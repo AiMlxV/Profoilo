@@ -1,23 +1,144 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="th">
 <head>
-    <title>AiMixV</title>
-    <link rel="stylesheet" href="index.css">
-    <script src="https://unpkg.com/htmx.org@2.0.2"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to E-Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Thai Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- DaisyUI -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="script.js"></script>
+    <script src="index.js"></script>
 </head>
+<body class="font-[Noto Sans Thai] bg-stone-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 transition-colors duration-200">
+    <nav class="fixed w-full bg-stone-100/90 dark:bg-zinc-900/90 backdrop-blur-sm border-b border-stone-200 dark:border-zinc-800 shadow-lg z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-zinc-800 dark:text-zinc-200">Hello, World!</div>
+            <ul class="hidden md:flex space-x-8 items-center text-zinc-700 dark:text-zinc-300">
+                <li><a href="#home" class="hover:text-teal-600 dark:hover:text-teal-400 transition">🏠 หน้าแรก</a></li>
+                <li><a href="#about" class="hover:text-teal-600 dark:hover:text-teal-400 transition">📁 เกี่ยวกับ</a></li>
+                <li><a href="#projects" class="hover:text-teal-600 dark:hover:text-teal-400 transition">💼 ผลงาน</a></li>
+                <li><a href="#certificates" class="hover:text-teal-600 dark:hover:text-teal-400 transition">📜 เกียรติบัตร</a></li>
+                <li><a href="#contact" class="hover:text-teal-600 dark:hover:text-teal-400 transition">ต้องการติดต่อ 🤔</a></li>
+                <li>
+                    <button id="themeToggle" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
+                    </button>
+                </li>
+            </ul>
+            <button class="md:hidden text-zinc-700 dark:text-zinc-300"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
 
-<body>
-    <div class="container">
-        <h1 class="welcome-txt">Hi🍀</h1>
+    <!-- Add responsive mobile menu -->
+    <div id="mobileMenu" class="fixed inset-0 bg-zinc-900/90 z-40 hidden">
+        <div class="container mx-auto px-4 py-20">
+            <ul class="flex flex-col space-y-6 items-center">
+                <li><a href="#home" class="text-2xl text-zinc-100">🏠 หน้าแรก</a></li>
+                <li><a href="#about" class="text-2xl text-zinc-100">📁 เกี่ยวกับ</a></li>
+                <li><a href="#projects" class="text-2xl text-zinc-100">💼 ผลงาน</a></li>
+                <li><a href="#certificates" class="text-2xl text-zinc-100">📜 เกียรติบัตร</a></li>
+                <li><a href="#contact" class="text-2xl text-zinc-100">ต้องการติดต่อ 🤔</a></li>
+            </ul>
+        </div>
     </div>
+
+    <section id="home" class="min-h-screen flex items-center justify-center relative">
+        <!-- Background image with overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1619410283995-43d9134e7656?q=80" 
+                 alt="Background" 
+                 class="w-full h-full object-cover filter brightness-50"
+                 onerror="this.src='https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80'">
+            <div class="absolute inset-0 bg-zinc-900/70"></div> <!-- Dark overlay -->
+        </div>
+        
+        <!-- Content -->
+        <div class="text-center relative z-10" data-aos="fade-up">
+            <h1 class="text-5xl font-bold mb-6 text-zinc-100">ยินดีต้อนรับสู่พอร์ตโฟลิโอ</h1>
+            <p id="welcome-text" class="text-xl mb-4 text-zinc-200"></p>
+            <p id="randomText" class="text-lg text-zinc-300"></p>
+            <div class="mt-8 space-x-4">
+                <a href="#contact" class="bg-teal-600 text-zinc-100 px-6 py-2 rounded-lg hover:bg-teal-700 transition">ต้องการติดต่อ 🤔</a>
+                <a href="#projects" class="border border-zinc-300 text-zinc-200 px-6 py-2 rounded-lg hover:bg-zinc-800/50 transition">💼 ผลงาน</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-stone-50 dark:bg-zinc-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 text-zinc-800 dark:text-zinc-200">About Me</h2>
+            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+                <div class="rounded-2xl overflow-hidden">
+                    <img src="images/profile.jpg" alt="Profile Photo" class="w-full h-auto object-cover" 
+                         onerror="this.src='https://via.placeholder.com/600x600'">
+                </div>
+                <div class="space-y-6">
+                    <p class="text-lg text-zinc-600 dark:text-zinc-400">Write your introduction here...</p>
+                    <div class="skills">
+                        <h3 class="text-2xl font-semibold mb-4 text-zinc-800 dark:text-zinc-200">Skills</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-stone-200 dark:bg-zinc-700 rounded-lg text-zinc-700 dark:text-zinc-300">HTML5</span>
+                            <span class="px-4 py-2 bg-stone-200 dark:bg-zinc-700 rounded-lg text-zinc-700 dark:text-zinc-300">CSS3</span>
+                            <span class="px-4 py-2 bg-stone-200 dark:bg-zinc-700 rounded-lg text-zinc-700 dark:text-zinc-300">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 bg-slate-50 dark:bg-slate-900">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">My Projects</h2>
+            <div class="projects-grid max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project cards will be added here via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="certificates" class="py-20 bg-white dark:bg-slate-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">Certificates</h2>
+            <div class="certificates-grid max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Certificate cards will be added here via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-stone-50 dark:bg-zinc-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 text-zinc-800 dark:text-zinc-200">Contact Me</h2>
+            <div class="max-w-lg mx-auto space-y-6">
+                <input type="text" placeholder="Name" id="name" 
+                       class="w-full px-4 py-3 rounded-lg bg-stone-100 dark:bg-zinc-900 border border-stone-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 placeholder-zinc-500 dark:placeholder-zinc-500">
+                <input type="email" placeholder="Email" id="email"
+                       class="w-full px-4 py-3 rounded-lg bg-stone-100 dark:bg-zinc-900 border border-stone-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 placeholder-zinc-500 dark:placeholder-zinc-500">
+                <textarea placeholder="Message" id="message" rows="6"
+                          class="w-full px-4 py-3 rounded-lg bg-stone-100 dark:bg-zinc-900 border border-stone-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 placeholder-zinc-500 dark:placeholder-zinc-500"></textarea>
+                <button onclick="submitForm()" 
+                        class="w-full bg-teal-600 hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600 text-white font-medium px-6 py-3 rounded-lg transition">
+                    Send Message
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 text-center bg-stone-50 dark:bg-zinc-800 border-t border-stone-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400">
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
 </body>
-
-<footer>
-
-</footer>
-
 </html>
