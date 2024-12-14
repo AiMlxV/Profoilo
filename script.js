@@ -43,31 +43,11 @@ const certificates = [
 ];
 
 // Typing animation configuration
-(async function initializeTyping() {
-    let welcomeText = "Welcome to my portfolio website!"; // Default text
-
-    async function getVisitorIP() {
-        try {
-            const response = await fetch('https://api.ipify.org?format=json');
-            const data = await response.json();
-            welcomeText = `Nice to meet U! ${data.ip}`;
-        } catch (error) {
-            console.error('Failed to fetch IP:', error);
-            // Keep default welcome text
-        }
-    }
-
-    await getVisitorIP();
-
-    const typingConfig = {
-        text: welcomeText,
-        speed: 100,
-        startDelay: 1000
-    };
-    
-    // Start typing animation here
-    startTypingAnimation(typingConfig);
-})();
+const typingConfig = {
+    text: "Welcome to my portfolio website!",
+    speed: 100,
+    startDelay: 1000
+};
 
 // Add typing animation
 function initTypingAnimation() {
