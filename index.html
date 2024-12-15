@@ -11,6 +11,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="script.js"></script>
     <script src="index.js"></script>
+    <style>
+        /* Add smooth transition for theme changes */
+        * {
+            transition: background-color 0.3s ease, color 0.01s ease, border-color 0.15s ease, fill 0.15s ease;
+        }
+    </style>
 </head>
 <body class="font-ibm-plex-sans-thai min-h-screen">
     <!-- Navbar -->
@@ -124,7 +130,7 @@
     </section>
 
     <footer class="footer footer-center p-4 bg-base-200">
-        <p>&copy; 2024 Your Name. All rights reserved.</p>
+        <p>&copy; 2024 AiMlxV. All rights reserved.</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -136,7 +142,11 @@
         
         // Check for saved theme preference
         const savedTheme = localStorage.getItem('theme') || 'light';
-        html.setAttribute('data-theme', savedTheme);
+        // Add a small delay to prevent initial transition
+        setTimeout(() => {
+            html.setAttribute('data-theme', savedTheme);
+            updateIcon();
+        }, 0);
 
         // Update icon based on current theme
         function updateIcon() {
@@ -150,17 +160,21 @@
             }
         }
 
-        // Initialize icon
-        updateIcon();
-
-        // Toggle theme
+        // Toggle theme with transition
         themeToggle.addEventListener('click', () => {
             const currentTheme = html.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             
+            // Add transition class
+            html.classList.add('theme-transition');
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateIcon();
+
+            // Remove transition class after animation
+            setTimeout(() => {
+                html.classList.remove('theme-transition');
+            }, 300);
         });
 
         // Initialize AOS

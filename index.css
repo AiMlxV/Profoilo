@@ -13,24 +13,3 @@ body {
     height: 100vh;
     
 }
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.welcome-txt {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 300px;
-    text-align: center;
-}
-
-.text {
-    font-size: 1em;
-    color: #fefefe;
-    font-style: normal;
-}
