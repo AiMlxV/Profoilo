@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'LINESeedSansTH';
+    src: url('./fonts/LINESeedSansTH_W_Rg.woff2') format('woff2'),
+         url('./fonts/LINESeedSansTH_W_Rg.woff') format('woff'),
+         url('./fonts/LINESeedSansTH_W_Rg.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* You can add additional @font-face declarations for different weights */
+@font-face {
+    font-family: 'LINESeedSansTH';
+    src: url('./fonts/LINESeedSansTH_W_Bd.woff2') format('woff2'),
+         url('./fonts/LINESeedSansTH_W_Bd.woff') format('woff'),
+         url('./fonts/LINESeedSansTH_W_Bd.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}

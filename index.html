@@ -8,17 +8,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="fonts/LINESeedSansTH_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/LINESeedSansTH_W_Bd.woff2" as="font" type="font/woff2" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'custom': ['LINESeedSansTH', 'sans-serif'],
+            },
+          },
+        },
+      }
+    </script>
     <script src="script.js"></script>
     <script src="index.js"></script>
     <style>
         /* Add smooth transition for theme changes */
         * {
             transition: background-color 0.3s ease, color 0.01s ease, border-color 0.15s ease, fill 0.15s ease;
+            font-family: 'LINESeedSansTH';
         }
     </style>
 </head>
-<body class="font-ibm-plex-sans-thai min-h-screen">
+<body class="font-custom min-h-screen">
     <!-- Navbar -->
     <nav class="navbar fixed bg-base-100/90 backdrop-blur-sm border-b z-50">
         <div class="container mx-auto">

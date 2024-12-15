@@ -1,3 +1,11 @@
+document.fonts.ready.then(() => {
+    if (document.fonts.check('1em LINESeedSansTH')) {
+        console.log('LINESeedSansTH font loaded successfully');
+    } else {
+        console.warn('LINESeedSansTH font failed to load');
+    }
+});
+
 // Sample project data
 const projects = [
     {
