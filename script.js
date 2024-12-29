@@ -1,3 +1,4 @@
+// Font loading check
 document.fonts.ready.then(() => {
     if (document.fonts.check('1em LINESeedSansTH')) {
         console.log('LINESeedSansTH font loaded successfully');
@@ -6,15 +7,17 @@ document.fonts.ready.then(() => {
     }
 });
 
+// Consolidated Tailwind configuration
 tailwind.config = {
+    darkMode: 'class',
     theme: {
-      extend: {
-        fontFamily: {
-          'custom': ['LINESeedSansTH', 'sans-serif'],
+        extend: {
+            fontFamily: {
+                'custom': ['LINESeedSansTH', 'sans-serif'],
+            },
         },
-      },
-    },
-  }
+    }
+};
 
 // Sample project data
 const projects = [
@@ -72,14 +75,17 @@ const texts = [
     "console.log(\"Welcome!\");"
 ];
 
-// Modified typing animation configuration
 const typingConfig = {
     speed: 75,
     exitCodeSpeed: 37.5, // Add faster speed for exit code
     startDelay: 250
 };
 
-// Add typing animation
+function getRandomText() {
+    const randomIndex = Math.floor(Math.random() * texts.length);
+    return { text: texts[randomIndex], index: randomIndex + 1 };
+}
+
 function initTypingAnimation() {
     const typing = document.getElementById('welcome-text');
     const { text, index } = getRandomText();
@@ -179,26 +185,14 @@ function submitForm() {
     alert('ส่งข้อความสำเร็จ!');
 }
 
-// Tailwind configuration for dark mode
-tailwind.config = {
-    darkMode: 'class',
-    // ... any other Tailwind config
-};
-
 // Theme toggle functionality
 function setupThemeToggle() {
     const themeToggle = document.getElementById('themeToggle');
-
+    
+    // Remove initial theme check since it's now handled in the HTML
     themeToggle.addEventListener('click', () => {
-        // Toggle dark class on document root element
         document.documentElement.classList.toggle('dark');
-
-        // Update localStorage
-        if (document.documentElement.classList.contains('dark')) {
-            localStorage.theme = 'dark';
-        } else {
-            localStorage.theme = 'light';
-        }
+        localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
     });
 }
 
@@ -219,7 +213,7 @@ function setupMobileMenu() {
     });
 }
 
-// Initialize all animations and event listeners
+// Single DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize AOS with custom settings
     AOS.init({
@@ -238,47 +232,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Initialize typing animation
+    // Initialize all functionality
     initTypingAnimation();
-
-    // Initialize existing functionality
     setupThemeToggle();
     displayProjects();
     displayCertificates();
     setupMobileMenu();
-
-});
-
-
-function getRandomText() {
-    const randomIndex = Math.floor(Math.random() * texts.length);
-    return { text: texts[randomIndex], index: randomIndex + 1, total: texts.length };
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    const textElement = document.getElementById("randomText");
-    const { text, index, total } = getRandomText();
-    textElement.innerHTML = `${text} <span class="text-sm text-zinc-400">(exit code 0${index})</span>`;
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS
-    AOS.init();
-
-    // Theme toggle
-    const themeToggle = document.getElementById('themeToggle');
-    
-    // Check initial theme
-    if (localStorage.getItem('theme') === 'dark' || 
-        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        themeToggle.checked = true;
-    }
-
-    // Theme toggle handler
-    themeToggle.addEventListener('change', function() {
-        const theme = this.checked ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-    });
 });
