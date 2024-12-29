@@ -1,0 +1,67 @@
+:root {
+    color-scheme: light dark;
+    --theme-transition-duration: 0.3s;
+}
+
+html {
+  visibility: visible;
+  opacity: 1;
+}
+#loading-overlay {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.8s ease-out;
+  z-index: 9999;
+}
+body {
+  visibility: hidden; /* Hide content initially */
+}
+
+/* Base transitions */
+* {
+    transition: background-color 0.3s ease,
+                border-color 0.3s ease,
+                fill 0.3s ease;
+}
+
+/* Theme transition specific styles */
+.theme-transition * {
+    transition: background-color 0.3s ease,
+                border-color 0.3s ease,
+                color 0.3s ease !important;
+}
+
+/* Remove transition for loading overlay */
+#loading-overlay * {
+    transition: none !important;
+}
+
+.theme-transition {
+  transition: background-color var(--theme-transition-duration) ease-in-out,
+              color var(--theme-transition-duration) ease-in-out,
+              border-color var(--theme-transition-duration) ease-in-out;
+}
+.custom-bg {
+  background-image: url('https://images.unsplash.com/photo-1672858460787-fb29ed7352f8');
+}
+
+
+@font-face {
+    font-family: 'LINESeedSansTH';
+    src: url('./fonts/LINESeedSansTH_W_Rg.woff2') format('woff2'),
+         url('./fonts/LINESeedSansTH_W_Rg.woff') format('woff'),
+         url('./fonts/LINESeedSansTH_W_Rg.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* You can add additional @font-face declarations for different weights */
+@font-face {
+    font-family: 'LINESeedSansTH';
+    src: url('./fonts/LINESeedSansTH_W_Bd.woff2') format('woff2'),
+         url('./fonts/LINESeedSansTH_W_Bd.woff') format('woff'),
+         url('./fonts/LINESeedSansTH_W_Bd.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
