@@ -279,23 +279,23 @@ function submitForm() {
 
 // Theme toggle functionality
 function setupThemeToggle() {
-    const themeToggle = document.getElementById('themeToggle');
+    const themeToggles = document.querySelectorAll('.theme-toggle');
     const html = document.documentElement;
     
-    function updateThemeIcon() {
-        const icon = themeToggle.querySelector('i');
+    function updateThemeIcons() {
         const isDark = html.getAttribute('data-theme') === 'dark';
-        requestAnimationFrame(() => {
-            icon.classList.remove(isDark ? 'fa-moon' : 'fa-sun');
-            icon.classList.add(isDark ? 'fa-sun' : 'fa-moon');
+        themeToggles.forEach(toggle => {
+            const icon = toggle.querySelector('i');
+            requestAnimationFrame(() => {
+                icon.classList.remove(isDark ? 'fa-moon' : 'fa-sun');
+                icon.classList.add(isDark ? 'fa-sun' : 'fa-moon');
+            });
         });
     }
     
     function toggleTheme() {
-        // Add transition class before changes
         html.classList.add('theme-transition');
         
-        // Toggle theme
         const isDark = html.getAttribute('data-theme') === 'light';
         const newTheme = isDark ? 'dark' : 'light';
         
@@ -303,18 +303,19 @@ function setupThemeToggle() {
             html.classList.toggle('dark', isDark);
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-            updateThemeIcon();
+            updateThemeIcons();
             
-            // Remove transition class after animation
             setTimeout(() => {
                 html.classList.remove('theme-transition');
             }, 300);
         });
     }
     
-    // Initialize icon
-    updateThemeIcon();
-    themeToggle.addEventListener('click', toggleTheme);
+    // Initialize icons
+    updateThemeIcons();
+    themeToggles.forEach(toggle => {
+        toggle.addEventListener('click', toggleTheme);
+    });
 }
 
 // Add mobile menu functionality
