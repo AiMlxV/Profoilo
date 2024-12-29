@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="th">
 <script>
-  // Blocking script to set theme immediately
-  let theme = localStorage.theme === 'dark' || (!localStorage.theme && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-  document.documentElement.classList.toggle('dark', theme === 'dark');
-  document.documentElement.setAttribute('data-theme', theme);
+  // Enhanced blocking script for immediate theme setup
+  (function() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const storedTheme = localStorage.getItem('theme');
+    const theme = storedTheme || (prefersDark ? 'dark' : 'light');
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+    // Prevent initial transition flash
+    document.documentElement.style.setProperty('transition', 'none');
+    window.addEventListener('load', () => {
+      document.documentElement.style.removeProperty('transition');
+    });
+  })();
 </script>
 <head>
     <meta charset="UTF-8">
@@ -24,10 +33,16 @@
       html {
         visibility: visible;
         opacity: 1;
-        transition: opacity 0.2s ease;
       }
-      html.theme-transition {
-        transition: all 0.3s ease;
+      #loading-overlay {
+        display: flex;
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 0.8s ease-out;
+        z-index: 9999;
+      }
+      body {
+        visibility: hidden; /* Hide content initially */
       }
     </style>
     
@@ -35,6 +50,16 @@
     <script src="script.js"></script>
 </head>
 <body class="font-custom min-h-screen">
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="fixed inset-0 bg-base-100 z-[9999] flex flex-col items-center justify-center">
+        <span class="loading loading-spinner loading-lg mb-4"></span>
+        <div class="w-64 mb-4">
+            <progress id="loading-progress" class="progress progress-primary w-full" value="0" max="100"></progress>
+        </div>
+        <p id="loading-text" class="text-lg mb-2">Getting Ready...</p>
+        <p class="text-sm text-base-content/60">Now Loading... Please Wait. 🪄</p>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar fixed bg-base-100/90 backdrop-blur-sm border-b z-50">
         <div class="container mx-auto">
@@ -151,50 +176,5 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
-    <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('themeToggle');
-        const html = document.documentElement;
-        
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        // Add a small delay to prevent initial transition
-        setTimeout(() => {
-            html.setAttribute('data-theme', savedTheme);
-            updateIcon();
-        }, 0);
-
-        // Update icon based on current theme
-        function updateIcon() {
-            const icon = themeToggle.querySelector('i');
-            if (html.getAttribute('data-theme') === 'dark') {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            }
-        }
-
-        // Toggle theme with transition
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            // Add transition class
-            html.classList.add('theme-transition');
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateIcon();
-
-            // Remove transition class after animation
-            setTimeout(() => {
-                html.classList.remove('theme-transition');
-            }, 300);
-        });
-
-        // Initialize AOS
-        AOS.init();
-    </script>
 </body>
 </html>

@@ -1,3 +1,85 @@
+const loadingConfig = {
+    minLoadTime: 2500, // Reduced to 2.5 seconds but still substantial
+    progressInterval: 30, // Smoother progress updates
+    loadingMessages: [
+        "🖥️กำลังเปิดเครื่อง...",
+        "🛜เชื่อมต่ออินเตอร์เน็ต...",
+        "🍵กำลังชงกาแฟ...",
+        "😊เกือบจะเสร็จแล้ว...",
+        "😄เสร็จแล้ว..."
+    ],
+    storageKey: 'lastLoadTime',
+    expirationTime: 60 * 60 * 1000 // 1 hour in milliseconds
+};
+
+function shouldShowLoading() {
+    const lastLoad = localStorage.getItem(loadingConfig.storageKey);
+    if (!lastLoad) return true;
+
+    const now = Date.now();
+    const timeSinceLastLoad = now - parseInt(lastLoad);
+    return timeSinceLastLoad > loadingConfig.expirationTime;
+}
+
+function simulateLoading() {
+    if (!shouldShowLoading()) {
+        // Skip loading animation if within time window
+        document.body.style.visibility = 'visible';
+        document.getElementById('loading-overlay').style.display = 'none';
+        initializeApp(); // New function to handle post-loading initialization
+        return;
+    }
+
+    const progressBar = document.getElementById('loading-progress');
+    const loadingText = document.getElementById('loading-text');
+    const loadingOverlay = document.getElementById('loading-overlay');
+    let progress = 0;
+    const startTime = Date.now();
+
+    // Ensure overlay is visible and body is hidden
+    document.body.style.visibility = 'hidden';
+    loadingOverlay.style.display = 'flex';
+    loadingOverlay.style.opacity = '1';
+    loadingOverlay.style.visibility = 'visible';
+
+    const updateProgress = () => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min((elapsed / loadingConfig.minLoadTime) * 100, 100);
+        
+        progressBar.value = progress;
+        
+        // Update loading message
+        const messageIndex = Math.floor((progress / 100) * loadingConfig.loadingMessages.length);
+        loadingText.textContent = loadingConfig.loadingMessages[Math.min(messageIndex, loadingConfig.loadingMessages.length - 1)];
+        
+        if (elapsed < loadingConfig.minLoadTime) {
+            requestAnimationFrame(updateProgress);
+        } else {
+            finishLoading();
+        }
+    };
+
+    const finishLoading = () => {
+        progressBar.value = 100;
+        loadingText.textContent = "Welcome!";
+        
+        // Store the loading completion time
+        localStorage.setItem(loadingConfig.storageKey, Date.now().toString());
+        
+        // Fade out overlay and show content
+        setTimeout(() => {
+            document.body.style.visibility = 'visible';
+            loadingOverlay.style.opacity = '0';
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+                initializeApp(); // Initialize after loading completes
+            }, 800);
+        }, 200);
+    };
+
+    requestAnimationFrame(updateProgress);
+}
+
 // Font loading check
 document.fonts.ready.then(() => {
     if (document.fonts.check('1em LINESeedSansTH')) {
@@ -133,45 +215,55 @@ function smoothScroll(targetId) {
 // Populate projects
 function displayProjects() {
     const projectsGrid = document.querySelector('.projects-grid');
-    projects.forEach(project => {
-        const projectCard = `
-            <div class="group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up">
-                <div class="relative overflow-hidden">
-                    <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+    projectsGrid.innerHTML = '<span class="loading loading-spinner loading-md"></span>';
+    
+    setTimeout(() => {
+        projectsGrid.innerHTML = '';
+        projects.forEach(project => {
+            const projectCard = `
+                <div class="group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up">
+                    <div class="relative overflow-hidden">
+                        <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-zinc-800 dark:text-zinc-200">${project.title}</h3>
+                        <p class="text-zinc-600 dark:text-zinc-400 mb-4">${project.description}</p>
+                        <a href="${project.link}" class="inline-flex items-center text-teal-600 hover:text-teal-700 transition-colors">
+                            View Project <i class="fas fa-arrow-right ml-2 transform transition-transform group-hover:translate-x-2"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2 text-zinc-800 dark:text-zinc-200">${project.title}</h3>
-                    <p class="text-zinc-600 dark:text-zinc-400 mb-4">${project.description}</p>
-                    <a href="${project.link}" class="inline-flex items-center text-teal-600 hover:text-teal-700 transition-colors">
-                        View Project <i class="fas fa-arrow-right ml-2 transform transition-transform group-hover:translate-x-2"></i>
-                    </a>
-                </div>
-            </div>
-        `;
-        projectsGrid.innerHTML += projectCard;
-    });
+            `;
+            projectsGrid.innerHTML += projectCard;
+        });
+    }, 500); // Simulate loading delay
 }
 
 // Populate certificates
 function displayCertificates() {
     const certificatesGrid = document.querySelector('.certificates-grid');
-    certificates.forEach(cert => {
-        const certCard = `
-            <div class="group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up">
-                <div class="relative overflow-hidden">
-                    <img src="${cert.image}" alt="${cert.title}" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+    certificatesGrid.innerHTML = '<span class="loading loading-spinner loading-md"></span>';
+    
+    setTimeout(() => {
+        certificatesGrid.innerHTML = '';
+        certificates.forEach(cert => {
+            const certCard = `
+                <div class="group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up">
+                    <div class="relative overflow-hidden">
+                        <img src="${cert.image}" alt="${cert.title}" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-zinc-800 dark:text-zinc-200">${cert.title}</h3>
+                        <p class="text-zinc-600 dark:text-zinc-400">Issued by: ${cert.issuer}</p>
+                        <p class="text-zinc-500 dark:text-zinc-500">${cert.date}</p>
+                    </div>
                 </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2 text-zinc-800 dark:text-zinc-200">${cert.title}</h3>
-                    <p class="text-zinc-600 dark:text-zinc-400">Issued by: ${cert.issuer}</p>
-                    <p class="text-zinc-500 dark:text-zinc-500">${cert.date}</p>
-                </div>
-            </div>
-        `;
-        certificatesGrid.innerHTML += certCard;
-    });
+            `;
+            certificatesGrid.innerHTML += certCard;
+        });
+    }, 500); // Simulate loading delay
 }
 
 // Form submission
@@ -188,24 +280,41 @@ function submitForm() {
 // Theme toggle functionality
 function setupThemeToggle() {
     const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
     
-    themeToggle.addEventListener('click', () => {
-        // Add transition class
-        document.documentElement.classList.add('theme-transition');
+    function updateThemeIcon() {
+        const icon = themeToggle.querySelector('i');
+        const isDark = html.getAttribute('data-theme') === 'dark';
+        requestAnimationFrame(() => {
+            icon.classList.remove(isDark ? 'fa-moon' : 'fa-sun');
+            icon.classList.add(isDark ? 'fa-sun' : 'fa-moon');
+        });
+    }
+    
+    function toggleTheme() {
+        // Add transition class before changes
+        html.classList.add('theme-transition');
         
         // Toggle theme
-        const isDark = document.documentElement.classList.toggle('dark');
+        const isDark = html.getAttribute('data-theme') === 'light';
         const newTheme = isDark ? 'dark' : 'light';
         
-        // Update storage and attribute
-        localStorage.theme = newTheme;
-        document.documentElement.setAttribute('data-theme', newTheme);
-        
-        // Remove transition class
-        setTimeout(() => {
-            document.documentElement.classList.remove('theme-transition');
-        }, 300);
-    });
+        requestAnimationFrame(() => {
+            html.classList.toggle('dark', isDark);
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon();
+            
+            // Remove transition class after animation
+            setTimeout(() => {
+                html.classList.remove('theme-transition');
+            }, 300);
+        });
+    }
+    
+    // Initialize icon
+    updateThemeIcon();
+    themeToggle.addEventListener('click', toggleTheme);
 }
 
 // Add mobile menu functionality
@@ -225,8 +334,8 @@ function setupMobileMenu() {
     });
 }
 
-// Single DOMContentLoaded event listener
-document.addEventListener('DOMContentLoaded', () => {
+// Move initialization code to separate function
+function initializeApp() {
     // Initialize AOS with custom settings
     AOS.init({
         duration: 1000,
@@ -250,4 +359,9 @@ document.addEventListener('DOMContentLoaded', () => {
     displayProjects();
     displayCertificates();
     setupMobileMenu();
+}
+
+// Single DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', () => {
+    simulateLoading(); // This will now check if loading is needed
 });
