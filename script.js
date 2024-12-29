@@ -6,6 +6,16 @@ document.fonts.ready.then(() => {
     }
 });
 
+tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          'custom': ['LINESeedSansTH', 'sans-serif'],
+        },
+      },
+    },
+  }
+
 // Sample project data
 const projects = [
     {
@@ -51,22 +61,50 @@ const certificates = [
 ];
 
 // Typing animation configuration
+const texts = [
+    "printf(\"Welcome!\")", 
+    "print(\"Welcome!\")", 
+    "std::cout << \"Welcome!\";",
+    "println(\"Welcome!\")",
+    "System.Console.WriteLine(\"Welcome\");",
+    "$echo Welcome!",
+    "<h1>Welcome!</h1>",
+    "console.log(\"Welcome!\");"
+];
+
+// Modified typing animation configuration
 const typingConfig = {
-    text: "Welcome to my portfolio website!",
-    speed: 100,
-    startDelay: 1000
+    speed: 75,
+    exitCodeSpeed: 37.5, // Add faster speed for exit code
+    startDelay: 250
 };
 
 // Add typing animation
 function initTypingAnimation() {
     const typing = document.getElementById('welcome-text');
-    let index = 0;
+    const { text, index } = getRandomText();
+    const mainText = text;
+    const exitCode = `      (Exit Code 0${index})`;
+    let currentIndex = 0;
+    let isTypingExitCode = false;
+    let exitCodeIndex = 0;
 
     function typeText() {
-        if (index < typingConfig.text.length) {
-            typing.textContent += typingConfig.text.charAt(index);
-            index++;
+        if (!isTypingExitCode && currentIndex < mainText.length) {
+            typing.textContent = mainText.substring(0, currentIndex + 1);
+            currentIndex++;
             setTimeout(typeText, typingConfig.speed);
+        } else if (!isTypingExitCode) {
+            isTypingExitCode = true;
+            typeExitCode();
+        }
+    }
+
+    function typeExitCode() {
+        if (exitCodeIndex < exitCode.length) {
+            typing.innerHTML = mainText + `<span class="text-sm text-zinc-400">${exitCode.substring(0, exitCodeIndex + 1)}</span>`;
+            exitCodeIndex++;
+            setTimeout(typeExitCode, typingConfig.exitCodeSpeed);
         }
     }
 
@@ -209,21 +247,8 @@ document.addEventListener('DOMContentLoaded', () => {
     displayCertificates();
     setupMobileMenu();
 
-    // Update random text display
-    const { text, index, total } = getRandomText();
-    const textElement = document.getElementById("randomText");
-    if (textElement) {
-        textElement.innerHTML = `${text} <span class="text-sm text-zinc-400">(ข้อความที่ ${index} จากทั้งหมด ${total})</span>`;
-    }
 });
 
-const texts = [
-    "ผู้ที่รักการสร้างสรรค์และทำอะไรใหม่ๆ",
-    "ผู้ที่ชอบเรียนรู้สิ่งใหม่ตลอดเวลา",
-    "ผู้ที่หลงใหลในเทคโนโลยีและนวัตกรรม",
-    "ผู้ที่สนใจการพัฒนาเทคโนโลยีเพื่อช่วยเหลือผู้คน",
-    "ผู้ที่ตั้งใจสร้างเทคโนโลยีที่ใช้งานง่ายและมีประโยชน์"
-];
 
 function getRandomText() {
     const randomIndex = Math.floor(Math.random() * texts.length);
@@ -233,7 +258,7 @@ function getRandomText() {
 document.addEventListener("DOMContentLoaded", () => {
     const textElement = document.getElementById("randomText");
     const { text, index, total } = getRandomText();
-    textElement.innerHTML = `${text} <span class="text-sm text-zinc-400">(ข้อความที่ ${index} จากทั้งหมด)</span>`;
+    textElement.innerHTML = `${text} <span class="text-sm text-zinc-400">(exit code 0${index})</span>`;
 });
 
 document.addEventListener('DOMContentLoaded', function() {
