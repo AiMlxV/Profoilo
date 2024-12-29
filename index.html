@@ -26,26 +26,6 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preload" href="fonts/LINESeedSansTH_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/LINESeedSansTH_W_Bd.woff2" as="font" type="font/woff2" crossorigin>
-    
-    <!-- Add this style before other stylesheets -->
-    <style>
-      /* Prevent flash during theme load */
-      html {
-        visibility: visible;
-        opacity: 1;
-      }
-      #loading-overlay {
-        display: flex;
-        visibility: visible;
-        opacity: 1;
-        transition: opacity 0.8s ease-out;
-        z-index: 9999;
-      }
-      body {
-        visibility: hidden; /* Hide content initially */
-      }
-    </style>
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="script.js"></script>
 </head>
@@ -64,7 +44,7 @@
     <nav class="navbar fixed bg-base-100/90 backdrop-blur-sm border-b z-50">
         <div class="container mx-auto">
             <div class="flex-1">
-                <h1 class="text-2xl font-bold pl-4">Hello, World!</h1>
+                <h1 class="text-2xl font-bold pl-4">AiMlxV's Portfolio</h1>
             </div>
             <div class="hidden md:flex">
                 <ul class="menu menu-horizontal">
@@ -98,16 +78,16 @@
     </div>
 
     <!-- Hero Section -->
-    <section id="home" class="hero min-h-screen">
-        <div class="hero-overlay bg-base-200/70"></div>
-        <div class="hero-content text-center" data-aos="fade-up">
+    <section id="home" class="hero min-h-screen bg-cover bg-center relative custom-bg">
+        <div class="hero-overlay bg-black/50"></div>
+        <div class="hero-content text-center text-neutral-content relative z-10" data-aos="fade-up">
             <div class="max-w-xl">
-                <h1 class="text-5xl font-bold mb-6">ยินดีต้อนรับสู่พอร์ตโฟลิโอ Ver.online</h1>
-                <h2>Version 1.0</h2>
-                <p id="welcome-text" class="text-xl mt-4"></p>
+                <h1 class="text-5xl font-bold mb-6 text-white">ยินดีต้อนรับสู่พอร์ตโฟลิโอ Ver.online</h1>
+                <h2 class="text-white">Version 1.0</h2>
+                <p id="welcome-text" class="text-xl mt-4 text-white"></p>
                 <div class="mt-8 space-x-4">
                     <a href="#contact" class="btn btn-primary">ต้องการติดต่อ 🤔</a>
-                    <a href="#projects" class="btn btn-outline">💼 ผลงาน</a>
+                    <a href="#projects" class="btn btn-glass">💼 ผลงาน</a>
                 </div>
             </div>
         </div>
@@ -119,7 +99,7 @@
             <h2 class="text-4xl font-bold text-center mb-16">About Me</h2>
             <div class="card lg:card-side bg-base-100 shadow-xl max-w-6xl mx-auto">
                 <figure class="w-full md:w-1/2">
-                    <img src="images/profile.jpg" alt="Profile Photo" class="w-full h-full object-cover" 
+                    <img src="public/img/DSCF4287EDIT1.JPG" alt="Profile Photo" class="w-full h-full object-cover" 
                          onerror="this.src='https://via.placeholder.com/600x600'">
                 </figure>
                 <div class="card-body">

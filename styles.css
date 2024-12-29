@@ -3,6 +3,21 @@
     --theme-transition-duration: 0.3s;
 }
 
+html {
+  visibility: visible;
+  opacity: 1;
+}
+#loading-overlay {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.8s ease-out;
+  z-index: 9999;
+}
+body {
+  visibility: hidden; /* Hide content initially */
+}
+
 /* Base transitions */
 * {
     transition: background-color 0.3s ease,
@@ -27,6 +42,10 @@
               color var(--theme-transition-duration) ease-in-out,
               border-color var(--theme-transition-duration) ease-in-out;
 }
+.custom-bg {
+  background-image: url('https://images.unsplash.com/photo-1672858460787-fb29ed7352f8');
+}
+
 
 @font-face {
     font-family: 'LINESeedSansTH';
