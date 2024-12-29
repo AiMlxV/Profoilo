@@ -1,3 +1,15 @@
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  transition: background-color 0.2s ease;
+}
+
+.theme-transition * {
+  transition: all 0.2s ease-in-out !important;
+}
+
 @font-face {
     font-family: 'LINESeedSansTH';
     src: url('./fonts/LINESeedSansTH_W_Rg.woff2') format('woff2'),

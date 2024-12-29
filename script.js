@@ -189,10 +189,22 @@ function submitForm() {
 function setupThemeToggle() {
     const themeToggle = document.getElementById('themeToggle');
     
-    // Remove initial theme check since it's now handled in the HTML
     themeToggle.addEventListener('click', () => {
-        document.documentElement.classList.toggle('dark');
-        localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        // Add transition class
+        document.documentElement.classList.add('theme-transition');
+        
+        // Toggle theme
+        const isDark = document.documentElement.classList.toggle('dark');
+        const newTheme = isDark ? 'dark' : 'light';
+        
+        // Update storage and attribute
+        localStorage.theme = newTheme;
+        document.documentElement.setAttribute('data-theme', newTheme);
+        
+        // Remove transition class
+        setTimeout(() => {
+            document.documentElement.classList.remove('theme-transition');
+        }, 300);
     });
 }
 

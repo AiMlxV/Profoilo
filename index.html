@@ -1,5 +1,11 @@
 <!DOCTYPE html>
-<html lang="th" data-theme="light">
+<html lang="th">
+<script>
+  // Blocking script to set theme immediately
+  let theme = localStorage.theme === 'dark' || (!localStorage.theme && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+  document.documentElement.classList.toggle('dark', theme === 'dark');
+  document.documentElement.setAttribute('data-theme', theme);
+</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,16 +17,20 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preload" href="fonts/LINESeedSansTH_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/LINESeedSansTH_W_Bd.woff2" as="font" type="font/woff2" crossorigin>
-    <script>
-        // Immediately invoked function to set the theme
-        (function() {
-            if (localStorage.theme === 'dark' || (!localStorage.theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        })();
-    </script>
+    
+    <!-- Add this style before other stylesheets -->
+    <style>
+      /* Prevent flash during theme load */
+      html {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 0.2s ease;
+      }
+      html.theme-transition {
+        transition: all 0.3s ease;
+      }
+    </style>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="script.js"></script>
 </head>
