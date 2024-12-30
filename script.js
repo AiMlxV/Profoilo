@@ -215,6 +215,33 @@ function createLoadingCard() {
     `;
 }
 
+function createThumbnail(originalUrl) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        
+        img.onload = function() {
+            // Create canvas for thumbnail
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Calculate thumbnail size (maintain aspect ratio)
+            const maxWidth = 400; // thumbnail width
+            const ratio = maxWidth / img.width;
+            canvas.width = maxWidth;
+            canvas.height = img.height * ratio;
+            
+            // Draw resized image
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            
+            // Get thumbnail as data URL
+            resolve(canvas.toDataURL('image/jpeg', 0.7));
+        };
+        
+        img.src = originalUrl;
+    });
+}
+
 function displayCertificates(isLoadMore = false) {
     if (certificateConfig.isLoading) return;
     certificateConfig.isLoading = true;
@@ -241,16 +268,21 @@ function displayCertificates(isLoadMore = false) {
 
     // Then load actual certificates with staggered delay
     const certsToDisplay = certificates.slice(startIndex, endIndex);
-    certsToDisplay.forEach((cert, index) => {
-        setTimeout(() => {
+    certsToDisplay.forEach(async (cert, index) => {
+        setTimeout(async () => {
             const placeholder = certificatesGrid.querySelector(`[data-index="${startIndex + index}"]`);
             if (placeholder) {
+                // Generate thumbnail
+                const thumbnailUrl = await createThumbnail(cert.image);
+                
                 const certCard = `
                     <div class="group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer" 
                          data-aos="fade-up"
                          onclick="openCertificateModal('${cert.image}', '${cert.title}')">
                         <div class="relative overflow-hidden">
-                            <img src="${cert.image}" alt="${cert.title}" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                            <img src="${thumbnailUrl}" alt="${cert.title}" 
+                                 class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110" 
+                                 loading="lazy">
                             <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
                         </div>
                         <div class="p-6">
@@ -277,15 +309,22 @@ function displayCertificates(isLoadMore = false) {
 }
 
 // Add new function to open the modal
-window.openCertificateModal = function(imageUrl, title) {
+window.openCertificateModal = function(imageUrl, title, thumbnailUrl) {
     const modalHTML = `
         <dialog id="cert_modal" class="modal modal-bottom sm:modal-middle">
-            <div class="modal-box bg-stone-50 dark:bg-zinc-800 p-0 relative">
+            <div class="modal-box bg-stone-50 dark:bg-zinc-800 p-0 relative max-w-3xl">
                 <div class="p-4">
                     <h3 class="font-bold text-lg mb-2">${title}</h3>
                 </div>
-                <figure class="w-full">
-                    <img src="${imageUrl}" alt="${title}" class="w-full h-auto">
+                <figure class="w-full relative">
+                    <!-- Show thumbnail first -->
+                    <img src="${thumbnailUrl || imageUrl}" alt="${title}" 
+                         class="w-full h-auto transition-opacity duration-300" 
+                         id="cert-image">
+                    <!-- Loading indicator -->
+                    <div id="cert-loading" class="absolute inset-0 flex items-center justify-center bg-base-200/50 hidden">
+                        <span class="loading loading-spinner loading-lg"></span>
+                    </div>
                 </figure>
                 <div class="modal-action absolute top-2 right-2">
                     <form method="dialog">
@@ -313,6 +352,22 @@ window.openCertificateModal = function(imageUrl, title) {
     // Show the modal
     const modal = document.getElementById('cert_modal');
     modal.showModal();
+
+    // Load full size image after modal is shown
+    if (thumbnailUrl) {
+        const fullImage = new Image();
+        const certImage = document.getElementById('cert-image');
+        const loadingIndicator = document.getElementById('cert-loading');
+
+        loadingIndicator.classList.remove('hidden');
+        
+        fullImage.onload = function() {
+            certImage.src = imageUrl;
+            loadingIndicator.classList.add('hidden');
+        };
+        
+        fullImage.src = imageUrl;
+    }
 };
 
 // Clean up resources
