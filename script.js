@@ -246,7 +246,9 @@ function displayCertificates(isLoadMore = false) {
             const placeholder = certificatesGrid.querySelector(`[data-index="${startIndex + index}"]`);
             if (placeholder) {
                 const certCard = `
-                    <div class="group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up">
+                    <div class="group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer" 
+                         data-aos="fade-up"
+                         onclick="openCertificateModal('${cert.image}', '${cert.title}')">
                         <div class="relative overflow-hidden">
                             <img src="${cert.image}" alt="${cert.title}" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110" loading="lazy">
                             <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
@@ -259,7 +261,7 @@ function displayCertificates(isLoadMore = false) {
                 `;
                 placeholder.innerHTML = certCard;
             }
-        }, index * 150); // Stagger each card load by 150ms
+        }, index * 150);
     });
 
     // Update load more button after all cards are loaded
@@ -273,6 +275,45 @@ function displayCertificates(isLoadMore = false) {
         certificateConfig.isLoading = false;
     }, certsToDisplay.length * 150);
 }
+
+// Add new function to open the modal
+window.openCertificateModal = function(imageUrl, title) {
+    const modalHTML = `
+        <dialog id="cert_modal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box bg-stone-50 dark:bg-zinc-800 p-0 relative">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-2">${title}</h3>
+                </div>
+                <figure class="w-full">
+                    <img src="${imageUrl}" alt="${title}" class="w-full h-auto">
+                </figure>
+                <div class="modal-action absolute top-2 right-2">
+                    <form method="dialog">
+                        <button class="btn btn-circle btn-ghost">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+    `;
+
+    // Remove existing modal if any
+    const existingModal = document.getElementById('cert_modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    // Add new modal to the document
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+    // Show the modal
+    const modal = document.getElementById('cert_modal');
+    modal.showModal();
+};
 
 // Clean up resources
 function cleanupCertificates() {
