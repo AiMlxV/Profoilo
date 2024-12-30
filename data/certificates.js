@@ -49,4 +49,50 @@ export const certificates = [
         date: "2024",
         image: "public/img/Cer/nextgen.jpg"
     },
+    {
+        title: "แข่งเขียนโปรแกรม สัปดาห์วิทยาศาสตร์มหาวิทยาลัยนเรศวร",
+        date: "2024",
+        image: "public/img/Cer/nusci67.jpg"
+    },
+    {
+        title: "คณะกรรมการดำเนินงาน ค่ายสอวน.",
+        date: "2024",
+        image: "public/img/Cer/posn-staff.jpg"
+    },
+    {
+        title: "ผ่านการอบรม สอวน. ค่าย 1",
+        date: "2022",
+        image: "public/img/Cer/posn1.jpg"
+    },
+    {
+        title: "ผ่านการอบรม สอวน. ค่าย 2",
+        date: "2023",
+        image: "public/img/Cer/posn2.jpg"
+    },
+    {
+        title: "เข้าร่วมค่าย RAI Ventures รอบ Onsite",
+        date: "2023",
+        image: "public/img/Cer/RAIven.jpg"
+    },
+    {
+        title: "ผู้ช่วยวิทยากรอบรม กิจกรรมพัฒนาผู้เรียน",
+        date: "2024",
+        image: "public/img/Cer/saint-staff.jpg"
+    },
+    {
+        title: "Introduction to Programming with Python",
+        date: "2024",
+        image: "public/img/Cer/samsung.jpg"
+    },
+    {
+        title: "เข้าร่วมค่าย ห้องเรียนพิเศษ SMTE",
+        date: "2022",
+        image: "public/img/Cer/smte-camp.jpg"
+    },
+    {
+        title: "ผ่านการอบรม Up/ReSkill AIoT",
+        date: "2023",
+        image: "public/img/Cer/upskillre.jpg"
+    },
+    
 ];
