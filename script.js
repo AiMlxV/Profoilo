@@ -1,3 +1,6 @@
+import { projects } from './data/projects.js';
+import { certificates } from './data/certificates.js';
+
 const loadingConfig = {
     minLoadTime: 2500, // Reduced to 2.5 seconds but still substantial
     progressInterval: 30, // Smoother progress updates
@@ -101,50 +104,6 @@ tailwind.config = {
     }
 };
 
-// Sample project data
-const projects = [
-    {
-        title: "loream ipsum",
-        description: "loram ipsum dolor sit amet, consectetur adipiscing elit",
-        image: "https://via.placeholder.com/300x200?text=Web+Project",
-        link: "#"
-    },
-    {
-        title: "loream ipsum",
-        description: "loram ipsum dolor sit amet, consectetur adipiscing elit",
-        image: "https://via.placeholder.com/300x200?text=Mobile+App",
-        link: "#"
-    },
-    {
-        title: "loream ipsum",
-        description: "loram ipsum dolor sit amet, consectetur adipiscing elit",
-        image: "https://via.placeholder.com/300x200?text=UI+Design",
-        link: "#"
-    }
-];
-
-// Sample certificate data
-const certificates = [
-    {
-        title: "Cer1",
-        issuer: "-",
-        date: "2024",
-        image: "https://via.placeholder.com/300x200?text=Web+Certificate"
-    },
-    {
-        title: "Cer2",
-        issuer: "-",
-        date: "2023",
-        image: "https://via.placeholder.com/300x200?text=JS+Certificate"
-    },
-    {
-        title: "Cer3",
-        issuer: "-",
-        date: "2023",
-        image: "https://via.placeholder.com/300x200?text=Design+Certificate"
-    }
-];
-
 // Typing animation configuration
 const texts = [
     "printf(\"Welcome!\")", 
@@ -221,7 +180,7 @@ function displayProjects() {
         projectsGrid.innerHTML = '';
         projects.forEach(project => {
             const projectCard = `
-                <div class="group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up">
+                <a href="${project.link}" class="block group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer" data-aos="fade-up">
                     <div class="relative overflow-hidden">
                         <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
@@ -229,53 +188,197 @@ function displayProjects() {
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 text-zinc-800 dark:text-zinc-200">${project.title}</h3>
                         <p class="text-zinc-600 dark:text-zinc-400 mb-4">${project.description}</p>
-                        <a href="${project.link}" class="inline-flex items-center text-teal-600 hover:text-teal-700 transition-colors">
-                            View Project <i class="fas fa-arrow-right ml-2 transform transition-transform group-hover:translate-x-2"></i>
-                        </a>
+                        <div class="inline-flex items-center text-teal-600 hover:text-teal-700 transition-colors">
+                            View more <i class="fas fa-arrow-right ml-2 transform transition-transform group-hover:translate-x-2"></i>
+                        </div>
                     </div>
-                </div>
+                </a>
             `;
             projectsGrid.innerHTML += projectCard;
         });
     }, 500); // Simulate loading delay
 }
 
-// Populate certificates
-function displayCertificates() {
+const certificateConfig = {
+    itemsPerPage: 6,
+    currentPage: 1,
+    cachedCards: [], // Store prerendered cards
+    isLoading: false
+};
+
+function createLoadingCard() {
+    return `
+        <div class="bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 p-6 flex flex-col items-center justify-center min-h-[300px]">
+            <span class="loading loading-spinner loading-lg"></span>
+            <p class="mt-4 text-zinc-500 dark:text-zinc-400">Loading...</p>
+        </div>
+    `;
+}
+
+function createThumbnail(originalUrl) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        
+        img.onload = function() {
+            // Create canvas for thumbnail
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Calculate thumbnail size (maintain aspect ratio)
+            const maxWidth = 400; // thumbnail width
+            const ratio = maxWidth / img.width;
+            canvas.width = maxWidth;
+            canvas.height = img.height * ratio;
+            
+            // Draw resized image
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            
+            // Get thumbnail as data URL
+            resolve(canvas.toDataURL('image/jpeg', 0.7));
+        };
+        
+        img.src = originalUrl;
+    });
+}
+
+function displayCertificates(isLoadMore = false) {
+    if (certificateConfig.isLoading) return;
+    certificateConfig.isLoading = true;
+
     const certificatesGrid = document.querySelector('.certificates-grid');
-    certificatesGrid.innerHTML = '<span class="loading loading-spinner loading-md"></span>';
-    
-    setTimeout(() => {
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+    if (!isLoadMore) {
         certificatesGrid.innerHTML = '';
-        certificates.forEach(cert => {
-            const certCard = `
-                <div class="group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up">
-                    <div class="relative overflow-hidden">
-                        <img src="${cert.image}" alt="${cert.title}" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+        certificateConfig.currentPage = 1;
+    }
+
+    const startIndex = (certificateConfig.currentPage - 1) * certificateConfig.itemsPerPage;
+    const endIndex = startIndex + certificateConfig.itemsPerPage;
+    
+    // First, add loading placeholders
+    const placeholdersNeeded = Math.min(certificateConfig.itemsPerPage, certificates.length - startIndex);
+    for (let i = 0; i < placeholdersNeeded; i++) {
+        const placeholder = document.createElement('div');
+        placeholder.innerHTML = createLoadingCard();
+        placeholder.setAttribute('data-index', startIndex + i);
+        certificatesGrid.appendChild(placeholder);
+    }
+
+    // Then load actual certificates with staggered delay
+    const certsToDisplay = certificates.slice(startIndex, endIndex);
+    certsToDisplay.forEach(async (cert, index) => {
+        setTimeout(async () => {
+            const placeholder = certificatesGrid.querySelector(`[data-index="${startIndex + index}"]`);
+            if (placeholder) {
+                // Generate thumbnail
+                const thumbnailUrl = await createThumbnail(cert.image);
+                
+                const certCard = `
+                    <div class="group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer" 
+                         data-aos="fade-up"
+                         onclick="openCertificateModal('${cert.image}', '${cert.title}')">
+                        <div class="relative overflow-hidden">
+                            <img src="${thumbnailUrl}" alt="${cert.title}" 
+                                 class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110" 
+                                 loading="lazy">
+                            <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 text-zinc-800 dark:text-zinc-200">${cert.title}</h3>
+                            <p class="text-zinc-500 dark:text-zinc-500">${cert.date}</p>
+                        </div>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-zinc-800 dark:text-zinc-200">${cert.title}</h3>
-                        <p class="text-zinc-600 dark:text-zinc-400">Issued by: ${cert.issuer}</p>
-                        <p class="text-zinc-500 dark:text-zinc-500">${cert.date}</p>
-                    </div>
+                `;
+                placeholder.innerHTML = certCard;
+            }
+        }, index * 150);
+    });
+
+    // Update load more button after all cards are loaded
+    setTimeout(() => {
+        const remainingItems = certificates.length - endIndex;
+        if (loadMoreBtn) {
+            loadMoreBtn.style.display = remainingItems > 0 ? 'block' : 'none';
+            loadMoreBtn.innerHTML = 'Load More <i class="fas fa-arrow-down ml-2"></i>';
+            loadMoreBtn.disabled = false;
+        }
+        certificateConfig.isLoading = false;
+    }, certsToDisplay.length * 150);
+}
+
+// Add new function to open the modal
+window.openCertificateModal = function(imageUrl, title) {
+    const modalHTML = `
+        <dialog id="cert_modal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box bg-stone-50 dark:bg-zinc-800 p-0 relative max-w-3xl">
+                <div class="p-4 flex justify-between items-center border-b border-base-200 dark:border-base-700">
+                    <h3 class="font-bold text-lg">${title}</h3>
+                    <form method="dialog">
+                        <button class="btn btn-circle btn-ghost">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </form>
                 </div>
-            `;
-            certificatesGrid.innerHTML += certCard;
-        });
-    }, 500); // Simulate loading delay
+                <figure class="w-full relative">
+                    <div id="cert-loading" class="absolute inset-0 flex items-center justify-center bg-base-200">
+                        <span class="loading loading-spinner loading-lg"></span>
+                    </div>
+                    <img src="" alt="${title}" 
+                         class="w-full h-auto opacity-0 transition-opacity duration-300" 
+                         id="cert-image">
+                </figure>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+    `;
+
+    // Remove existing modal if any
+    const existingModal = document.getElementById('cert_modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    // Add new modal to the document
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+    // Show the modal and load image
+    const modal = document.getElementById('cert_modal');
+    const certImage = document.getElementById('cert-image');
+    const loadingIndicator = document.getElementById('cert-loading');
+
+    modal.showModal();
+
+    // Load full size image
+    certImage.onload = function() {
+        certImage.classList.remove('opacity-0');
+        loadingIndicator.classList.add('hidden');
+    };
+    
+    certImage.src = imageUrl;
+};
+
+// Clean up resources
+function cleanupCertificates() {
+    if (certificateConfig.observer) {
+        certificateConfig.observer.disconnect();
+        certificateConfig.observer = null;
+    }
+    if (certificateConfig.scrollThrottle) {
+        window.removeEventListener('scroll', certificateConfig.scrollThrottle);
+    }
+    certificateConfig.loadedImages.clear();
+    certificateConfig.renderedCards.clear();
 }
 
-// Form submission
-function submitForm() {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-
-    // Add your form submission logic here
-    console.log('Form submitted:', { name, email, message });
-    alert('ส่งข้อความสำเร็จ!');
-}
+// Make loadMoreCertificates globally available
+window.loadMoreCertificates = function() {
+    certificateConfig.currentPage++;
+    displayCertificates(true);
+};
 
 // Theme toggle functionality
 function setupThemeToggle() {
@@ -318,19 +421,32 @@ function setupThemeToggle() {
     });
 }
 
-// Add mobile menu functionality
+// Add mobile menu functionality with smooth animations
 function setupMobileMenu() {
     const menuButton = document.querySelector('.md\\:hidden');
     const mobileMenu = document.getElementById('mobileMenu');
+    const closeButton = document.getElementById('closeMobileMenu');
     const mobileLinks = mobileMenu.querySelectorAll('a');
 
-    menuButton.addEventListener('click', () => {
+    function toggleMenu() {
         mobileMenu.classList.toggle('hidden');
-    });
+        // Add small delay to ensure display:flex is applied before opacity transition
+        setTimeout(() => {
+            mobileMenu.classList.toggle('opacity-0');
+        }, 10);
+    }
+
+    menuButton.addEventListener('click', toggleMenu);
+    closeButton.addEventListener('click', toggleMenu);
 
     mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
+            toggleMenu();
+            // Add slide effect to menu items
+            link.classList.add('translate-x-4', 'opacity-0');
+            setTimeout(() => {
+                link.classList.remove('translate-x-4', 'opacity-0');
+            }, 300);
         });
     });
 }
@@ -360,9 +476,13 @@ function initializeApp() {
     displayProjects();
     displayCertificates();
     setupMobileMenu();
+
 }
 
 // Single DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', () => {
     simulateLoading(); // This will now check if loading is needed
 });
+
+// Cleanup on page unload
+window.addEventListener('unload', cleanupCertificates, { passive: true });

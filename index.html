@@ -27,7 +27,7 @@
     <link rel="preload" href="fonts/LINESeedSansTH_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/LINESeedSansTH_W_Bd.woff2" as="font" type="font/woff2" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </head>
 <body class="font-custom min-h-screen">
     <!-- Loading Overlay -->
@@ -67,18 +67,48 @@
     </nav>
 
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed inset-0 bg-base-300/90 z-40 hidden">
-        <div class="menu menu-vertical pt-20">
-            <li><a href="#home" class="text-2xl">🏠 หน้าแรก</a></li>
-            <li><a href="#about" class="text-2xl">📁 เกี่ยวกับ</a></li>
-            <li><a href="#projects" class="text-2xl">💼 ผลงาน</a></li>
-            <li><a href="#certificates" class="text-2xl">📜 เกียรติบัตร</a></li>
-            <li><a href="#contact" class="text-2xl">ต้องการติดต่อ 🤔</a></li>
-            <li>
-                <button class="theme-toggle btn btn-circle btn-ghost">
-                    <i class="fas fa-moon"></i>
+    <div id="mobileMenu" class="fixed inset-0 bg-base-100/95 backdrop-blur-md z-40 hidden transition-all duration-300 opacity-0">
+        <div class="flex flex-col h-full pt-24 px-6">
+            <div class="menu menu-vertical gap-4">
+                <li>
+                    <a href="#home" class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
+                        <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">🏠</span>
+                        <span>หน้าแรก</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#about" class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
+                        <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">📁</span>
+                        <span>เกี่ยวกับ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#projects" class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
+                        <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">💼</span>
+                        <span>ผลงาน</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#certificates" class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
+                        <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">📜</span>
+                        <span>เกียรติบัตร</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#contact" class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
+                        <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">📞</span>
+                        <span>ติดต่อ</span>
+                    </a>
+                </li>
+            </div>
+            <div class="mt-auto mb-8 flex justify-between items-center px-4">
+                <button class="theme-toggle btn btn-circle btn-lg">
+                    <i class="fas fa-moon text-xl"></i>
                 </button>
-            </li>
+                <button id="closeMobileMenu" class="btn btn-circle btn-lg btn-primary">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -101,17 +131,17 @@
     <!-- About Section -->
     <section id="about" class="py-20">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-16">About Me</h2>
+            <h2 class="text-4xl font-bold text-center mb-16">😄About Me</h2>
             <div class="card lg:card-side bg-base-100 shadow-xl max-w-6xl mx-auto">
                 <figure class="w-full md:w-1/2">
-                    <img src="public/img/DSCF4287EDIT1.JPG" alt="Profile Photo" class="w-full h-full object-cover" 
+                    <img src="https://cloud.aimlxv.me/s/pfp/preview" alt="Profile Photo" class="w-full h-full object-cover" 
                          onerror="this.src='https://via.placeholder.com/600x600'">
                 </figure>
                 <div class="card-body">
                     <h1 class="text-3xl font-semibold">🙏</h1>
                     <p class="text-2xl font-semibold">สวัสดีครับ/SawatdeeKub/サワッディークップ</p>
                     <div class="skills">
-                        <h3 class="text-2xl font-semibold mb-4">กำลังฝึกฝน/Working on it</h3>
+                        <h3 class="text-2xl font-semibold mb-4">Working on it 🍵</h3>
                         <div class="flex flex-col gap-4">
                             <img src="https://skillicons.dev/icons?i=c,cpp,cs,py,go,js,ts,html,css,bootstrap,tailwind,react,angular,flutter,firebase,figma,ae,linux,windows,git,github,githubactions,vscode,pycharm,clion,rider,arduino,discord,instagram,linkedin&theme=dark" 
                                  alt="My Skills" 
@@ -127,7 +157,7 @@
     <!-- Projects Section -->
     <section id="projects" class="py-20 bg-base-200">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-16">My Projects</h2>
+            <h2 class="text-3xl font-bold text-center mb-16">💼Project/Works</h2>
             <div class="projects-grid max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project cards will be added here via JavaScript -->
             </div>
@@ -137,9 +167,14 @@
     <!-- Certificates Section -->
     <section id="certificates" class="py-20">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-16">Certificates</h2>
-            <div class="certificates-grid max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Certificate cards will be added here via JavaScript -->
+            <h2 class="text-3xl font-bold text-center mb-16">📜Certificates</h2>
+            <div class="certificates-grid max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 content-start">
+                <!-- Certificates will be loaded here -->
+            </div>
+            <div class="load-more-container flex justify-center mt-8">
+                <button id="loadMoreBtn" onclick="loadMoreCertificates()" class="btn btn-primary">
+                    Load More <i class="fas fa-arrow-down ml-2"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -147,12 +182,16 @@
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-base-200">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-16">Contact Me</h2>
-            <div class="form-control max-w-lg mx-auto space-y-4">
-                <input type="text" placeholder="Name" id="name" class="input input-bordered">
-                <input type="email" placeholder="Email" id="email" class="input input-bordered">
-                <textarea placeholder="Message" id="message" rows="6" class="textarea textarea-bordered"></textarea>
-                <button onclick="submitForm()" class="btn btn-primary">Send Message</button>
+            <h2 class="text-4xl font-bold text-center mb-16">📞Contact Me</h2>
+            <div class="flex justify-center gap-4">
+                <a href="https://github.com/AiMlxV" target="_blank" class="btn btn-lg gap-2">
+                    <i class="fab fa-github text-2xl"></i>
+                    GitHub Profile
+                </a>
+                <a href="https://www.linkedin.com/in/aimltanawat/" target="_blank" class="btn btn-lg gap-2 btn-primary">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                    LinkedIn Profile
+                </a>
             </div>
         </div>
     </section>
@@ -162,6 +201,6 @@
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
