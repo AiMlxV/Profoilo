@@ -1,5 +1,40 @@
 export const certificates = [
     {
+        title: "Talent RAC",
+        date: "2023",
+        image: "public/img/Cer/fibo.jpg"
+    },
+    {
+        title: "NextGen AI Camp",
+        date: "2024",
+        image: "public/img/Cer/nextgen.jpg"
+    },
+    {
+        title: "DEPA Coding Bootcamp",
+        date: "2024",
+        image: "public/img/Cer/depa.jpg"
+    },
+    {
+        title: "ผ่านการอบรม สอวน. ค่าย 2",
+        date: "2023",
+        image: "public/img/Cer/posn2.jpg"
+    },
+    {
+        title: "ผ่านการอบรม สอวน. ค่าย 1",
+        date: "2022",
+        image: "public/img/Cer/posn1.jpg"
+    },
+    {
+        title: "คณะกรรมการดำเนินงาน ค่ายสอวน.",
+        date: "2024",
+        image: "public/img/Cer/posn-staff.jpg"
+    },
+    {
+        title: "ผู้ช่วยวิทยากรอบรม กิจกรรมพัฒนาผู้เรียน",
+        date: "2024",
+        image: "public/img/Cer/saint-staff.jpg"
+    },
+    {
         title: "Bangmod Hackathon",
         date: "2023",
         image: "public/img/Cer/bangmod.jpg"
@@ -10,9 +45,14 @@ export const certificates = [
         image: "public/img/Cer/com-art.jpg"
     },
     {
-        title: "DEPA Coding Bootcamp",
+        title: "แข่งเขียนโปรแกรม สัปดาห์วิทยาศาสตร์มหาวิทยาลัยนเรศวร",
         date: "2024",
-        image: "public/img/Cer/depa.jpg"
+        image: "public/img/Cer/nusci67.jpg"
+    },
+    {
+        title: "ผ่านการอบรม Up/ReSkill AIoT",
+        date: "2023",
+        image: "public/img/Cer/upskillre.jpg"
     },
     {
         title: "Introduction to Agmented Reality",
@@ -40,34 +80,9 @@ export const certificates = [
         image: "public/img/Cer/fibo-mqtt.png"
     },
     {
-        title: "Talent RAC",
-        date: "2023",
-        image: "public/img/Cer/fibo.jpg"
-    },
-    {
-        title: "NextGen AI Camp",
+        title: "Introduction to Programming with Python",
         date: "2024",
-        image: "public/img/Cer/nextgen.jpg"
-    },
-    {
-        title: "แข่งเขียนโปรแกรม สัปดาห์วิทยาศาสตร์มหาวิทยาลัยนเรศวร",
-        date: "2024",
-        image: "public/img/Cer/nusci67.jpg"
-    },
-    {
-        title: "คณะกรรมการดำเนินงาน ค่ายสอวน.",
-        date: "2024",
-        image: "public/img/Cer/posn-staff.jpg"
-    },
-    {
-        title: "ผ่านการอบรม สอวน. ค่าย 1",
-        date: "2022",
-        image: "public/img/Cer/posn1.jpg"
-    },
-    {
-        title: "ผ่านการอบรม สอวน. ค่าย 2",
-        date: "2023",
-        image: "public/img/Cer/posn2.jpg"
+        image: "public/img/Cer/samsung.jpg"
     },
     {
         title: "เข้าร่วมค่าย RAI Ventures รอบ Onsite",
@@ -75,24 +90,8 @@ export const certificates = [
         image: "public/img/Cer/RAIven.jpg"
     },
     {
-        title: "ผู้ช่วยวิทยากรอบรม กิจกรรมพัฒนาผู้เรียน",
-        date: "2024",
-        image: "public/img/Cer/saint-staff.jpg"
-    },
-    {
-        title: "Introduction to Programming with Python",
-        date: "2024",
-        image: "public/img/Cer/samsung.jpg"
-    },
-    {
         title: "เข้าร่วมค่าย ห้องเรียนพิเศษ SMTE",
         date: "2022",
         image: "public/img/Cer/smte-camp.jpg"
-    },
-    {
-        title: "ผ่านการอบรม Up/ReSkill AIoT",
-        date: "2023",
-        image: "public/img/Cer/upskillre.jpg"
-    },
-    
+    }
 ];
