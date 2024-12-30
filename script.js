@@ -380,17 +380,6 @@ window.loadMoreCertificates = function() {
     displayCertificates(true);
 };
 
-// Form submission
-function submitForm() {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-
-    // Add your form submission logic here
-    console.log('Form submitted:', { name, email, message });
-    alert('ส่งข้อความสำเร็จ!');
-}
-
 // Theme toggle functionality
 function setupThemeToggle() {
     const themeToggles = document.querySelectorAll('.theme-toggle');
