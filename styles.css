@@ -1,3 +1,10 @@
+/* Add at the top of the file */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
 :root {
     color-scheme: light dark;
     --theme-transition-duration: 0.3s;
@@ -16,6 +23,20 @@ html {
 }
 body {
   visibility: hidden; /* Hide content initially */
+}
+
+.container {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Fix for skill icons overflow */
+.skills img {
+    max-width: 100%;
+    height: auto;
 }
 
 /* Base transitions */
@@ -50,6 +71,7 @@ body {
 #mobileMenu {
     display: flex;
     pointer-events: none;
+    max-width: 100vw;
 }
 
 #mobileMenu.hidden {
@@ -95,4 +117,20 @@ body {
          url('./fonts/LINESeedSansTH_W_Bd.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
+}
+
+/* Ensure proper padding on mobile */
+@media (max-width: 768px) {
+    .hero-content {
+        padding: 1rem;
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }
