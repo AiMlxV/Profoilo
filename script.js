@@ -199,31 +199,99 @@ function displayProjects() {
     }, 500); // Simulate loading delay
 }
 
-// Populate certificates
-function displayCertificates() {
-    const certificatesGrid = document.querySelector('.certificates-grid');
-    certificatesGrid.innerHTML = '<span class="loading loading-spinner loading-md"></span>';
-    
-    setTimeout(() => {
-        certificatesGrid.innerHTML = '';
-        certificates.forEach(cert => {
-            const certCard = `
-                <div class="group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up">
-                    <div class="relative overflow-hidden">
-                        <img src="${cert.image}" alt="${cert.title}" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-zinc-800 dark:text-zinc-200">${cert.title}</h3>
-                        <p class="text-zinc-600 dark:text-zinc-400">Issued by: ${cert.issuer}</p>
-                        <p class="text-zinc-500 dark:text-zinc-500">${cert.date}</p>
-                    </div>
-                </div>
-            `;
-            certificatesGrid.innerHTML += certCard;
-        });
-    }, 500); // Simulate loading delay
+const certificateConfig = {
+    itemsPerPage: 6,
+    currentPage: 1,
+    cachedCards: [], // Store prerendered cards
+    isLoading: false
+};
+
+function createLoadingCard() {
+    return `
+        <div class="bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 p-6 flex flex-col items-center justify-center min-h-[300px]">
+            <span class="loading loading-spinner loading-lg"></span>
+            <p class="mt-4 text-zinc-500 dark:text-zinc-400">Loading...</p>
+        </div>
+    `;
 }
+
+function displayCertificates(isLoadMore = false) {
+    if (certificateConfig.isLoading) return;
+    certificateConfig.isLoading = true;
+
+    const certificatesGrid = document.querySelector('.certificates-grid');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+    if (!isLoadMore) {
+        certificatesGrid.innerHTML = '';
+        certificateConfig.currentPage = 1;
+    }
+
+    const startIndex = (certificateConfig.currentPage - 1) * certificateConfig.itemsPerPage;
+    const endIndex = startIndex + certificateConfig.itemsPerPage;
+    
+    // First, add loading placeholders
+    const placeholdersNeeded = Math.min(certificateConfig.itemsPerPage, certificates.length - startIndex);
+    for (let i = 0; i < placeholdersNeeded; i++) {
+        const placeholder = document.createElement('div');
+        placeholder.innerHTML = createLoadingCard();
+        placeholder.setAttribute('data-index', startIndex + i);
+        certificatesGrid.appendChild(placeholder);
+    }
+
+    // Then load actual certificates with staggered delay
+    const certsToDisplay = certificates.slice(startIndex, endIndex);
+    certsToDisplay.forEach((cert, index) => {
+        setTimeout(() => {
+            const placeholder = certificatesGrid.querySelector(`[data-index="${startIndex + index}"]`);
+            if (placeholder) {
+                const certCard = `
+                    <div class="group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up">
+                        <div class="relative overflow-hidden">
+                            <img src="${cert.image}" alt="${cert.title}" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                            <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 text-zinc-800 dark:text-zinc-200">${cert.title}</h3>
+                            <p class="text-zinc-500 dark:text-zinc-500">${cert.date}</p>
+                        </div>
+                    </div>
+                `;
+                placeholder.innerHTML = certCard;
+            }
+        }, index * 150); // Stagger each card load by 150ms
+    });
+
+    // Update load more button after all cards are loaded
+    setTimeout(() => {
+        const remainingItems = certificates.length - endIndex;
+        if (loadMoreBtn) {
+            loadMoreBtn.style.display = remainingItems > 0 ? 'block' : 'none';
+            loadMoreBtn.innerHTML = 'Load More <i class="fas fa-arrow-down ml-2"></i>';
+            loadMoreBtn.disabled = false;
+        }
+        certificateConfig.isLoading = false;
+    }, certsToDisplay.length * 150);
+}
+
+// Clean up resources
+function cleanupCertificates() {
+    if (certificateConfig.observer) {
+        certificateConfig.observer.disconnect();
+        certificateConfig.observer = null;
+    }
+    if (certificateConfig.scrollThrottle) {
+        window.removeEventListener('scroll', certificateConfig.scrollThrottle);
+    }
+    certificateConfig.loadedImages.clear();
+    certificateConfig.renderedCards.clear();
+}
+
+// Make loadMoreCertificates globally available
+window.loadMoreCertificates = function() {
+    certificateConfig.currentPage++;
+    displayCertificates(true);
+};
 
 // Form submission
 function submitForm() {
@@ -319,9 +387,13 @@ function initializeApp() {
     displayProjects();
     displayCertificates();
     setupMobileMenu();
+
 }
 
 // Single DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', () => {
     simulateLoading(); // This will now check if loading is needed
 });
+
+// Cleanup on page unload
+window.addEventListener('unload', cleanupCertificates, { passive: true });
