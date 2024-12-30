@@ -239,7 +239,7 @@ function displayProjects() {
         projectsGrid.innerHTML = '';
         projects.forEach(project => {
             const projectCard = `
-                <div class="group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up">
+                <a href="${project.link}" class="block group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer" data-aos="fade-up">
                     <div class="relative overflow-hidden">
                         <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
@@ -247,11 +247,11 @@ function displayProjects() {
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 text-zinc-800 dark:text-zinc-200">${project.title}</h3>
                         <p class="text-zinc-600 dark:text-zinc-400 mb-4">${project.description}</p>
-                        <a href="${project.link}" class="inline-flex items-center text-teal-600 hover:text-teal-700 transition-colors">
+                        <div class="inline-flex items-center text-teal-600 hover:text-teal-700 transition-colors">
                             View more <i class="fas fa-arrow-right ml-2 transform transition-transform group-hover:translate-x-2"></i>
-                        </a>
+                        </div>
                     </div>
-                </div>
+                </a>
             `;
             projectsGrid.innerHTML += projectCard;
         });
