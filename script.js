@@ -2,8 +2,8 @@ import { projects } from './data/projects.js';
 import { certificates } from './data/certificates.js';
 
 const loadingConfig = {
-    minLoadTime: 2500, // Reduced to 2.5 seconds but still substantial
-    progressInterval: 30, // Smoother progress updates
+    minLoadTime: 2500,
+    progressInterval: 30,
     loadingMessages: [
         "🖥️กำลังเปิดเครื่อง...",
         "🛜เชื่อมต่ออินเตอร์เน็ต...",
@@ -12,7 +12,7 @@ const loadingConfig = {
         "😄เสร็จแล้ว..."
     ],
     storageKey: 'lastLoadTime',
-    expirationTime: 60 * 60 * 1000 // 1 hour in milliseconds
+    expirationTime: 60 * 60 * 1000
 };
 
 function shouldShowLoading() {
@@ -26,10 +26,9 @@ function shouldShowLoading() {
 
 function simulateLoading() {
     if (!shouldShowLoading()) {
-        // Skip loading animation if within time window
         document.body.style.visibility = 'visible';
         document.getElementById('loading-overlay').style.display = 'none';
-        initializeApp(); // New function to handle post-loading initialization
+        initializeApp();
         return;
     }
 
@@ -39,7 +38,6 @@ function simulateLoading() {
     let progress = 0;
     const startTime = Date.now();
 
-    // Ensure overlay is visible and body is hidden
     document.body.style.visibility = 'hidden';
     loadingOverlay.style.display = 'flex';
     loadingOverlay.style.opacity = '1';
@@ -51,7 +49,6 @@ function simulateLoading() {
         
         progressBar.value = progress;
         
-        // Update loading message
         const messageIndex = Math.floor((progress / 100) * loadingConfig.loadingMessages.length);
         loadingText.textContent = loadingConfig.loadingMessages[Math.min(messageIndex, loadingConfig.loadingMessages.length - 1)];
         
@@ -66,16 +63,14 @@ function simulateLoading() {
         progressBar.value = 100;
         loadingText.textContent = "Welcome!";
         
-        // Store the loading completion time
         localStorage.setItem(loadingConfig.storageKey, Date.now().toString());
         
-        // Fade out overlay and show content
         setTimeout(() => {
             document.body.style.visibility = 'visible';
             loadingOverlay.style.opacity = '0';
             setTimeout(() => {
                 loadingOverlay.style.display = 'none';
-                initializeApp(); // Initialize after loading completes
+                initializeApp();
             }, 800);
         }, 200);
     };
@@ -83,7 +78,6 @@ function simulateLoading() {
     requestAnimationFrame(updateProgress);
 }
 
-// Font loading check
 document.fonts.ready.then(() => {
     if (document.fonts.check('1em LINESeedSansTH')) {
         console.log('LINESeedSansTH font loaded successfully');
@@ -92,7 +86,6 @@ document.fonts.ready.then(() => {
     }
 });
 
-// Consolidated Tailwind configuration
 tailwind.config = {
     darkMode: 'class',
     theme: {
@@ -104,7 +97,6 @@ tailwind.config = {
     }
 };
 
-// Typing animation configuration
 const texts = [
     "printf(\"Welcome!\")", 
     "print(\"Welcome!\")", 
@@ -118,7 +110,7 @@ const texts = [
 
 const typingConfig = {
     speed: 75,
-    exitCodeSpeed: 37.5, // Add faster speed for exit code
+    exitCodeSpeed: 37.5,
     startDelay: 250
 };
 
@@ -158,7 +150,6 @@ function initTypingAnimation() {
     setTimeout(typeText, typingConfig.startDelay);
 }
 
-// Enhanced smooth scroll function
 function smoothScroll(targetId) {
     const targetSection = document.querySelector(targetId);
     const navHeight = document.querySelector('nav').offsetHeight;
@@ -171,7 +162,6 @@ function smoothScroll(targetId) {
     }
 }
 
-// Populate projects
 function displayProjects() {
     const projectsGrid = document.querySelector('.projects-grid');
     projectsGrid.innerHTML = '<span class="loading loading-spinner loading-md"></span>';
@@ -196,13 +186,13 @@ function displayProjects() {
             `;
             projectsGrid.innerHTML += projectCard;
         });
-    }, 500); // Simulate loading delay
+    }, 500);
 }
 
 const certificateConfig = {
     itemsPerPage: 6,
     currentPage: 1,
-    cachedCards: [], // Store prerendered cards
+    cachedCards: [],
     isLoading: false
 };
 
@@ -221,20 +211,16 @@ function createThumbnail(originalUrl) {
         img.crossOrigin = "anonymous";
         
         img.onload = function() {
-            // Create canvas for thumbnail
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             
-            // Calculate thumbnail size (maintain aspect ratio)
-            const maxWidth = 400; // thumbnail width
+            const maxWidth = 400;
             const ratio = maxWidth / img.width;
             canvas.width = maxWidth;
             canvas.height = img.height * ratio;
             
-            // Draw resized image
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
             
-            // Get thumbnail as data URL
             resolve(canvas.toDataURL('image/jpeg', 0.7));
         };
         
@@ -257,7 +243,6 @@ function displayCertificates(isLoadMore = false) {
     const startIndex = (certificateConfig.currentPage - 1) * certificateConfig.itemsPerPage;
     const endIndex = startIndex + certificateConfig.itemsPerPage;
     
-    // First, add loading placeholders
     const placeholdersNeeded = Math.min(certificateConfig.itemsPerPage, certificates.length - startIndex);
     for (let i = 0; i < placeholdersNeeded; i++) {
         const placeholder = document.createElement('div');
@@ -266,13 +251,11 @@ function displayCertificates(isLoadMore = false) {
         certificatesGrid.appendChild(placeholder);
     }
 
-    // Then load actual certificates with staggered delay
     const certsToDisplay = certificates.slice(startIndex, endIndex);
     certsToDisplay.forEach(async (cert, index) => {
         setTimeout(async () => {
             const placeholder = certificatesGrid.querySelector(`[data-index="${startIndex + index}"]`);
             if (placeholder) {
-                // Generate thumbnail
                 const thumbnailUrl = await createThumbnail(cert.image);
                 
                 const certCard = `
@@ -296,7 +279,6 @@ function displayCertificates(isLoadMore = false) {
         }, index * 150);
     });
 
-    // Update load more button after all cards are loaded
     setTimeout(() => {
         const remainingItems = certificates.length - endIndex;
         if (loadMoreBtn) {
@@ -308,7 +290,6 @@ function displayCertificates(isLoadMore = false) {
     }, certsToDisplay.length * 150);
 }
 
-// Add new function to open the modal
 window.openCertificateModal = function(imageUrl, title) {
     const modalHTML = `
         <dialog id="cert_modal" class="modal modal-bottom sm:modal-middle">
@@ -336,23 +317,19 @@ window.openCertificateModal = function(imageUrl, title) {
         </dialog>
     `;
 
-    // Remove existing modal if any
     const existingModal = document.getElementById('cert_modal');
     if (existingModal) {
         existingModal.remove();
     }
 
-    // Add new modal to the document
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 
-    // Show the modal and load image
     const modal = document.getElementById('cert_modal');
     const certImage = document.getElementById('cert-image');
     const loadingIndicator = document.getElementById('cert-loading');
 
     modal.showModal();
 
-    // Load full size image
     certImage.onload = function() {
         certImage.classList.remove('opacity-0');
         loadingIndicator.classList.add('hidden');
@@ -361,7 +338,6 @@ window.openCertificateModal = function(imageUrl, title) {
     certImage.src = imageUrl;
 };
 
-// Clean up resources
 function cleanupCertificates() {
     if (certificateConfig.observer) {
         certificateConfig.observer.disconnect();
@@ -374,13 +350,11 @@ function cleanupCertificates() {
     certificateConfig.renderedCards.clear();
 }
 
-// Make loadMoreCertificates globally available
 window.loadMoreCertificates = function() {
     certificateConfig.currentPage++;
     displayCertificates(true);
 };
 
-// Theme toggle functionality
 function setupThemeToggle() {
     const themeToggles = document.querySelectorAll('.theme-toggle');
     const html = document.documentElement;
@@ -414,14 +388,12 @@ function setupThemeToggle() {
         });
     }
     
-    // Initialize icons
     updateThemeIcons();
     themeToggles.forEach(toggle => {
         toggle.addEventListener('click', toggleTheme);
     });
 }
 
-// Add mobile menu functionality with smooth animations
 function setupMobileMenu() {
     const menuButton = document.querySelector('.md\\:hidden');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -430,7 +402,6 @@ function setupMobileMenu() {
 
     function toggleMenu() {
         mobileMenu.classList.toggle('hidden');
-        // Add small delay to ensure display:flex is applied before opacity transition
         setTimeout(() => {
             mobileMenu.classList.toggle('opacity-0');
         }, 10);
@@ -442,7 +413,6 @@ function setupMobileMenu() {
     mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
             toggleMenu();
-            // Add slide effect to menu items
             link.classList.add('translate-x-4', 'opacity-0');
             setTimeout(() => {
                 link.classList.remove('translate-x-4', 'opacity-0');
@@ -451,16 +421,13 @@ function setupMobileMenu() {
     });
 }
 
-// Move initialization code to separate function
 function initializeApp() {
-    // Initialize AOS with custom settings
     AOS.init({
         duration: 1000,
         once: true,
         offset: 100
     });
 
-    // Add smooth scroll to all anchor links
     const links = document.querySelectorAll('a[href^="#"]');
     links.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -470,19 +437,15 @@ function initializeApp() {
         });
     });
 
-    // Initialize all functionality
     initTypingAnimation();
     setupThemeToggle();
     displayProjects();
     displayCertificates();
     setupMobileMenu();
-
 }
 
-// Single DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', () => {
-    simulateLoading(); // This will now check if loading is needed
+    simulateLoading();
 });
 
-// Cleanup on page unload
 window.addEventListener('unload', cleanupCertificates, { passive: true });
