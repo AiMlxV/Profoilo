@@ -421,19 +421,32 @@ function setupThemeToggle() {
     });
 }
 
-// Add mobile menu functionality
+// Add mobile menu functionality with smooth animations
 function setupMobileMenu() {
     const menuButton = document.querySelector('.md\\:hidden');
     const mobileMenu = document.getElementById('mobileMenu');
+    const closeButton = document.getElementById('closeMobileMenu');
     const mobileLinks = mobileMenu.querySelectorAll('a');
 
-    menuButton.addEventListener('click', () => {
+    function toggleMenu() {
         mobileMenu.classList.toggle('hidden');
-    });
+        // Add small delay to ensure display:flex is applied before opacity transition
+        setTimeout(() => {
+            mobileMenu.classList.toggle('opacity-0');
+        }, 10);
+    }
+
+    menuButton.addEventListener('click', toggleMenu);
+    closeButton.addEventListener('click', toggleMenu);
 
     mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
+            toggleMenu();
+            // Add slide effect to menu items
+            link.classList.add('translate-x-4', 'opacity-0');
+            setTimeout(() => {
+                link.classList.remove('translate-x-4', 'opacity-0');
+            }, 300);
         });
     });
 }

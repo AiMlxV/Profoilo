@@ -67,18 +67,48 @@
     </nav>
 
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed inset-0 bg-base-300/90 z-40 hidden">
-        <div class="menu menu-vertical pt-20">
-            <li><a href="#home" class="text-2xl">🏠 หน้าแรก</a></li>
-            <li><a href="#about" class="text-2xl">📁 เกี่ยวกับ</a></li>
-            <li><a href="#projects" class="text-2xl">💼 ผลงาน</a></li>
-            <li><a href="#certificates" class="text-2xl">📜 เกียรติบัตร</a></li>
-            <li><a href="#contact" class="text-2xl">ต้องการติดต่อ 🤔</a></li>
-            <li>
-                <button class="theme-toggle btn btn-circle btn-ghost">
-                    <i class="fas fa-moon"></i>
+    <div id="mobileMenu" class="fixed inset-0 bg-base-100/95 backdrop-blur-md z-40 hidden transition-all duration-300 opacity-0">
+        <div class="flex flex-col h-full pt-24 px-6">
+            <div class="menu menu-vertical gap-4">
+                <li>
+                    <a href="#home" class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
+                        <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">🏠</span>
+                        <span>หน้าแรก</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#about" class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
+                        <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">📁</span>
+                        <span>เกี่ยวกับ</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#projects" class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
+                        <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">💼</span>
+                        <span>ผลงาน</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#certificates" class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
+                        <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">📜</span>
+                        <span>เกียรติบัตร</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#contact" class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
+                        <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">📞</span>
+                        <span>ติดต่อ</span>
+                    </a>
+                </li>
+            </div>
+            <div class="mt-auto mb-8 flex justify-between items-center px-4">
+                <button class="theme-toggle btn btn-circle btn-lg">
+                    <i class="fas fa-moon text-xl"></i>
                 </button>
-            </li>
+                <button id="closeMobileMenu" class="btn btn-circle btn-lg btn-primary">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
         </div>
     </div>
 

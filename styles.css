@@ -46,6 +46,37 @@ body {
   background-image: url('https://images.unsplash.com/photo-1672858460787-fb29ed7352f8');
 }
 
+/* Mobile menu animations */
+#mobileMenu {
+    display: flex;
+    pointer-events: none;
+}
+
+#mobileMenu.hidden {
+    display: none;
+}
+
+#mobileMenu:not(.hidden) {
+    pointer-events: auto;
+}
+
+#mobileMenu .menu a {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+}
+
+#mobileMenu.opacity-0 .menu a {
+    transform: translateX(-1rem);
+    opacity: 0;
+}
+
+/* Stagger animation delays for menu items */
+#mobileMenu .menu li:nth-child(1) a { transition-delay: 0.1s; }
+#mobileMenu .menu li:nth-child(2) a { transition-delay: 0.15s; }
+#mobileMenu .menu li:nth-child(3) a { transition-delay: 0.2s; }
+#mobileMenu .menu li:nth-child(4) a { transition-delay: 0.25s; }
+#mobileMenu .menu li:nth-child(5) a { transition-delay: 0.3s; }
 
 @font-face {
     font-family: 'LINESeedSansTH';
