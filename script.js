@@ -309,30 +309,26 @@ function displayCertificates(isLoadMore = false) {
 }
 
 // Add new function to open the modal
-window.openCertificateModal = function(imageUrl, title, thumbnailUrl) {
+window.openCertificateModal = function(imageUrl, title) {
     const modalHTML = `
         <dialog id="cert_modal" class="modal modal-bottom sm:modal-middle">
             <div class="modal-box bg-stone-50 dark:bg-zinc-800 p-0 relative max-w-3xl">
-                <div class="p-4">
-                    <h3 class="font-bold text-lg mb-2">${title}</h3>
-                </div>
-                <figure class="w-full relative">
-                    <!-- Show thumbnail first -->
-                    <img src="${thumbnailUrl || imageUrl}" alt="${title}" 
-                         class="w-full h-auto transition-opacity duration-300" 
-                         id="cert-image">
-                    <!-- Loading indicator -->
-                    <div id="cert-loading" class="absolute inset-0 flex items-center justify-center bg-base-200/50 hidden">
-                        <span class="loading loading-spinner loading-lg"></span>
-                    </div>
-                </figure>
-                <div class="modal-action absolute top-2 right-2">
+                <div class="p-4 flex justify-between items-center border-b border-base-200 dark:border-base-700">
+                    <h3 class="font-bold text-lg">${title}</h3>
                     <form method="dialog">
                         <button class="btn btn-circle btn-ghost">
                             <i class="fas fa-times"></i>
                         </button>
                     </form>
                 </div>
+                <figure class="w-full relative">
+                    <div id="cert-loading" class="absolute inset-0 flex items-center justify-center bg-base-200">
+                        <span class="loading loading-spinner loading-lg"></span>
+                    </div>
+                    <img src="" alt="${title}" 
+                         class="w-full h-auto opacity-0 transition-opacity duration-300" 
+                         id="cert-image">
+                </figure>
             </div>
             <form method="dialog" class="modal-backdrop">
                 <button>close</button>
@@ -349,25 +345,20 @@ window.openCertificateModal = function(imageUrl, title, thumbnailUrl) {
     // Add new modal to the document
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 
-    // Show the modal
+    // Show the modal and load image
     const modal = document.getElementById('cert_modal');
+    const certImage = document.getElementById('cert-image');
+    const loadingIndicator = document.getElementById('cert-loading');
+
     modal.showModal();
 
-    // Load full size image after modal is shown
-    if (thumbnailUrl) {
-        const fullImage = new Image();
-        const certImage = document.getElementById('cert-image');
-        const loadingIndicator = document.getElementById('cert-loading');
-
-        loadingIndicator.classList.remove('hidden');
-        
-        fullImage.onload = function() {
-            certImage.src = imageUrl;
-            loadingIndicator.classList.add('hidden');
-        };
-        
-        fullImage.src = imageUrl;
-    }
+    // Load full size image
+    certImage.onload = function() {
+        certImage.classList.remove('opacity-0');
+        loadingIndicator.classList.add('hidden');
+    };
+    
+    certImage.src = imageUrl;
 };
 
 // Clean up resources
