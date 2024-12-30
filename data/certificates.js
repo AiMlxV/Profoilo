@@ -55,7 +55,7 @@ export const certificates = [
         image: "public/img/Cer/upskillre.jpg"
     },
     {
-        title: "Introduction to Agmented Reality",
+        title: "Introduction to AR",
         date: "2023",
         image: "public/img/Cer/fibo-ar.png"
     },
