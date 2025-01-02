@@ -163,14 +163,20 @@
             <h2 class="text-3xl font-bold text-center mb-16">📜Certificates</h2>
             
             <div class="flex flex-col items-center mb-8">
-                <!-- Add active tag display -->
+                <!-- Update active tag display with icon -->
                 <div class="mb-4" id="activeTagDisplay">
-                    <span class="text-lg font-medium">
-                        Showing: <span class="badge badge-lg" id="currentTag">All Certificates</span>
-                    </span>
-                    <button id="clearFilter" class="btn btn-sm btn-ghost ml-2" style="display: none;">
-                        <i class="fas fa-times"></i> Clear filter
-                    </button>
+                    <div class="flex items-center justify-center gap-2">
+                        <span class="text-lg font-medium flex items-center gap-2">
+                            <i class="fas fa-filter"></i>
+                            Current Filter: 
+                            <span class="badge badge-lg gap-2" id="currentTag">
+                                <i class="fas fa-th-large"></i> All Certificates
+                            </span>
+                        </span>
+                        <button id="clearFilter" class="btn btn-sm btn-ghost">
+                            <i class="fas fa-times"></i> Clear filter
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Filter buttons -->

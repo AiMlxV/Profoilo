@@ -25,6 +25,16 @@ const tagLabels = {
     stem: 'STEM'
 };
 
+const tagIcons = {
+    all: 'fa-th-large',
+    robotics: 'fa-robot',
+    coding: 'fa-code',
+    camp: 'fa-campground',
+    contest: 'fa-trophy',
+    ai: 'fa-brain',
+    stem: 'fa-atom'
+};
+
 function shouldShowLoading() {
     const lastLoad = localStorage.getItem(loadingConfig.storageKey);
     if (!lastLoad) return true;
@@ -518,16 +528,63 @@ function setupCertificateFilters() {
     const activeTagDisplay = document.getElementById('currentTag');
     const clearFilterBtn = document.getElementById('clearFilter');
     
-    function updateActiveTagDisplay(tag) {
+    function updateActiveTagDisplay(tag, clickedButton = null) {
         const tagName = tagLabels[tag] || 'All Certificates';
-        activeTagDisplay.textContent = tagName;
-        activeTagDisplay.className = `badge badge-lg ${tag !== 'all' ? tagColors[tag] : 'border-base-300'} border-2`;
+        const iconClass = tagIcons[tag] || 'fa-th-large';
+        
+        if (clickedButton) {
+            // Get the button's position
+            const buttonRect = clickedButton.getBoundingClientRect();
+            const targetRect = activeTagDisplay.getBoundingClientRect();
+            
+            // Create and animate a clone
+            const clone = clickedButton.cloneNode(true);
+            clone.style.position = 'fixed';
+            clone.style.left = `${buttonRect.left}px`;
+            clone.style.top = `${buttonRect.top}px`;
+            clone.style.width = `${buttonRect.width}px`;
+            clone.style.height = `${buttonRect.height}px`;
+            clone.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            clone.style.zIndex = '100';
+            
+            document.body.appendChild(clone);
+            
+            // Trigger animation
+            requestAnimationFrame(() => {
+                clone.style.transform = 'scale(1.1)';
+                clone.style.left = `${targetRect.left}px`;
+                clone.style.top = `${targetRect.top}px`;
+                clone.style.opacity = '0';
+                
+                setTimeout(() => {
+                    clone.remove();
+                    activeTagDisplay.innerHTML = `<i class="fas ${iconClass}"></i> ${tagName}`;
+                    activeTagDisplay.className = `badge badge-lg ${tag !== 'all' ? tagColors[tag] : 'border-base-300'} border-2`;
+                }, 300);
+            });
+        } else {
+            activeTagDisplay.innerHTML = `<i class="fas ${iconClass}"></i> ${tagName}`;
+            activeTagDisplay.className = `badge badge-lg ${tag !== 'all' ? tagColors[tag] : 'border-base-300'} border-2`;
+        }
+        
         clearFilterBtn.style.display = tag !== 'all' ? 'inline-flex' : 'none';
+
+        // Hide the selected tag button
+        filterButtons.forEach(btn => {
+            if (btn.dataset.tag === tag) {
+                btn.classList.add('hidden');
+            } else {
+                btn.classList.remove('hidden');
+            }
+        });
     }
 
     filterButtons.forEach(button => {
         button.addEventListener('click', async () => {
             const tag = button.dataset.tag;
+            
+            // Show all buttons first (in case another was hidden)
+            filterButtons.forEach(btn => btn.classList.remove('hidden'));
             
             // Remove active state from all buttons
             filterButtons.forEach(btn => {
@@ -539,7 +596,7 @@ function setupCertificateFilters() {
             button.classList.add('bg-opacity-20');
             
             // Update the active tag display
-            updateActiveTagDisplay(tag);
+            updateActiveTagDisplay(tag, button);
             
             // Add transition class
             certificatesGrid.classList.add('filtering');
@@ -563,6 +620,8 @@ function setupCertificateFilters() {
     
     // Clear filter button handler
     clearFilterBtn.addEventListener('click', () => {
+        // Show all buttons first
+        filterButtons.forEach(btn => btn.classList.remove('hidden'));
         const allButton = document.querySelector('.tag-filter[data-tag="all"]');
         allButton.click();
     });
