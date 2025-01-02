@@ -161,11 +161,55 @@
     <section id="certificates" class="py-20">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-16">📜Certificates</h2>
+            
+            <div class="flex flex-col items-center mb-8">
+                <!-- Add active tag display -->
+                <div class="mb-4" id="activeTagDisplay">
+                    <span class="text-lg font-medium">
+                        Showing: <span class="badge badge-lg" id="currentTag">All Certificates</span>
+                    </span>
+                    <button id="clearFilter" class="btn btn-sm btn-ghost ml-2" style="display: none;">
+                        <i class="fas fa-times"></i> Clear filter
+                    </button>
+                </div>
+
+                <!-- Filter buttons -->
+                <div class="flex flex-wrap justify-center gap-2 mb-2">
+                    <button class="btn btn-sm tag-filter border-2 border-base-300 hover:bg-base-200" data-tag="all">
+                        <i class="fas fa-th-large"></i> All
+                    </button>
+                    <button class="btn btn-sm tag-filter border-2 border-red-500 text-red-500 hover:bg-red-50 dark:hover:bg-red-950" data-tag="robotics">
+                        <i class="fas fa-robot"></i> Robotics
+                    </button>
+                    <button class="btn btn-sm tag-filter border-2 border-blue-500 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950" data-tag="coding">
+                        <i class="fas fa-code"></i> Coding
+                    </button>
+                    <button class="btn btn-sm tag-filter border-2 border-green-500 text-green-500 hover:bg-green-50 dark:hover:bg-green-950" data-tag="camp">
+                        <i class="fas fa-campground"></i> Camp
+                    </button>
+                    <button class="btn btn-sm tag-filter border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-50 dark:hover:bg-yellow-950" data-tag="contest">
+                        <i class="fas fa-trophy"></i> Contest
+                    </button>
+                    <button class="btn btn-sm tag-filter border-2 border-cyan-500 text-cyan-500 hover:bg-cyan-50 dark:hover:bg-cyan-950" data-tag="ai">
+                        <i class="fas fa-brain"></i> AI
+                    </button>
+                    <button class="btn btn-sm tag-filter border-2 border-purple-500 text-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950" data-tag="stem">
+                        <i class="fas fa-atom"></i> STEM
+                    </button>
+                </div>
+
+                <p class="text-sm text-base-content/60 mt-2">
+                    <i class="fas fa-magnifying-glass-plus mr-1"></i> Click any certificate to zoom
+                </p>
+            </div>
+
             <div class="certificates-grid max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 content-start">
                 <!-- Certificates will be loaded here -->
             </div>
-            <div class="load-more-container flex justify-center mt-8">
-                <button id="loadMoreBtn" onclick="loadMoreCertificates()" class="btn btn-primary">
+            
+            <!-- Update the load more button -->
+            <div class="flex justify-center mt-8">
+                <button id="loadMoreBtn" onclick="loadMoreCertificates()" class="btn btn-wide btn-primary">
                     Load More <i class="fas fa-arrow-down ml-2"></i>
                 </button>
             </div>

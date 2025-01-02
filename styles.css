@@ -96,3 +96,105 @@ body {
     font-weight: bold;
     font-style: normal;
 }
+
+/* Certificate filter styles */
+.tag-filter {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 100px;
+    font-weight: 500;
+}
+
+.tag-filter::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: currentColor;
+    opacity: 0.1;
+}
+
+.tag-filter:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.tag-filter.active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Tag-specific styles */
+.tag-filter[data-tag="all"].active {
+    background: #374151;
+    color: white;
+}
+
+.tag-filter i {
+    margin-right: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.tag-filter:hover i {
+    transform: scale(1.2);
+}
+
+/* Add badge counts */
+.tag-filter .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.2);
+    color: white;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.certificates-grid {
+    transition: opacity 0.3s ease;
+}
+
+.certificates-grid.filtering {
+    opacity: 0.5;
+}
+
+/* Tag-specific hover effects */
+.tag-filter i {
+    margin-right: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.tag-filter:hover i {
+    transform: scale(1.2);
+}
+
+.tag-filter.btn-primary {
+    border-width: 2px;
+}
+
+/* Active tag display styles */
+#activeTagDisplay {
+    transition: all 0.3s ease;
+}
+
+#activeTagDisplay .badge {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    min-width: 120px;
+    justify-content: center;
+}
+
+#clearFilter {
+    transition: all 0.3s ease;
+}
+
+#clearFilter:hover {
+    background-color: rgba(var(--color-error-base), 0.1);
+    color: var(--color-error);
+}
