@@ -7,7 +7,7 @@ const loadingConfig = {
     loadingMessages: [
         "🖥️กำลังเปิดเครื่อง...",
         "🛜เชื่อมต่ออินเตอร์เน็ต...",
-        "🍵กำลังชงกาแฟ...",
+        "🍵ชงกาแฟ...",
         "😊เกือบจะเสร็จแล้ว...",
         "😄เสร็จแล้ว..."
     ],
@@ -16,7 +16,7 @@ const loadingConfig = {
 };
 
 const tagLabels = {
-    all: 'All Certificates',
+    all: 'All',
     robotics: 'Robotics',
     coding: 'Coding',
     camp: 'Camps',

@@ -3,7 +3,7 @@ export const certificates = [
         title: "Talent RAC",
         date: "2023",
         image: "public/img/Cer/fibo.jpg",
-        tags: ["robotics", "camp", "stem"]
+        tags: ["robotics", "camp"]
     },
     {
         title: "NextGen AI Camp",
@@ -57,49 +57,49 @@ export const certificates = [
         title: "แข่งเขียนโปรแกรม สัปดาห์วิทยาศาสตร์มหาวิทยาลัยนเรศวร",
         date: "2024",
         image: "public/img/Cer/nusci67.jpg",
-        tags: ["coding", "contest", "stem"]
+        tags: ["coding", "contest"]
     },
     {
         title: "ผ่านการอบรม Up/ReSkill AIoT",
         date: "2023",
         image: "public/img/Cer/upskillre.jpg",
-        tags: ["ai", "robotics", "coding"]
+        tags: ["ai", "robotics"]
     },
     {
         title: "Introduction to AR",
         date: "2023",
         image: "public/img/Cer/fibo-ar.png",
-        tags: ["stem", "robotics"]
+        tags: ["robotics"]
     },
     {
         title: "Engineering Circuit Analysis",
         date: "2023",
         image: "public/img/Cer/fibo-ec.png",
-        tags: ["stem", "robotics"]
+        tags: ["robotics"]
     },
     {
         title: "Introduction to Robotics",
         date: "2023",
         image: "public/img/Cer/fibo-intro.png",
-        tags: ["robotics", "stem"]
+        tags: ["robotics"]
     },
     {
         title: "Internet of Things Appications",
         date: "2023",
         image: "public/img/Cer/fibo-iot.png",
-        tags: ["robotics", "coding"]
+        tags: ["robotics"]
     },
     {
         title: "Introduction to MQTT",
         date: "2023",
         image: "public/img/Cer/fibo-mqtt.png",
-        tags: ["robotics", "coding"]
+        tags: ["robotics"]
     },
     {
         title: "Introduction to Programming with Python",
         date: "2024",
         image: "public/img/Cer/samsung.jpg",
-        tags: ["coding", "camp"]
+        tags: ["coding"]
     },
     {
         title: "เข้าร่วมค่าย RAI Ventures รอบ Onsite",
