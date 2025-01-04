@@ -263,10 +263,10 @@ function createThumbnail(originalUrl) {
             resolve('https://via.placeholder.com/400x300?text=Certificate+Image+Not+Available');
         };
         
-        // Add timeout
+        //  timeout
         setTimeout(() => {
             resolve('https://via.placeholder.com/400x300?text=Loading+Timeout');
-        }, 5000); // 5 second timeout
+        }, 5000);
 
         img.src = originalUrl;
     });
@@ -279,7 +279,7 @@ function displayCertificates(isLoadMore = false) {
     const certificatesGrid = document.querySelector('.certificates-grid');
     const loadMoreBtn = document.getElementById('loadMoreBtn');
 
-    // Show loading state for the button
+    //loading state
     if (loadMoreBtn) {
         loadMoreBtn.innerHTML = '<span class="loading loading-spinner loading-sm"></span> Loading...';
         loadMoreBtn.disabled = true;
@@ -290,7 +290,7 @@ function displayCertificates(isLoadMore = false) {
         certificateConfig.currentPage = 1;
     }
 
-    // Filter certificates based on active tag
+    // Filter
     const filteredCertificates = certificates.filter(cert => 
         certificateConfig.activeTag === 'all' || 
         (cert.tags && cert.tags.includes(certificateConfig.activeTag))
@@ -325,11 +325,10 @@ function displayCertificates(isLoadMore = false) {
     certsToDisplay.forEach(async (cert, index) => {
         try {
             const placeholder = certificatesGrid.querySelector(`[data-index="${startIndex + index}"]`);
-            if (!placeholder) return; // Skip if placeholder not found
+            if (!placeholder) return;
 
             const thumbnailUrl = await createThumbnail(cert.image);
-            
-            // Get border color based on active tag or first tag
+
             const borderColor = certificateConfig.activeTag !== 'all' ? 
                 tagColors[certificateConfig.activeTag] :
                 tagColors[cert.tags[0]] || 'border-base-300';
@@ -533,11 +532,9 @@ function setupCertificateFilters() {
         const iconClass = tagIcons[tag] || 'fa-th-large';
         
         if (clickedButton) {
-            // Get the button's position
             const buttonRect = clickedButton.getBoundingClientRect();
             const targetRect = activeTagDisplay.getBoundingClientRect();
             
-            // Create and animate a clone
             const clone = clickedButton.cloneNode(true);
             clone.style.position = 'fixed';
             clone.style.left = `${buttonRect.left}px`;
@@ -549,7 +546,6 @@ function setupCertificateFilters() {
             
             document.body.appendChild(clone);
             
-            // Trigger animation
             requestAnimationFrame(() => {
                 clone.style.transform = 'scale(1.1)';
                 clone.style.left = `${targetRect.left}px`;
@@ -569,7 +565,7 @@ function setupCertificateFilters() {
         
         clearFilterBtn.style.display = tag !== 'all' ? 'inline-flex' : 'none';
 
-        // Hide the selected tag button
+        // Hide the selected tag
         filterButtons.forEach(btn => {
             if (btn.dataset.tag === tag) {
                 btn.classList.add('hidden');
@@ -583,50 +579,39 @@ function setupCertificateFilters() {
         button.addEventListener('click', async () => {
             const tag = button.dataset.tag;
             
-            // Show all buttons first (in case another was hidden)
             filterButtons.forEach(btn => btn.classList.remove('hidden'));
             
-            // Remove active state from all buttons
             filterButtons.forEach(btn => {
                 btn.classList.remove('active', 'bg-opacity-20');
             });
             
-            // Add active state to clicked button
             button.classList.add('active');
             button.classList.add('bg-opacity-20');
             
-            // Update the active tag display
             updateActiveTagDisplay(tag, button);
             
-            // Add transition class
             certificatesGrid.classList.add('filtering');
             
-            // Update active tag
             certificateConfig.activeTag = tag;
             certificateConfig.currentPage = 1;
             
-            // Wait for fade out
             await new Promise(resolve => setTimeout(resolve, 300));
             
-            // Update display
             displayCertificates();
             
-            // Remove transition class after new content is loaded
             setTimeout(() => {
                 certificatesGrid.classList.remove('filtering');
             }, 300);
         });
     });
     
-    // Clear filter button handler
+    // Clear filter
     clearFilterBtn.addEventListener('click', () => {
-        // Show all buttons first
         filterButtons.forEach(btn => btn.classList.remove('hidden'));
         const allButton = document.querySelector('.tag-filter[data-tag="all"]');
         allButton.click();
     });
     
-    // Set initial active state
     const defaultButton = document.querySelector('.tag-filter[data-tag="all"]');
     if (defaultButton) {
         defaultButton.classList.add('active', 'bg-opacity-20');
