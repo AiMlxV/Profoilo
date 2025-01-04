@@ -7,12 +7,32 @@ const loadingConfig = {
     loadingMessages: [
         "🖥️กำลังเปิดเครื่อง...",
         "🛜เชื่อมต่ออินเตอร์เน็ต...",
-        "🍵กำลังชงกาแฟ...",
+        "🍵ชงกาแฟ...",
         "😊เกือบจะเสร็จแล้ว...",
         "😄เสร็จแล้ว..."
     ],
     storageKey: 'lastLoadTime',
     expirationTime: 60 * 60 * 1000
+};
+
+const tagLabels = {
+    all: 'ทั้งหมด',
+    robotics: 'Robotics',
+    coding: 'Coding',
+    camp: 'Camps',
+    contest: 'Contests',
+    ai: 'AI',
+    stem: 'STEM'
+};
+
+const tagIcons = {
+    all: 'fa-th-large',
+    robotics: 'fa-robot',
+    coding: 'fa-code',
+    camp: 'fa-campground',
+    contest: 'fa-trophy',
+    ai: 'fa-brain',
+    stem: 'fa-atom'
 };
 
 function shouldShowLoading() {
@@ -189,11 +209,21 @@ function displayProjects() {
     }, 500);
 }
 
+const tagColors = {
+    robotics: 'border-red-500',
+    coding: 'border-blue-500',
+    camp: 'border-green-500',
+    contest: 'border-yellow-500',
+    ai: 'border-cyan-500',
+    stem: 'border-purple-500',
+};
+
 const certificateConfig = {
     itemsPerPage: 6,
     currentPage: 1,
     cachedCards: [],
-    isLoading: false
+    isLoading: false,
+    activeTag: 'all'
 };
 
 function createLoadingCard() {
@@ -206,24 +236,38 @@ function createLoadingCard() {
 }
 
 function createThumbnail(originalUrl) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         const img = new Image();
         img.crossOrigin = "anonymous";
         
         img.onload = function() {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            
-            const maxWidth = 400;
-            const ratio = maxWidth / img.width;
-            canvas.width = maxWidth;
-            canvas.height = img.height * ratio;
-            
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            
-            resolve(canvas.toDataURL('image/jpeg', 0.7));
+            try {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                const maxWidth = 400;
+                const ratio = maxWidth / img.width;
+                canvas.width = maxWidth;
+                canvas.height = img.height * ratio;
+                
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                resolve(canvas.toDataURL('image/jpeg', 0.7));
+            } catch (error) {
+                console.warn('Thumbnail creation failed, using original image:', error);
+                resolve(originalUrl);
+            }
         };
         
+        img.onerror = function() {
+            console.warn('Image load failed:', originalUrl);
+            resolve('https://via.placeholder.com/400x300?text=Certificate+Image+Not+Available');
+        };
+        
+        //  timeout
+        setTimeout(() => {
+            resolve('https://via.placeholder.com/400x300?text=Loading+Timeout');
+        }, 5000);
+
         img.src = originalUrl;
     });
 }
@@ -235,15 +279,39 @@ function displayCertificates(isLoadMore = false) {
     const certificatesGrid = document.querySelector('.certificates-grid');
     const loadMoreBtn = document.getElementById('loadMoreBtn');
 
+    //loading state
+    if (loadMoreBtn) {
+        loadMoreBtn.innerHTML = '<span class="loading loading-spinner loading-sm"></span> Loading...';
+        loadMoreBtn.disabled = true;
+    }
+
     if (!isLoadMore) {
         certificatesGrid.innerHTML = '';
         certificateConfig.currentPage = 1;
     }
 
+    // Filter
+    const filteredCertificates = certificates.filter(cert => 
+        certificateConfig.activeTag === 'all' || 
+        (cert.tags && cert.tags.includes(certificateConfig.activeTag))
+    );
+
+    if (filteredCertificates.length === 0) {
+        certificatesGrid.innerHTML = `
+            <div class="col-span-full text-center py-12">
+                <i class="fas fa-search text-4xl mb-4 opacity-50"></i>
+                <p class="text-lg opacity-70">No certificates found for this category</p>
+            </div>
+        `;
+        if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+        certificateConfig.isLoading = false;
+        return;
+    }
+
     const startIndex = (certificateConfig.currentPage - 1) * certificateConfig.itemsPerPage;
     const endIndex = startIndex + certificateConfig.itemsPerPage;
     
-    const placeholdersNeeded = Math.min(certificateConfig.itemsPerPage, certificates.length - startIndex);
+    const placeholdersNeeded = Math.min(certificateConfig.itemsPerPage, filteredCertificates.length - startIndex);
     for (let i = 0; i < placeholdersNeeded; i++) {
         const placeholder = document.createElement('div');
         placeholder.innerHTML = createLoadingCard();
@@ -251,43 +319,75 @@ function displayCertificates(isLoadMore = false) {
         certificatesGrid.appendChild(placeholder);
     }
 
-    const certsToDisplay = certificates.slice(startIndex, endIndex);
+    const certsToDisplay = filteredCertificates.slice(startIndex, endIndex);
+    let loadedCount = 0;
+
     certsToDisplay.forEach(async (cert, index) => {
-        setTimeout(async () => {
+        try {
             const placeholder = certificatesGrid.querySelector(`[data-index="${startIndex + index}"]`);
-            if (placeholder) {
-                const thumbnailUrl = await createThumbnail(cert.image);
-                
-                const certCard = `
-                    <div class="group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer" 
-                         data-aos="fade-up"
-                         onclick="openCertificateModal('${cert.image}', '${cert.title}')">
-                        <div class="relative overflow-hidden">
-                            <img src="${thumbnailUrl}" alt="${cert.title}" 
-                                 class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110" 
-                                 loading="lazy">
-                            <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2 text-zinc-800 dark:text-zinc-200">${cert.title}</h3>
-                            <p class="text-zinc-500 dark:text-zinc-500">${cert.date}</p>
+            if (!placeholder) return;
+
+            const thumbnailUrl = await createThumbnail(cert.image);
+
+            const borderColor = certificateConfig.activeTag !== 'all' ? 
+                tagColors[certificateConfig.activeTag] :
+                tagColors[cert.tags[0]] || 'border-base-300';
+
+            const certCard = `
+                <div class="group bg-base-100 dark:bg-base-800 rounded-lg overflow-hidden shadow-sm border-2 ${borderColor} transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-zoom-in" 
+                     data-aos="fade-up"
+                     onclick="openCertificateModal('${cert.image}', '${cert.title}')">
+                    <div class="relative overflow-hidden">
+                        <img src="${thumbnailUrl}" 
+                             alt="${cert.title}" 
+                             class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110" 
+                             loading="lazy"
+                             onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Available'">
+                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300">
+                            <div class="w-full h-full flex items-center justify-center">
+                                <i class="fas fa-search-plus text-3xl text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                            </div>
                         </div>
                     </div>
-                `;
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">${cert.title}</h3>
+                        <p class="text-base-content/60 mb-4">${cert.date}</p>
+                        <div class="flex flex-wrap gap-2">
+                            ${cert.tags.map(tag => `
+                                <span class="badge ${tagColors[tag]} border-2 text-xs">
+                                    ${tag.charAt(0).toUpperCase() + tag.slice(1)}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            if (placeholder) {
                 placeholder.innerHTML = certCard;
             }
-        }, index * 150);
-    });
-
-    setTimeout(() => {
-        const remainingItems = certificates.length - endIndex;
-        if (loadMoreBtn) {
-            loadMoreBtn.style.display = remainingItems > 0 ? 'block' : 'none';
-            loadMoreBtn.innerHTML = 'Load More <i class="fas fa-arrow-down ml-2"></i>';
-            loadMoreBtn.disabled = false;
+        } catch (error) {
+            console.error('Error displaying certificate:', error);
+            if (placeholder) {
+                placeholder.innerHTML = `
+                    <div class="bg-base-100 dark:bg-base-800 rounded-lg p-6 text-center">
+                        <i class="fas fa-exclamation-circle text-3xl text-error mb-4"></i>
+                        <p>Failed to load certificate</p>
+                    </div>
+                `;
+            }
+        } finally {
+            loadedCount++;
+            if (loadedCount === certsToDisplay.length) {
+                const remainingItems = filteredCertificates.length - endIndex;
+                if (loadMoreBtn) {
+                    loadMoreBtn.style.display = remainingItems > 0 ? 'block' : 'none';
+                    loadMoreBtn.innerHTML = 'Load More <i class="fas fa-arrow-down ml-2"></i>';
+                    loadMoreBtn.disabled = false;
+                }
+                certificateConfig.isLoading = false;
+            }
         }
-        certificateConfig.isLoading = false;
-    }, certsToDisplay.length * 150);
+    });
 }
 
 window.openCertificateModal = function(imageUrl, title) {
@@ -421,6 +521,104 @@ function setupMobileMenu() {
     });
 }
 
+function setupCertificateFilters() {
+    const filterButtons = document.querySelectorAll('.tag-filter');
+    const certificatesGrid = document.querySelector('.certificates-grid');
+    const activeTagDisplay = document.getElementById('currentTag');
+    const clearFilterBtn = document.getElementById('clearFilter');
+    
+    function updateActiveTagDisplay(tag, clickedButton = null) {
+        const tagName = tagLabels[tag] || 'All Certificates';
+        const iconClass = tagIcons[tag] || 'fa-th-large';
+        
+        if (clickedButton) {
+            const buttonRect = clickedButton.getBoundingClientRect();
+            const targetRect = activeTagDisplay.getBoundingClientRect();
+            
+            const clone = clickedButton.cloneNode(true);
+            clone.style.position = 'fixed';
+            clone.style.left = `${buttonRect.left}px`;
+            clone.style.top = `${buttonRect.top}px`;
+            clone.style.width = `${buttonRect.width}px`;
+            clone.style.height = `${buttonRect.height}px`;
+            clone.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            clone.style.zIndex = '100';
+            
+            document.body.appendChild(clone);
+            
+            requestAnimationFrame(() => {
+                clone.style.transform = 'scale(1.1)';
+                clone.style.left = `${targetRect.left}px`;
+                clone.style.top = `${targetRect.top}px`;
+                clone.style.opacity = '0';
+                
+                setTimeout(() => {
+                    clone.remove();
+                    activeTagDisplay.innerHTML = `<i class="fas ${iconClass}"></i> ${tagName}`;
+                    activeTagDisplay.className = `badge badge-lg ${tag !== 'all' ? tagColors[tag] : 'border-base-300'} border-2`;
+                }, 300);
+            });
+        } else {
+            activeTagDisplay.innerHTML = `<i class="fas ${iconClass}"></i> ${tagName}`;
+            activeTagDisplay.className = `badge badge-lg ${tag !== 'all' ? tagColors[tag] : 'border-base-300'} border-2`;
+        }
+        
+        clearFilterBtn.style.display = tag !== 'all' ? 'inline-flex' : 'none';
+
+        // Hide the selected tag
+        filterButtons.forEach(btn => {
+            if (btn.dataset.tag === tag) {
+                btn.classList.add('hidden');
+            } else {
+                btn.classList.remove('hidden');
+            }
+        });
+    }
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', async () => {
+            const tag = button.dataset.tag;
+            
+            filterButtons.forEach(btn => btn.classList.remove('hidden'));
+            
+            filterButtons.forEach(btn => {
+                btn.classList.remove('active', 'bg-opacity-20');
+            });
+            
+            button.classList.add('active');
+            button.classList.add('bg-opacity-20');
+            
+            updateActiveTagDisplay(tag, button);
+            
+            certificatesGrid.classList.add('filtering');
+            
+            certificateConfig.activeTag = tag;
+            certificateConfig.currentPage = 1;
+            
+            await new Promise(resolve => setTimeout(resolve, 300));
+            
+            displayCertificates();
+            
+            setTimeout(() => {
+                certificatesGrid.classList.remove('filtering');
+            }, 300);
+        });
+    });
+    
+    // Clear filter
+    clearFilterBtn.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('hidden'));
+        const allButton = document.querySelector('.tag-filter[data-tag="all"]');
+        allButton.click();
+    });
+    
+    const defaultButton = document.querySelector('.tag-filter[data-tag="all"]');
+    if (defaultButton) {
+        defaultButton.classList.add('active', 'bg-opacity-20');
+        updateActiveTagDisplay('all');
+    }
+}
+
 function initializeApp() {
     AOS.init({
         duration: 1000,
@@ -442,6 +640,7 @@ function initializeApp() {
     displayProjects();
     displayCertificates();
     setupMobileMenu();
+    setupCertificateFilters();
 }
 
 document.addEventListener('DOMContentLoaded', () => {

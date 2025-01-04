@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="th">
 <script>
-  // Enhanced blocking script for immediate theme setup
-  (function() {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const storedTheme = localStorage.getItem('theme');
-    const theme = storedTheme || (prefersDark ? 'dark' : 'light');
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-    document.documentElement.setAttribute('data-theme', theme);
-    // Prevent initial transition flash
-    document.documentElement.style.setProperty('transition', 'none');
-    window.addEventListener('load', () => {
-      document.documentElement.style.removeProperty('transition');
-    });
-  })();
+    (function () {
+        const prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+        ).matches;
+        const storedTheme = localStorage.getItem("theme");
+        const theme = storedTheme || (prefersDark ? "dark" : "light");
+        document.documentElement.classList.toggle("dark", theme === "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+        document.documentElement.style.setProperty("transition", "none");
+        window.addEventListener("load", () => {
+            document.documentElement.style.removeProperty("transition");
+        });
+    })();
 </script>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Welcome to E-Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.19/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preload" href="fonts/LINESeedSansTH_W_Rg.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/LINESeedSansTH_W_Bd.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preload" href="fonts/LINESeedSansTH_W_Rg.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="fonts/LINESeedSansTH_W_Bd.woff2" as="font" type="font/woff2" crossorigin />
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="script.js"></script>
 </head>
+
 <body class="font-custom min-h-screen">
     <div id="loading-overlay" class="fixed inset-0 bg-base-100 z-[9999] flex flex-col items-center justify-center">
         <span class="loading loading-spinner loading-lg mb-4"></span>
@@ -49,8 +52,12 @@
                     <li><a href="#home" class="btn btn-ghost">🏠 หน้าแรก</a></li>
                     <li><a href="#about" class="btn btn-ghost">📁 เกี่ยวกับ</a></li>
                     <li><a href="#projects" class="btn btn-ghost">💼 ผลงาน</a></li>
-                    <li><a href="#certificates" class="btn btn-ghost">📜 เกียรติบัตร</a></li>
-                    <li><a href="#contact" class="btn btn-ghost">ต้องการติดต่อ 🤔</a></li>
+                    <li>
+                        <a href="#certificates" class="btn btn-ghost">📜 เกียรติบัตร</a>
+                    </li>
+                    <li>
+                        <a href="#contact" class="btn btn-ghost">ต้องการติดต่อ 🤔</a>
+                    </li>
                     <li>
                         <button class="theme-toggle btn btn-circle btn-ghost">
                             <i class="fas fa-moon"></i>
@@ -64,35 +71,41 @@
         </div>
     </nav>
 
-    <div id="mobileMenu" class="fixed inset-0 bg-base-100/95 backdrop-blur-md z-40 hidden transition-all duration-300 opacity-0">
+    <div id="mobileMenu"
+        class="fixed inset-0 bg-base-100/95 backdrop-blur-md z-40 hidden transition-all duration-300 opacity-0">
         <div class="flex flex-col h-full w-full pt-24 px-6">
             <div class="menu menu-vertical gap-4">
                 <li>
-                    <a href="#home" class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
+                    <a href="#home"
+                        class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
                         <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">🏠</span>
                         <span>หน้าแรก</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#about" class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
+                    <a href="#about"
+                        class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
                         <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">📁</span>
                         <span>เกี่ยวกับ</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#projects" class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
+                    <a href="#projects"
+                        class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
                         <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">💼</span>
                         <span>ผลงาน</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#certificates" class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
+                    <a href="#certificates"
+                        class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
                         <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">📜</span>
                         <span>เกียรติบัตร</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#contact" class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
+                    <a href="#contact"
+                        class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
                         <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">📞</span>
                         <span>ติดต่อ</span>
                     </a>
@@ -113,8 +126,10 @@
         <div class="hero-overlay bg-black/50"></div>
         <div class="hero-content text-center text-neutral-content relative z-10" data-aos="fade-up">
             <div class="max-w-xl">
-                <h1 class="text-5xl font-bold mb-6 text-white">ยินดีต้อนรับสู่พอร์ตโฟลิโอ Ver.online</h1>
-                <h2 class="text-white">Version 1.0</h2>
+                <h1 class="text-5xl font-bold mb-6 text-white">
+                    ยินดีต้อนรับสู่พอร์ตโฟลิโอ Ver.online
+                </h1>
+                <h2 class="text-white">Version 1.1</h2>
                 <p id="welcome-text" class="text-xl mt-4 text-white"></p>
                 <div class="mt-8 space-x-4">
                     <a href="#contact" class="btn btn-primary">ต้องการติดต่อ 🤔</a>
@@ -129,19 +144,30 @@
             <h2 class="text-4xl font-bold text-center mb-16">😄About Me</h2>
             <div class="card lg:card-side bg-base-100 shadow-xl max-w-6xl mx-auto">
                 <figure class="w-full md:w-1/2">
-                    <img src="https://cloud.aimlxv.me/s/pfp/preview" alt="Profile Photo" class="w-full h-full object-cover" 
-                         onerror="this.src='https://via.placeholder.com/600x600'">
+                    <img src="https://cloud.aimlxv.me/s/pfp/preview" alt="Profile Photo"
+                        class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/600x600'" />
                 </figure>
                 <div class="card-body">
                     <h1 class="text-3xl font-semibold">🙏</h1>
-                    <p class="text-2xl font-semibold">สวัสดีครับ/SawatdeeKub/サワッディークップ</p>
+                    <p class="text-2xl font-semibold">
+                        สวัสดีครับ/SawatdeeKub/サワッディークップ
+                    </p>
+                    <p class="text-lg text-base-content/60">
+                        ผมชื่อธนวัฒน์ ศรีสุขพร้อม หรือเรียกชื่อเล่นสั้นๆว่า"อาร์ต"ครับ
+                        อายุ 18 ปี<br />กำลังศึกษาอยู่ชั้นมัธยมศึกษาปีที่ 6
+                        ที่โรงเรียนเฉลิมขวัญสตรี ครับ
+                    </p>
+                    <b class="text-xl">งานอดิเรก : </b>
+                    <ul class="list-disc list-inside text-lg text-base-content/60">
+                        <li>😆ดูหนังฟังเพลงเล่นเกมดูTV</li>
+                        <li>📰ติดตามข่าวสารทางด้านเทคโนโลยี</li>
+                        <li>🤔ออกแบบชิ้นงานและพิมพ์โมเดล 3 มิติ</li>
+                    </ul>
                     <div class="skills">
                         <h3 class="text-2xl font-semibold mb-4">Working on it 🍵</h3>
                         <div class="flex flex-col gap-4">
-                            <img src="https://skillicons.dev/icons?i=c,cpp,cs,py,go,js,ts,html,css,bootstrap,tailwind,react,angular,flutter,firebase,figma,ae,linux,windows,git,github,githubactions,vscode,pycharm,clion,rider,arduino,discord,instagram,linkedin&theme=dark" 
-                                 alt="My Skills" 
-                                 class="w-full max-w-3xl"
-                                 loading="lazy">
+                            <img src="https://skillicons.dev/icons?i=c,cpp,cs,py,go,js,ts,html,css,bootstrap,tailwind,react,angular,flutter,firebase,figma,ae,linux,windows,git,github,githubactions,vscode,pycharm,clion,rider,arduino,discord,instagram,linkedin&theme=dark"
+                                alt="My Skills" class="w-full max-w-3xl" loading="lazy" />
                         </div>
                     </div>
                 </div>
@@ -152,20 +178,79 @@
     <section id="projects" class="py-20 bg-base-200">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-16">💼Project/Works</h2>
-            <div class="projects-grid max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project cards will be added here via JavaScript -->
-            </div>
+            <div class="projects-grid max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </div>
     </section>
 
     <section id="certificates" class="py-20">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-16">📜Certificates</h2>
-            <div class="certificates-grid max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 content-start">
-                <!-- Certificates will be loaded here -->
+
+            <div class="flex flex-col items-center mb-8">
+                <div class="mb-4" id="activeTagDisplay">
+                    <div class="flex items-center justify-center gap-2">
+                        <span class="text-lg font-medium flex items-center gap-2">
+                            <i class="fas fa-filter"></i>
+                            ตอนนี้กำลังดู:
+                            <span class="badge badge-lg gap-2" id="currentTag">
+                                <i class="fas fa-th-large"></i> All Certificates
+                            </span>
+                        </span>
+                        <button id="clearFilter" class="btn btn-sm btn-ghost">
+                            <i class="fas fa-times"></i> Clear filter
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filter -->
+                <div class="flex flex-wrap justify-center gap-2 mb-2">
+                    <button class="btn btn-sm tag-filter border-2 border-base-300 hover:bg-base-200" data-tag="all">
+                        <i class="fas fa-th-large"></i> ทั้งหมด
+                    </button>
+                    <button
+                        class="btn btn-sm tag-filter border-2 border-red-500 text-red-500 hover:bg-red-50 dark:hover:bg-red-950"
+                        data-tag="robotics">
+                        <i class="fas fa-robot"></i> Robotics
+                    </button>
+                    <button
+                        class="btn btn-sm tag-filter border-2 border-blue-500 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950"
+                        data-tag="coding">
+                        <i class="fas fa-code"></i> Coding
+                    </button>
+                    <button
+                        class="btn btn-sm tag-filter border-2 border-green-500 text-green-500 hover:bg-green-50 dark:hover:bg-green-950"
+                        data-tag="camp">
+                        <i class="fas fa-campground"></i> Camp
+                    </button>
+                    <button
+                        class="btn btn-sm tag-filter border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-50 dark:hover:bg-yellow-950"
+                        data-tag="contest">
+                        <i class="fas fa-trophy"></i> Contest
+                    </button>
+                    <button
+                        class="btn btn-sm tag-filter border-2 border-cyan-500 text-cyan-500 hover:bg-cyan-50 dark:hover:bg-cyan-950"
+                        data-tag="ai">
+                        <i class="fas fa-brain"></i> AI
+                    </button>
+                    <button
+                        class="btn btn-sm tag-filter border-2 border-purple-500 text-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950"
+                        data-tag="stem">
+                        <i class="fas fa-atom"></i> STEM
+                    </button>
+                </div>
+
+                <p class="text-sm text-base-content/60 mt-2">
+                    <i class="fas fa-magnifying-glass-plus mr-1"></i>
+                    คลิกที่รูปภาพเพื่อดูรูปภาพเต็ม
+                </p>
             </div>
-            <div class="load-more-container flex justify-center mt-8">
-                <button id="loadMoreBtn" onclick="loadMoreCertificates()" class="btn btn-primary">
+
+            <div
+                class="certificates-grid max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 content-start">
+            </div>
+
+            <div class="flex justify-center mt-8">
+                <button id="loadMoreBtn" onclick="loadMoreCertificates()" class="btn btn-wide btn-primary">
                     Load More <i class="fas fa-arrow-down ml-2"></i>
                 </button>
             </div>
@@ -195,4 +280,5 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="module" src="script.js"></script>
 </body>
+
 </html>
