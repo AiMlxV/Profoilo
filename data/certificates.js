@@ -54,6 +54,12 @@ export const certificates = [
         tags: ["coding", "contest"]
     },
     {
+        title: "ศิลปหัตถกรรม หุ่นยนต์ระดับสูง",
+        date: "2022",
+        image: "public/img/Cer/robo-art.png",
+        tags: ["robotics", "contest"]
+    },
+    {
         title: "แข่งเขียนโปรแกรม สัปดาห์วิทยาศาสตร์มหาวิทยาลัยนเรศวร",
         date: "2024",
         image: "public/img/Cer/nusci67.jpg",
