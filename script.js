@@ -16,7 +16,7 @@ const loadingConfig = {
 };
 
 const tagLabels = {
-    all: 'All',
+    all: 'ทั้งหมด',
     robotics: 'Robotics',
     coding: 'Coding',
     camp: 'Camps',
