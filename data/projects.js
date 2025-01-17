@@ -1,3 +1,4 @@
+// maybe more projects in the future 😆
 export const projects = [
     {
         title: "ระบบจัดสรรน้ำเพื่อการเกษตรด้วย AI",
