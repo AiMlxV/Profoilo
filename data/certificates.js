@@ -1,3 +1,4 @@
+//aliviable tags: ["ai", "camp", "coding", "contest", "robotics", "stem"]
 export const certificates = [
     {
         title: "Talent RAC",
@@ -66,6 +67,12 @@ export const certificates = [
         tags: ["coding", "contest"]
     },
     {
+        title: "ผ่านการอบรม Dashboards Design & Data Analysis",
+        date: "2023",
+        image: "public/img/Cer/digi.jpg",
+        tags: ["contest", "camp"]
+    },
+    {
         title: "ผ่านการอบรม Up/ReSkill AIoT",
         date: "2023",
         image: "public/img/Cer/upskillre.jpg",
@@ -112,6 +119,12 @@ export const certificates = [
         date: "2023",
         image: "public/img/Cer/RAIven.jpg",
         tags: ["ai", "camp", "coding"]
+    },
+    {
+        title: "เข้าร่วมแข่งขัน TNI it Camp 2023",
+        date: "2022",
+        image: "public/img/Cer/TNI.jpg",
+        tags: ["camp", "contest"]
     },
     {
         title: "เข้าร่วมค่าย ห้องเรียนพิเศษ SMTE",
