@@ -188,9 +188,9 @@ function displayProjects() {
     
     setTimeout(() => {
         projectsGrid.innerHTML = '';
-        projects.forEach(project => {
+    projects.forEach((project, idx) => {
             const projectCard = `
-                <a href="${project.link}" class="block group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer" data-aos="fade-up">
+        <a href="${project.link}" class="block group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-card-in" style="animation-delay: ${Math.min(idx*80, 480)}ms" data-aos="fade-up">
                     <div class="relative overflow-hidden">
                         <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
@@ -206,6 +206,11 @@ function displayProjects() {
             `;
             projectsGrid.innerHTML += projectCard;
         });
+        if (window.AOS && typeof window.AOS.refreshHard === 'function') {
+            window.AOS.refreshHard();
+        } else if (window.AOS && typeof window.AOS.refresh === 'function') {
+            window.AOS.refresh();
+        }
     }, 500);
 }
 
@@ -334,7 +339,8 @@ function displayCertificates(isLoadMore = false) {
                 tagColors[cert.tags[0]] || 'border-base-300';
 
             const certCard = `
-                <div class="group bg-base-100 dark:bg-base-800 rounded-lg overflow-hidden shadow-sm border-2 ${borderColor} transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-zoom-in" 
+                <div class="group bg-base-100 dark:bg-base-800 rounded-lg overflow-hidden shadow-sm border-2 ${borderColor} transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-zoom-in animate-card-in" 
+                     style="animation-delay: ${Math.min((startIndex+index)%6 * 80, 480)}ms"
                      data-aos="fade-up"
                      onclick="openCertificateModal('${cert.image}', '${cert.title}')">
                     <div class="relative overflow-hidden">
@@ -383,6 +389,11 @@ function displayCertificates(isLoadMore = false) {
                     loadMoreBtn.style.display = remainingItems > 0 ? 'block' : 'none';
                     loadMoreBtn.innerHTML = 'Load More <i class="fas fa-arrow-down ml-2"></i>';
                     loadMoreBtn.disabled = false;
+                }
+                if (window.AOS && typeof window.AOS.refreshHard === 'function') {
+                    window.AOS.refreshHard();
+                } else if (window.AOS && typeof window.AOS.refresh === 'function') {
+                    window.AOS.refresh();
                 }
                 certificateConfig.isLoading = false;
             }
@@ -446,8 +457,12 @@ function cleanupCertificates() {
     if (certificateConfig.scrollThrottle) {
         window.removeEventListener('scroll', certificateConfig.scrollThrottle);
     }
-    certificateConfig.loadedImages.clear();
-    certificateConfig.renderedCards.clear();
+    if (certificateConfig.loadedImages && typeof certificateConfig.loadedImages.clear === 'function') {
+        certificateConfig.loadedImages.clear();
+    }
+    if (certificateConfig.renderedCards && typeof certificateConfig.renderedCards.clear === 'function') {
+        certificateConfig.renderedCards.clear();
+    }
 }
 
 window.loadMoreCertificates = function() {
@@ -480,9 +495,11 @@ function setupThemeToggle() {
             html.classList.toggle('dark', isDark);
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
+            themeToggles.forEach(t => t.classList.add('spin'));
             updateThemeIcons();
             
             setTimeout(() => {
+                themeToggles.forEach(t => t.classList.remove('spin'));
                 html.classList.remove('theme-transition');
             }, 300);
         });
@@ -621,9 +638,10 @@ function setupCertificateFilters() {
 
 function initializeApp() {
     AOS.init({
-        duration: 1000,
+        duration: 800,
         once: true,
-        offset: 100
+        easing: 'ease-out-quart',
+        offset: 80
     });
 
     const links = document.querySelectorAll('a[href^="#"]');
@@ -641,6 +659,25 @@ function initializeApp() {
     displayCertificates();
     setupMobileMenu();
     setupCertificateFilters();
+
+    // Hero reveal for headings if present
+    const heroTexts = document.querySelectorAll('#home h1, #home h2, #home p');
+    heroTexts.forEach((el, i) => {
+        el.classList.add('reveal-up');
+        el.style.animationDelay = `${i * 100}ms`;
+    });
+
+    // Scroll-to-top button behavior
+    const scrollBtn = document.getElementById('scrollTop');
+    if (scrollBtn) {
+        window.addEventListener('scroll', () => {
+            const show = window.scrollY > 600;
+            scrollBtn.classList.toggle('visible', show);
+        }, { passive: true });
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

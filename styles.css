@@ -25,6 +25,16 @@ body {
                 fill 0.3s ease;
 }
 
+/* Motion safety */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 /* Theme transition specific styles */
 .theme-transition * {
     transition: background-color 0.3s ease,
@@ -44,6 +54,37 @@ body {
 }
 .custom-bg {
   background-image: url('https://images.unsplash.com/photo-1672858460787-fb29ed7352f8');
+}
+
+/* Keyframes and utility animations */
+@keyframes rise-in {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes scale-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.reveal-up {
+    animation: rise-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    will-change: transform, opacity;
+}
+
+.animate-card-in {
+    animation: rise-in 500ms var(--curve, cubic-bezier(0.22, 1, 0.36, 1)) both;
+    will-change: transform, opacity;
+}
+
+.reveal-scale {
+    animation: scale-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    will-change: transform, opacity;
 }
 
 /* Mobile menu animations */
@@ -258,4 +299,29 @@ body {
     min-height: 2.5rem; /* Maintain consistent height */
     padding: 0.25rem;
     transition: height 0.3s ease;
+}
+
+/* Theme toggle micro-interaction */
+.theme-toggle i {
+    transition: transform 0.4s ease;
+}
+.theme-toggle.spin i {
+    transform: rotate(180deg) scale(1.05);
+}
+
+/* Scroll-to-top button */
+#scrollTop {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 40;
+}
+#scrollTop.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
