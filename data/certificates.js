@@ -1,6 +1,18 @@
 //aliviable tags: ["ai", "camp", "coding", "contest", "robotics", "stem"]
 export const certificates = [
     {
+        title: "Thailand Cyber Talent 2025",
+        date: "2025",
+        image: "public/img/Cer/ctf2025.jpg",
+        tags: ["coding", "contest"]
+    },
+    {
+        title: "CP LINK 2025 - Staff",
+        date: "2025",
+        image: "public/img/Cer/cplink.jpg",
+        tags: ["camp"]
+    },
+    {
         title: "Talent RAC",
         date: "2023",
         image: "public/img/Cer/fibo.jpg",
@@ -131,5 +143,6 @@ export const certificates = [
         date: "2022",
         image: "public/img/Cer/smte-camp.jpg",
         tags: ["camp", "stem"]
-    }
+    },
+
 ];
