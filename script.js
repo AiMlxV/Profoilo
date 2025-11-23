@@ -352,7 +352,7 @@ function displayCertificates(isLoadMore = false) {
                              alt="${cert.title}" 
                              class="w-full h-52 object-cover transform transition-transform duration-500 group-hover:scale-110" 
                              loading="lazy"
-                             onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Available'">
+                             onerror="this.src='https://placehold.co/400x300?text=Image+Not+Available'">
                         <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300">
                             <div class="w-full h-full flex items-center justify-center">
                                 <i class="fas fa-search-plus text-4xl text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110"></i>
