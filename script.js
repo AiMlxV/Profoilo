@@ -190,16 +190,20 @@ function displayProjects() {
         projectsGrid.innerHTML = '';
     projects.forEach((project, idx) => {
             const projectCard = `
-        <a href="${project.link}" class="block group bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-card-in" style="animation-delay: ${Math.min(idx*80, 480)}ms" data-aos="fade-up">
+        <a href="${project.link}" class="block group bg-base-100 rounded-2xl overflow-hidden shadow-lg border-2 border-base-300 transform transition-all duration-300 hover:-translate-y-3 hover:shadow-2xl hover:border-primary cursor-pointer animate-card-in" style="animation-delay: ${Math.min(idx*80, 480)}ms" data-aos="fade-up">
                     <div class="relative overflow-hidden">
-                        <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+                        <img src="${project.image}" alt="${project.title}" class="w-full h-52 object-cover transform transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <div class="badge badge-primary badge-lg">View Project</div>
+                        </div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-zinc-800 dark:text-zinc-200">${project.title}</h3>
-                        <p class="text-zinc-600 dark:text-zinc-400 mb-4">${project.description}</p>
-                        <div class="inline-flex items-center text-teal-600 hover:text-teal-700 transition-colors">
-                            View more <i class="fas fa-arrow-right ml-2 transform transition-transform group-hover:translate-x-2"></i>
+                        <h3 class="text-2xl font-bold mb-3 text-base-content group-hover:text-primary transition-colors">${project.title}</h3>
+                        <p class="text-base-content/70 mb-4 line-clamp-3">${project.description}</p>
+                        <div class="flex items-center text-primary font-semibold transition-all group-hover:gap-3">
+                            <span>View more</span>
+                            <i class="fas fa-arrow-right ml-2 transform transition-transform group-hover:translate-x-2"></i>
                         </div>
                     </div>
                 </a>
@@ -233,9 +237,9 @@ const certificateConfig = {
 
 function createLoadingCard() {
     return `
-        <div class="bg-stone-50 dark:bg-zinc-800 rounded-lg overflow-hidden shadow-sm border border-stone-200 dark:border-zinc-700 p-6 flex flex-col items-center justify-center min-h-[300px]">
-            <span class="loading loading-spinner loading-lg"></span>
-            <p class="mt-4 text-zinc-500 dark:text-zinc-400">Loading...</p>
+        <div class="bg-base-200 rounded-2xl overflow-hidden shadow-lg border-2 border-base-300 p-6 flex flex-col items-center justify-center min-h-[350px] animate-pulse">
+            <span class="loading loading-spinner loading-lg text-primary"></span>
+            <p class="mt-4 text-base-content/70 font-semibold">Loading...</p>
         </div>
     `;
 }
@@ -339,28 +343,31 @@ function displayCertificates(isLoadMore = false) {
                 tagColors[cert.tags[0]] || 'border-base-300';
 
             const certCard = `
-                <div class="group bg-base-100 dark:bg-base-800 rounded-lg overflow-hidden shadow-sm border-2 ${borderColor} transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-zoom-in animate-card-in" 
+                <div class="group bg-base-100 rounded-2xl overflow-hidden shadow-lg border-2 ${borderColor} transform transition-all duration-300 hover:-translate-y-3 hover:shadow-2xl cursor-zoom-in animate-card-in" 
                      style="animation-delay: ${Math.min((startIndex+index)%6 * 80, 480)}ms"
                      data-aos="fade-up"
                      onclick="openCertificateModal('${cert.image}', '${cert.title}')">
                     <div class="relative overflow-hidden">
                         <img src="${thumbnailUrl}" 
                              alt="${cert.title}" 
-                             class="w-full h-48 object-cover transform transition-transform duration-500 group-hover:scale-110" 
+                             class="w-full h-52 object-cover transform transition-transform duration-500 group-hover:scale-110" 
                              loading="lazy"
                              onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Available'">
-                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300">
+                        <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300">
                             <div class="w-full h-full flex items-center justify-center">
-                                <i class="fas fa-search-plus text-3xl text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                                <i class="fas fa-search-plus text-4xl text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110"></i>
                             </div>
                         </div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">${cert.title}</h3>
-                        <p class="text-base-content/60 mb-4">${cert.date}</p>
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">${cert.title}</h3>
+                        <p class="text-base-content/60 mb-4 flex items-center gap-2">
+                            <i class="far fa-calendar text-primary"></i>
+                            ${cert.date}
+                        </p>
                         <div class="flex flex-wrap gap-2">
                             ${cert.tags.map(tag => `
-                                <span class="badge ${tagColors[tag]} border-2 text-xs">
+                                <span class="badge ${tagColors[tag]} border-2 text-xs font-semibold px-3 py-2">
                                     ${tag.charAt(0).toUpperCase() + tag.slice(1)}
                                 </span>
                             `).join('')}
@@ -404,18 +411,19 @@ function displayCertificates(isLoadMore = false) {
 window.openCertificateModal = function(imageUrl, title) {
     const modalHTML = `
         <dialog id="cert_modal" class="modal modal-bottom sm:modal-middle">
-            <div class="modal-box bg-stone-50 dark:bg-zinc-800 p-0 relative max-w-3xl">
-                <div class="p-4 flex justify-between items-center border-b border-base-200 dark:border-base-700">
-                    <h3 class="font-bold text-lg">${title}</h3>
+            <div class="modal-box bg-base-100 p-0 relative max-w-4xl shadow-2xl">
+                <div class="p-6 flex justify-between items-center border-b-2 border-base-300 bg-base-200">
+                    <h3 class="font-bold text-2xl text-primary">${title}</h3>
                     <form method="dialog">
-                        <button class="btn btn-circle btn-ghost">
-                            <i class="fas fa-times"></i>
+                        <button class="btn btn-circle btn-ghost btn-lg hover:btn-error transition-all">
+                            <i class="fas fa-times text-xl"></i>
                         </button>
                     </form>
                 </div>
-                <figure class="w-full relative">
-                    <div id="cert-loading" class="absolute inset-0 flex items-center justify-center bg-base-200">
-                        <span class="loading loading-spinner loading-lg"></span>
+                <figure class="w-full relative bg-base-200">
+                    <div id="cert-loading" class="absolute inset-0 flex flex-col items-center justify-center gap-4">
+                        <span class="loading loading-spinner loading-lg text-primary"></span>
+                        <p class="text-base-content/70">Loading certificate...</p>
                     </div>
                     <img src="" alt="${title}" 
                          class="w-full h-auto opacity-0 transition-opacity duration-300" 

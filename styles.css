@@ -143,8 +143,8 @@ body {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    min-width: 100px;
-    font-weight: 500;
+    min-width: 120px;
+    font-weight: 600;
     transform-origin: center;
     opacity: 1;
     width: auto;
@@ -171,19 +171,22 @@ body {
 }
 
 .tag-filter:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.1);
+    transform: translateY(-4px);
+    filter: brightness(1.15);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
 }
 
 .tag-filter.active {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    font-weight: 700;
 }
 
 /* Tag-specific styles */
 .tag-filter[data-tag="all"].active {
     background: #374151;
     color: white;
+    transform: translateY(-2px) scale(1.05);
 }
 
 .tag-filter[data-tag="robotics"] i { color: rgb(239, 68, 68); }
