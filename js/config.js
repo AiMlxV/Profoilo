@@ -24,10 +24,14 @@ window.tailwind.config = {
     },
 };
 
-// Plausible queue stub
+// Plausible queue stub + init
 window.plausible = window.plausible || function () {
     (window.plausible.q = window.plausible.q || []).push(arguments);
 };
+window.plausible.init = window.plausible.init || function (opts) {
+    window.plausible.o = opts || {};
+};
+window.plausible.init();
 
 // Footer year helper
 document.addEventListener('DOMContentLoaded', () => {
