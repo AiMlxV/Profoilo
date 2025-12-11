@@ -3,7 +3,7 @@ import { certificates } from '../data/certificates.js';
 import { simulateLoading } from './modules/loading.js';
 import { initTypingAnimation } from './modules/typing.js';
 import { setupThemeToggle } from './modules/theme.js';
-import { setupMobileMenu, setupAnchorScrolling, setupScrollToTop } from './modules/navigation.js';
+import { setupMobileMenu, setupAnchorScrolling, setupScrollToTop, setupScrollSpy } from './modules/navigation.js';
 import { displayProjects } from './modules/projects.js';
 import { setupCertificates } from './modules/certificates.js';
 
@@ -26,6 +26,7 @@ function initializeApp() {
     }
 
     setupAnchorScrolling();
+    const cleanupScrollSpy = setupScrollSpy();
     initTypingAnimation();
     setupThemeToggle();
     displayProjects(projects);
@@ -34,7 +35,7 @@ function initializeApp() {
     setupScrollToTop();
     revealHeroText();
 
-    return { cleanupCertificates };
+    return { cleanupCertificates, cleanupScrollSpy };
 }
 
 document.fonts.ready.then(() => {
@@ -47,7 +48,10 @@ document.fonts.ready.then(() => {
 
 document.addEventListener('DOMContentLoaded', () => {
     simulateLoading(() => {
-        const { cleanupCertificates } = initializeApp();
-        window.addEventListener('unload', cleanupCertificates, { passive: true });
+        const { cleanupCertificates, cleanupScrollSpy } = initializeApp();
+        window.addEventListener('unload', () => {
+            cleanupCertificates();
+            cleanupScrollSpy();
+        }, { passive: true });
     });
 });

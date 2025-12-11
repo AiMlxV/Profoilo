@@ -66,3 +66,41 @@ export function setupScrollToTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
+
+export function setupScrollSpy() {
+    const sections = document.querySelectorAll('section[id]');
+    if (!sections.length) return () => {};
+
+    const navLinks = Array.from(document.querySelectorAll('nav a[href^="#"], #mobileMenu a[href^="#"]'));
+    const linkById = new Map();
+
+    navLinks.forEach(link => {
+        const targetId = link.getAttribute('href');
+        if (!targetId || !targetId.startsWith('#')) return;
+        linkById.set(targetId.replace('#', ''), link);
+    });
+
+    const setActive = id => {
+        linkById.forEach((link, key) => {
+            const isActive = key === id;
+            link.classList.toggle('nav-link-active', isActive);
+        });
+    };
+
+    const initialId = location.hash ? location.hash.replace('#', '') : sections[0].id;
+    setActive(initialId);
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                setActive(entry.target.id);
+            }
+        });
+    }, {
+        threshold: 0.4,
+        rootMargin: '-10% 0px -40%'
+    });
+
+    sections.forEach(section => observer.observe(section));
+    return () => observer.disconnect();
+}
