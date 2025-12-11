@@ -1,21 +1,5 @@
 <!DOCTYPE html>
 <html lang="th">
-<script>
-    (function () {
-        const prefersDark = window.matchMedia(
-            "(prefers-color-scheme: dark)"
-        ).matches;
-        const storedTheme = localStorage.getItem("theme");
-        const theme = storedTheme || (prefersDark ? "dark" : "light");
-        document.documentElement.classList.toggle("dark", theme === "dark");
-        document.documentElement.setAttribute("data-theme", theme);
-        document.documentElement.style.setProperty("transition", "none");
-        window.addEventListener("load", () => {
-            document.documentElement.style.removeProperty("transition");
-        });
-    })();
-</script>
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -24,12 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@4.12.19/dist/full.min.css" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
     <link rel="preload" href="fonts/LINESeedSansTH_W_Rg.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="fonts/LINESeedSansTH_W_Bd.woff2" as="font" type="font/woff2" crossorigin />
+    <script src="js/config.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer data-domain="aimlxv.me" src="https://visitor.aimlxv.me/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"></script>
-    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
 </head>
 
 <body class="font-custom min-h-screen">
@@ -260,7 +244,7 @@
             </div>
 
             <div class="flex justify-center mt-12" data-aos="fade-up">
-                <button id="loadMoreBtn" onclick="loadMoreCertificates()" class="btn btn-wide btn-primary btn-lg shadow-xl hover:scale-105 transition-transform">
+                <button id="loadMoreBtn" class="btn btn-wide btn-primary btn-lg shadow-xl hover:scale-105 transition-transform">
                     <i class="fas fa-arrow-down mr-2"></i>
                     Load More
                     <i class="fas fa-arrow-down ml-2"></i>
@@ -311,16 +295,10 @@
             <p class="text-sm text-base-content/50">Made with ❤️ using daisyUI & Tailwind CSS</p>
         </div>
     </footer>
-    <script>
-            (function() {
-                document.getElementById('currentYear').textContent = new Date().getFullYear();
-            })();
-    </script>
-
     <button id="scrollTop" class="btn btn-circle btn-primary shadow-2xl hover:scale-110 transition-transform"><i class="fas fa-arrow-up text-lg"></i></button>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script type="module" src="script.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 
 </html>
