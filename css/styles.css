@@ -1,6 +1,8 @@
 :root {
     color-scheme: light dark;
     --theme-transition-duration: 0.3s;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --nav-height: 72px;
 }
 
 html {
@@ -25,6 +27,16 @@ body {
                 fill 0.3s ease;
 }
 
+/* Motion safety */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 /* Theme transition specific styles */
 .theme-transition * {
     transition: background-color 0.3s ease,
@@ -44,6 +56,41 @@ body {
 }
 .custom-bg {
   background-image: url('https://images.unsplash.com/photo-1672858460787-fb29ed7352f8');
+}
+
+/* Keyframes and utility animations */
+@keyframes rise-in {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes scale-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.reveal-up {
+    animation: rise-in 700ms var(--ease-out) both;
+    will-change: transform, opacity;
+}
+
+.animate-card-in {
+    animation: rise-in 500ms var(--curve, var(--ease-out)) both;
+    will-change: transform, opacity;
+}
+
+.reveal-scale {
+    animation: scale-in 500ms var(--ease-out) both;
+    will-change: transform, opacity;
+}
+
+section {
+    scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
 /* Mobile menu animations */
@@ -78,11 +125,24 @@ body {
 #mobileMenu .menu li:nth-child(4) a { transition-delay: 0.25s; }
 #mobileMenu .menu li:nth-child(5) a { transition-delay: 0.3s; }
 
+.nav-link-active {
+    background: linear-gradient(120deg, rgba(59, 130, 246, 0.16), rgba(236, 72, 153, 0.12));
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+    transform: translateY(-2px);
+    transition: transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out), background 0.25s ease;
+}
+
+.nav-link-active:not(.btn) {
+    border-radius: 9999px;
+    padding-inline: 0.65rem;
+}
+
 @font-face {
     font-family: 'LINESeedSansTH';
-    src: url('./fonts/LINESeedSansTH_W_Rg.woff2') format('woff2'),
-         url('./fonts/LINESeedSansTH_W_Rg.woff') format('woff'),
-         url('./fonts/LINESeedSansTH_W_Rg.ttf') format('truetype');
+    src: url('../fonts/LINESeedSansTH_W_Rg.woff2') format('woff2'),
+         url('../fonts/LINESeedSansTH_W_Rg.woff') format('woff'),
+         url('../fonts/LINESeedSansTH_W_Rg.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -90,9 +150,9 @@ body {
 /* You can add additional @font-face declarations for different weights */
 @font-face {
     font-family: 'LINESeedSansTH';
-    src: url('./fonts/LINESeedSansTH_W_Bd.woff2') format('woff2'),
-         url('./fonts/LINESeedSansTH_W_Bd.woff') format('woff'),
-         url('./fonts/LINESeedSansTH_W_Bd.ttf') format('truetype');
+    src: url('../fonts/LINESeedSansTH_W_Bd.woff2') format('woff2'),
+         url('../fonts/LINESeedSansTH_W_Bd.woff') format('woff'),
+         url('../fonts/LINESeedSansTH_W_Bd.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
 }
@@ -102,8 +162,8 @@ body {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    min-width: 100px;
-    font-weight: 500;
+    min-width: 120px;
+    font-weight: 600;
     transform-origin: center;
     opacity: 1;
     width: auto;
@@ -130,19 +190,22 @@ body {
 }
 
 .tag-filter:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.1);
+    transform: translateY(-4px);
+    filter: brightness(1.15);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
 }
 
 .tag-filter.active {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    font-weight: 700;
 }
 
 /* Tag-specific styles */
 .tag-filter[data-tag="all"].active {
     background: #374151;
     color: white;
+    transform: translateY(-2px) scale(1.05);
 }
 
 .tag-filter[data-tag="robotics"] i { color: rgb(239, 68, 68); }
@@ -258,4 +321,29 @@ body {
     min-height: 2.5rem; /* Maintain consistent height */
     padding: 0.25rem;
     transition: height 0.3s ease;
+}
+
+/* Theme toggle micro-interaction */
+.theme-toggle i {
+    transition: transform 0.4s ease;
+}
+.theme-toggle.spin i {
+    transform: rotate(180deg) scale(1.05);
+}
+
+/* Scroll-to-top button */
+#scrollTop {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 40;
+}
+#scrollTop.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }

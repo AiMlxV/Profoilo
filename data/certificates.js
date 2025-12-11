@@ -13,6 +13,18 @@ export const certificates = [
         tags: ["ai", "camp", "coding"]
     },
     {
+        title: "Thailand Cyber Top Talent 2025",
+        date: "2025",
+        image: "public/img/Cer/ctf2025.jpg",
+        tags: ["coding", "contest"]
+    },
+    {
+        title: "CP LINK 2025 - Staff",
+        date: "2025",
+        image: "public/img/Cer/cplink.jpg",
+        tags: ["camp"]
+    },
+    {
         title: "DEPA Coding Bootcamp",
         date: "2024",
         image: "public/img/Cer/depa.jpg",
@@ -131,5 +143,6 @@ export const certificates = [
         date: "2022",
         image: "public/img/Cer/smte-camp.jpg",
         tags: ["camp", "stem"]
-    }
+    },
+
 ];

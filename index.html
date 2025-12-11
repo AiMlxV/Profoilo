@@ -1,36 +1,21 @@
 <!DOCTYPE html>
 <html lang="th">
-<script>
-    (function () {
-        const prefersDark = window.matchMedia(
-            "(prefers-color-scheme: dark)"
-        ).matches;
-        const storedTheme = localStorage.getItem("theme");
-        const theme = storedTheme || (prefersDark ? "dark" : "light");
-        document.documentElement.classList.toggle("dark", theme === "dark");
-        document.documentElement.setAttribute("data-theme", theme);
-        document.documentElement.style.setProperty("transition", "none");
-        window.addEventListener("load", () => {
-            document.documentElement.style.removeProperty("transition");
-        });
-    })();
-</script>
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Hi~~👋 Welcome to E-Portfolio</title>
+    <title>Welcome to E-Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="public/img/favico.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@4.12.19/dist/full.min.css" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
     <link rel="preload" href="fonts/LINESeedSansTH_W_Rg.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="fonts/LINESeedSansTH_W_Bd.woff2" as="font" type="font/woff2" crossorigin />
+    <script src="js/theme-init.js"></script>
+    <script src="js/config.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module" src="script.js"></script>
-    <script defer data-domain="aimlxv.me" src="https://visitor.aimlxv.me/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"></script>
-    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+    <script async src="https://plausible.65737776.xyz/js/pa-OAajxJ6ofMBNp996BxmLF.js"></script>
 </head>
 
 <body class="font-custom min-h-screen">
@@ -40,83 +25,83 @@
             <progress id="loading-progress" class="progress progress-primary w-full" value="0" max="100"></progress>
         </div>
         <p id="loading-text" class="text-lg mb-2">Getting Ready...</p>
-        <p class="text-sm text-base-content/60">Now Loading... Please Wait. 🪄</p>
+        <p class="text-sm text-base-content/60">Now Loading... Please Wait. <i class="fas fa-wand-magic-sparkles"></i></p>
     </div>
 
-    <nav class="navbar fixed bg-base-100/90 backdrop-blur-sm border-b z-50">
-        <div class="container mx-auto">
+    <nav class="navbar fixed bg-base-100/95 backdrop-blur-md shadow-xl border-b border-base-300 z-50">
+        <div class="container mx-auto px-4">
             <div class="flex-1">
-                <h1 class="text-2xl font-bold pl-4">AiMlxV's Portfolio</h1>
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text">AiMlxV's Portfolio</h1>
             </div>
             <div class="hidden md:flex">
-                <ul class="menu menu-horizontal">
-                    <li><a href="#home" class="btn btn-ghost">🏠 หน้าแรก</a></li>
-                    <li><a href="#about" class="btn btn-ghost">📁 เกี่ยวกับ</a></li>
-                    <li><a href="#projects" class="btn btn-ghost">💼 ผลงาน</a></li>
+                <ul class="menu menu-horizontal px-1 gap-1">
+                    <li><a href="#home" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i class="fas fa-house"></i> หน้าแรก</a></li>
+                    <li><a href="#about" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i class="fas fa-folder-open"></i> เกี่ยวกับ</a></li>
+                    <li><a href="#projects" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i class="fas fa-briefcase"></i> ผลงาน</a></li>
                     <li>
-                        <a href="#certificates" class="btn btn-ghost">📜 เกียรติบัตร</a>
+                        <a href="#certificates" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i class="fas fa-scroll"></i> เกียรติบัตร</a>
                     </li>
                     <li>
-                        <a href="#contact" class="btn btn-ghost">ต้องการติดต่อ 🤔</a>
+                        <a href="#contact" class="btn btn-ghost hover:btn-primary transition-all duration-300">ต้องการติดต่อ <i class="fas fa-circle-question"></i></a>
                     </li>
                     <li>
-                        <button class="theme-toggle btn btn-circle btn-ghost">
-                            <i class="fas fa-moon"></i>
+                        <button class="theme-toggle btn btn-circle btn-ghost hover:btn-primary transition-all duration-300">
+                            <i class="fas fa-moon text-lg"></i>
                         </button>
                     </li>
                 </ul>
             </div>
             <div class="md:hidden">
-                <button class="btn btn-ghost"><i class="fas fa-bars"></i></button>
+                <button class="btn btn-ghost btn-square"><i class="fas fa-bars text-xl"></i></button>
             </div>
         </div>
     </nav>
 
     <div id="mobileMenu"
-        class="fixed inset-0 bg-base-100/95 backdrop-blur-md z-40 hidden transition-all duration-300 opacity-0">
+        class="fixed inset-0 bg-base-100/98 backdrop-blur-lg z-40 hidden transition-all duration-300 opacity-0">
         <div class="flex flex-col h-full w-full pt-24 px-6">
             <div class="menu menu-vertical gap-4">
                 <li>
                     <a href="#home"
-                        class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
-                        <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">🏠</span>
-                        <span>หน้าแรก</span>
+                        class="flex items-center gap-4 text-xl p-5 hover:bg-primary hover:text-primary-content rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl">
+                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i class="fas fa-house"></i></span>
+                        <span class="font-semibold">หน้าแรก</span>
                     </a>
                 </li>
                 <li>
                     <a href="#about"
-                        class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
-                        <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">📁</span>
-                        <span>เกี่ยวกับ</span>
+                        class="flex items-center gap-4 text-xl p-5 hover:bg-primary hover:text-primary-content rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl">
+                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i class="fas fa-folder-open"></i></span>
+                        <span class="font-semibold">เกี่ยวกับ</span>
                     </a>
                 </li>
                 <li>
                     <a href="#projects"
-                        class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
-                        <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">💼</span>
-                        <span>ผลงาน</span>
+                        class="flex items-center gap-4 text-xl p-5 hover:bg-primary hover:text-primary-content rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl">
+                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i class="fas fa-briefcase"></i></span>
+                        <span class="font-semibold">ผลงาน</span>
                     </a>
                 </li>
                 <li>
                     <a href="#certificates"
-                        class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
-                        <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">📜</span>
-                        <span>เกียรติบัตร</span>
+                        class="flex items-center gap-4 text-xl p-5 hover:bg-primary hover:text-primary-content rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl">
+                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i class="fas fa-scroll"></i></span>
+                        <span class="font-semibold">เกียรติบัตร</span>
                     </a>
                 </li>
                 <li>
                     <a href="#contact"
-                        class="flex items-center gap-3 text-xl p-4 hover:bg-base-200 rounded-xl transition-all duration-300">
-                        <span class="w-10 h-10 flex items-center justify-center bg-primary/10 rounded-lg">📞</span>
-                        <span>ติดต่อ</span>
+                        class="flex items-center gap-4 text-xl p-5 hover:bg-primary hover:text-primary-content rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl">
+                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i class="fas fa-phone"></i></span>
+                        <span class="font-semibold">ติดต่อ</span>
                     </a>
                 </li>
             </div>
             <div class="mt-auto mb-8 flex justify-between items-center px-4">
-                <button class="theme-toggle btn btn-circle btn-lg">
+                <button class="theme-toggle btn btn-circle btn-lg shadow-xl hover:scale-110 transition-transform">
                     <i class="fas fa-moon text-xl"></i>
                 </button>
-                <button id="closeMobileMenu" class="btn btn-circle btn-lg btn-primary">
+                <button id="closeMobileMenu" class="btn btn-circle btn-lg btn-primary shadow-xl hover:scale-110 transition-transform">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
@@ -124,48 +109,52 @@
     </div>
 
     <section id="home" class="hero min-h-screen bg-cover bg-center relative custom-bg">
-        <div class="hero-overlay bg-black/50"></div>
+        <div class="hero-overlay bg-black/60"></div>
         <div class="hero-content text-center text-neutral-content relative z-10" data-aos="fade-up">
-            <div class="max-w-xl">
-                <h1 class="text-5xl font-bold mb-6 text-white">
-                    ยินดีต้อนรับสู่พอร์ตโฟลิโอ Ver.online
+            <div class="max-w-2xl">
+                <div class="badge badge-primary badge-lg mb-4" data-aos="fade-up" data-aos-delay="0">Version 1.19</div>
+                <h1 class="text-6xl md:text-7xl font-bold mb-6 text-white drop-shadow-2xl" data-aos="fade-up" data-aos-delay="100">
+                    ยินดีต้อนรับสู่ <br> พอร์ตโฟลิโอ online
                 </h1>
-                <h2 class="text-white">Version 1.19</h2>
-                <p id="welcome-text" class="text-xl mt-4 text-white"></p>
-                <div class="mt-8 space-x-4">
-                    <a href="#contact" class="btn btn-primary">ต้องการติดต่อ 🤔</a>
-                    <a href="#projects" class="btn btn-glass">💼 ผลงาน</a>
+                <p id="welcome-text" class="text-2xl mt-6 text-white/90 font-mono drop-shadow-lg" data-aos="fade-up" data-aos-delay="200"></p>
+                <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="300">
+                    <a href="#contact" class="btn btn-primary btn-lg shadow-2xl hover:scale-105 transition-transform">ต้องการติดต่อ <i class="fas fa-circle-question"></i></a>
+                    <a href="#projects" class="btn btn-glass btn-lg hover:bg-white/20 shadow-2xl hover:scale-105 transition-transform"><i class="fas fa-briefcase"></i> ผลงาน</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="py-20">
+    <section id="about" class="py-20 bg-base-100">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-16">😄About Me</h2>
-            <div class="card lg:card-side bg-base-100 shadow-xl max-w-6xl mx-auto">
+            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up"><i class="fas fa-face-smile text-primary"></i> About Me</h2>
+            <div class="divider max-w-xs mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
+            <div class="card lg:card-side bg-base-200 shadow-2xl max-w-6xl mx-auto hover:shadow-primary/20 transition-all duration-300" data-aos="zoom-in" data-aos-delay="200">
                 <figure class="w-full md:w-1/2">
-                    <img src="https://images.microcms-assets.io/assets/5a02cf30002940a0b67121dba2e03980/92ea2c7e307e4e94b9d8a7e054f5b340/screenshot_20250405_132816.png?fit=crop&w=512&h=512" alt="Profile Photo"
+                    <img src="https://images.microcms-assets.io/assets/0fe4e011ef5d44708e3dea66d8893415/ee3c8dd138f449eca0573cd01fed98af/ewn.JPG?fit=crop&w=1024&h=1024" alt="Profile Photo"
                         class="w-full h-full object-cover" />
                 </figure>
-                <div class="card-body">
-                    <h1 class="text-3xl font-semibold">🙏</h1>
-                    <p class="text-2xl font-semibold">
-                        สวัสดีครับ/SawatdeeKub/サワッディークップ
-                    </p>
-                    <p class="text-lg text-base-content/60">
-                        ผมชื่อธนวัฒน์ ศรีสุขพร้อม หรือเรียกชื่อเล่นสั้นๆว่า"อาร์ต"ครับ
-                        อายุ 18 ปี<br />กำลังศึกษาอยู่ชั้นมัธยมศึกษาปีที่ 6
-                        ที่โรงเรียนเฉลิมขวัญสตรี ครับ
-                    </p>
-                    <b class="text-xl">งานอดิเรก : </b>
-                    <ul class="list-disc list-inside text-lg text-base-content/60">
-                        <li>😆ดูหนังฟังเพลงเล่นเกมดูTV</li>
-                        <li>📰ติดตามข่าวสารทางด้านเทคโนโลยี</li>
-                        <li>🤔ออกแบบชิ้นงานและพิมพ์โมเดล 3 มิติ</li>
-                    </ul>
+                <div class="card-body p-8">
+                    <div class="text-4xl mb-4">🙏</div>
+                    <h3 class="text-3xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text">
+                        สวัสดีครับ / SawatdeeKub / サワッディークップ
+                    </h3>
+                    <div class="prose max-w-none">
+                        <p class="text-lg leading-relaxed">
+                            ผมชื่อ<span class="font-bold">ธนวัฒน์ ศรีสุขพร้อม</span> หรือเรียกชื่อเล่น <span class="font-bold">"อาร์ต"</span> ครับ
+                            กำลังศึกษาอยู่ชั้นปีที่ 1 ในคณะวิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์และเทคโนโลยีดิจิทัล(CEDT) จุฬาลงกรณ์มหาวิทยาลัยครับ
+                        </p>
+                    </div>
+                    <div class="divider"></div>
+                    <h4 class="text-2xl font-bold flex items-center gap-2"><i class="fas fa-bullseye"></i> งานอดิเรก</h4>
+                    <div class="flex flex-wrap gap-2 my-4">
+                        <div class="badge badge-lg badge-outline gap-2"><i class="fas fa-face-laugh-beam"></i> ดูหนังฟังเพลงเล่นเกมดูTV</div>
+                        <div class="badge badge-lg badge-outline gap-2"><i class="fas fa-newspaper"></i> ติดตามข่าวสารทางด้านเทคโนโลยี</div>
+                        <div class="badge badge-lg badge-outline gap-2"><i class="fas fa-lightbulb"></i> ออกแบบชิ้นงานและพิมพ์โมเดล 3 มิติ</div>
+                    </div>
+                    <div class="divider"></div>
                     <div class="skills">
-                        <h3 class="text-2xl font-semibold mb-4">Working on it 🍵</h3>
+                        <h3 class="text-2xl font-bold flex items-center gap-2 mb-6">🍵 Working on it</h3>
                         <div class="flex flex-col gap-4">
                             <img src="https://skillicons.dev/icons?i=c,cpp,cs,py,go,js,ts,html,css,bootstrap,tailwind,react,angular,flutter,firebase,figma,ae,linux,windows,git,github,githubactions,vscode,pycharm,clion,rider,arduino,discord,instagram,linkedin&theme=dark"
                                 alt="My Skills" class="w-full max-w-3xl" loading="lazy" />
@@ -178,63 +167,69 @@
 
     <section id="projects" class="py-20 bg-base-200">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-16">💼Project/Works</h2>
+            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up"><i class="fas fa-briefcase text-primary"></i> Projects & Works</h2>
+            <div class="divider max-w-xs mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
+            <p class="text-center text-lg text-base-content/70 mb-12" data-aos="fade-up" data-aos-delay="200">ผลงานและโปรเจกต์ที่ผมได้ทำมา</p>
             <div class="projects-grid max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </div>
     </section>
 
-    <section id="certificates" class="py-20">
+    <section id="certificates" class="py-20 bg-base-100">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-16">📜Certificates</h2>
+            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up"><i class="fas fa-scroll text-primary"></i> Certificates</h2>
+            <div class="divider max-w-xs mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
+            <p class="text-center text-lg text-base-content/70 mb-8" data-aos="fade-up" data-aos-delay="200">เกียรติบัตรและรางวัลที่ได้รับ</p>
 
-            <div class="flex flex-col items-center mb-8">
-                <div class="mb-4" id="activeTagDisplay">
-                    <div class="flex items-center justify-center gap-2">
-                        <span class="text-lg font-medium flex items-center gap-2">
-                            <i class="fas fa-filter"></i>
-                            ตอนนี้กำลังดู:
-                            <span class="badge badge-lg gap-2" id="currentTag">
+            <div class="flex flex-col items-center mb-8" data-aos="fade-up" data-aos-delay="300">
+                <div class="mb-6 card bg-base-200 shadow-lg" id="activeTagDisplay">
+                    <div class="card-body py-4">
+                        <div class="flex flex-wrap items-center justify-center gap-3">
+                            <span class="text-lg font-semibold flex items-center gap-2">
+                                <i class="fas fa-filter text-primary"></i>
+                                ตอนนี้กำลังดู:
+                            </span>
+                            <span class="badge badge-lg badge-primary gap-2 shadow-md" id="currentTag">
                                 <i class="fas fa-th-large"></i> All Certificates
                             </span>
-                        </span>
-                        <button id="clearFilter" class="btn btn-sm btn-ghost">
-                            <i class="fas fa-times"></i> Clear filter
-                        </button>
+                            <button id="clearFilter" class="btn btn-sm btn-ghost hover:btn-error transition-all">
+                                <i class="fas fa-times"></i> Clear filter
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Filter -->
-                <div class="flex flex-wrap justify-center gap-2 mb-2">
-                    <button class="btn btn-sm tag-filter border-2 border-base-300 hover:bg-base-200" data-tag="all">
+                <div class="flex flex-wrap justify-center gap-3 mb-4">
+                    <button class="btn btn-md tag-filter border-2 border-base-300 hover:bg-base-200 shadow-md hover:shadow-lg transition-all" data-tag="all">
                         <i class="fas fa-th-large"></i> ทั้งหมด
                     </button>
                     <button
-                        class="btn btn-sm tag-filter border-2 border-red-500 text-red-500 hover:bg-red-50 dark:hover:bg-red-950"
+                        class="btn btn-md tag-filter border-2 border-red-500 text-red-500 hover:bg-red-50 dark:hover:bg-red-950 shadow-md hover:shadow-lg transition-all"
                         data-tag="robotics">
                         <i class="fas fa-robot"></i> Robotics
                     </button>
                     <button
-                        class="btn btn-sm tag-filter border-2 border-blue-500 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950"
+                        class="btn btn-md tag-filter border-2 border-blue-500 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950 shadow-md hover:shadow-lg transition-all"
                         data-tag="coding">
                         <i class="fas fa-code"></i> Coding
                     </button>
                     <button
-                        class="btn btn-sm tag-filter border-2 border-green-500 text-green-500 hover:bg-green-50 dark:hover:bg-green-950"
+                        class="btn btn-md tag-filter border-2 border-green-500 text-green-500 hover:bg-green-50 dark:hover:bg-green-950 shadow-md hover:shadow-lg transition-all"
                         data-tag="camp">
                         <i class="fas fa-campground"></i> Camp
                     </button>
                     <button
-                        class="btn btn-sm tag-filter border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-50 dark:hover:bg-yellow-950"
+                        class="btn btn-md tag-filter border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-50 dark:hover:bg-yellow-950 shadow-md hover:shadow-lg transition-all"
                         data-tag="contest">
                         <i class="fas fa-trophy"></i> Contest
                     </button>
                     <button
-                        class="btn btn-sm tag-filter border-2 border-cyan-500 text-cyan-500 hover:bg-cyan-50 dark:hover:bg-cyan-950"
+                        class="btn btn-md tag-filter border-2 border-cyan-500 text-cyan-500 hover:bg-cyan-50 dark:hover:bg-cyan-950 shadow-md hover:shadow-lg transition-all"
                         data-tag="ai">
                         <i class="fas fa-brain"></i> AI
                     </button>
                     <button
-                        class="btn btn-sm tag-filter border-2 border-purple-500 text-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950"
+                        class="btn btn-md tag-filter border-2 border-purple-500 text-purple-500 hover:bg-purple-50 dark:hover:bg-purple-950 shadow-md hover:shadow-lg transition-all"
                         data-tag="stem">
                         <i class="fas fa-atom"></i> STEM
                     </button>
@@ -250,9 +245,11 @@
                 class="certificates-grid max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 content-start">
             </div>
 
-            <div class="flex justify-center mt-8">
-                <button id="loadMoreBtn" onclick="loadMoreCertificates()" class="btn btn-wide btn-primary">
-                    Load More <i class="fas fa-arrow-down ml-2"></i>
+            <div class="flex justify-center mt-12" data-aos="fade-up">
+                <button id="loadMoreBtn" class="btn btn-wide btn-primary btn-lg shadow-xl hover:scale-105 transition-transform">
+                    <i class="fas fa-arrow-down mr-2"></i>
+                    Load More
+                    <i class="fas fa-arrow-down ml-2"></i>
                 </button>
             </div>
         </div>
@@ -260,26 +257,50 @@
 
     <section id="contact" class="py-20 bg-base-200">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-16">📞Contact Me</h2>
-            <div class="flex flex-col md:flex-row justify-center gap-4">
-                <a href="https://github.com/AiMlxV" target="_blank" class="btn btn-lg gap-2">
-                    <i class="fab fa-github text-2xl"></i>
-                    GitHub Profile
+            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up"><i class="fas fa-phone-volume text-primary"></i> Contact Me</h2>
+            <div class="divider max-w-xs mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
+            <p class="text-center text-lg text-base-content/70 mb-12" data-aos="fade-up" data-aos-delay="200">ติดต่อผมได้ที่ช่องทางเหล่านี้</p>
+            <div class="flex flex-col md:flex-row justify-center gap-6 max-w-2xl mx-auto" data-aos="zoom-in" data-aos-delay="300">
+                <a href="https://github.com/AiMlxV" target="_blank" class="btn btn-lg gap-3 flex-1 shadow-xl hover:scale-105 transition-transform hover:btn-neutral">
+                    <i class="fab fa-github text-3xl"></i>
+                    <div class="text-left">
+                        <div class="text-xs opacity-70">View on</div>
+                        <div class="font-bold">GitHub Profile</div>
+                    </div>
                 </a>
-                <a href="https://www.linkedin.com/in/aimltanawat/" target="_blank" class="btn btn-lg gap-2 btn-primary">
-                    <i class="fab fa-linkedin text-2xl"></i>
-                    LinkedIn Profile
+                <a href="https://www.linkedin.com/in/aimltanawat/" target="_blank" class="btn btn-lg gap-3 btn-primary flex-1 shadow-xl hover:scale-105 transition-transform">
+                    <i class="fab fa-linkedin text-3xl"></i>
+                    <div class="text-left">
+                        <div class="text-xs opacity-70">Connect on</div>
+                        <div class="font-bold">LinkedIn Profile</div>
+                    </div>
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="footer footer-center p-4 bg-base-200">
-        <p>&copy; 2024 AiMlxV. All rights reserved.</p>
+    <style>
+    .footer.footer-center > * {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.2rem !important;
+    }
+    </style>
+
+    <footer class="footer footer-center p-10 bg-base-300 text-base-content">
+        <div>
+            <div class="text-3xl mb-4"><i class="fas fa-star"></i></div>
+            <p class="font-bold text-lg">
+                AiMlxV's Portfolio
+            </p> 
+            <p class="text-base-content/70">&copy; <span id="currentYear"></span> AiMlxV. All rights reserved.</p>
+            <p class="text-sm text-base-content/50">Made with <i class="fas fa-heart text-error"></i> using daisyUI & Tailwind CSS</p>
+        </div>
     </footer>
+    <button id="scrollTop" class="btn btn-circle btn-primary shadow-2xl hover:scale-110 transition-transform"><i class="fas fa-arrow-up text-lg"></i></button>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script type="module" src="script.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 
 </html>
