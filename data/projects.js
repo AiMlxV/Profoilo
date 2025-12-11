@@ -41,5 +41,17 @@ export const projects = [
         description: "เว็บแอปพลิเคชันที่ช่วยจัดการสูตรอาหารด้วย AI สามารถสร้างสูตรอาหารใหม่ ๆ ได้ตามวัตถุดิบที่มีอยู่",
         image: "public/img/Project/ai_recipe.png",
         link: "https://github.com/Croissant-no-Yuusha/20-Croissant-no-Maou"
+    },
+    {
+        title: "พี่เลี้ยง สอวน. ค่าย 2",
+        description: "ช่วยจัดการระบบหลังบ้าน Grader บน Server และดูแลน้องๆ ในการเขียนโปรแกรมค่ายสอวน. ศูนย์โรงเรียนเฉลิมขวัญสตรี",
+        image: "public/img/Project/posnta2.png",
+        link: "https://www.facebook.com/profile.php?id=100086664457918"
+    },
+    {
+        title: "เข้าร่วมโครงการ Talent RAC รุ่น 1",
+        description: "รับโจทย์จากทางโครงการ เพื่อพัฒนาโปรเจคที่ใช้ Cobot และออกแบบระบบ Conveyor ในการลำเลียงและขนย้ายสินค้า",
+        image: "public/img/Project/rac.png",
+        link: "https://rac.thairobotics.org/2023/10/27/conveyor-system/"
     }
 ];
