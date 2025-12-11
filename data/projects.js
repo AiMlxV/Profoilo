@@ -43,15 +43,15 @@ export const projects = [
         link: "https://github.com/Croissant-no-Yuusha/20-Croissant-no-Maou"
     },
     {
-        title: "พี่เลี้ยง สอวน. ค่าย 2",
-        description: "ช่วยจัดการระบบหลังบ้าน Grader บน Server และดูแลน้องๆ ในการเขียนโปรแกรมค่ายสอวน. ศูนย์โรงเรียนเฉลิมขวัญสตรี",
-        image: "public/img/Project/posnta2.png",
+        title: "รับหน้าที่เป็นพี่เลี้ยง สอวน. ศูนย์โรงเรียนเฉลิมขวัญสตรี",
+        description: "ช่วยจัดการระบบหลังบ้าน(Grader ที่อยู่บน Server) และดูแลน้องๆ ในการเขียนโปรแกรมค่ายสอวน. ค่าย 1 ศูนย์โรงเรียนเฉลิมขวัญสตรี",
+        image: "public/img/Project/posnta.jpg",
         link: "https://www.facebook.com/profile.php?id=100086664457918"
     },
     {
-        title: "เข้าร่วมโครงการ Talent RAC รุ่น 1",
-        description: "รับโจทย์จากทางโครงการ เพื่อพัฒนาโปรเจคที่ใช้ Cobot และออกแบบระบบ Conveyor ในการลำเลียงและขนย้ายสินค้า",
-        image: "public/img/Project/rac.png",
+        title: "ไดัรับโอกาสในการฝึกงานกับบริษัท จากโครงการ Talent RAC",
+        description: "ผมได้รับโจทย์จากทางบริษัทผ่านทางโครงการ ให้ร่วมพัฒนาโปรเจคกับทีมด้วยการใช้ Cobot พร้อมทั้งช่วยออกแบบระบบ Conveyor ในการลำเลียงและขนย้ายสินค้า",
+        image: "public/img/Project/rac.jpg",
         link: "https://rac.thairobotics.org/2023/10/27/conveyor-system/"
     }
 ];
