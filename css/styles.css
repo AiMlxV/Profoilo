@@ -1,6 +1,8 @@
 :root {
     color-scheme: light dark;
     --theme-transition-duration: 0.3s;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --nav-height: 72px;
 }
 
 html {
@@ -73,18 +75,22 @@ body {
 }
 
 .reveal-up {
-    animation: rise-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: rise-in 700ms var(--ease-out) both;
     will-change: transform, opacity;
 }
 
 .animate-card-in {
-    animation: rise-in 500ms var(--curve, cubic-bezier(0.22, 1, 0.36, 1)) both;
+    animation: rise-in 500ms var(--curve, var(--ease-out)) both;
     will-change: transform, opacity;
 }
 
 .reveal-scale {
-    animation: scale-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: scale-in 500ms var(--ease-out) both;
     will-change: transform, opacity;
+}
+
+section {
+    scroll-margin-top: calc(var(--nav-height) + 16px);
 }
 
 /* Mobile menu animations */
@@ -119,11 +125,24 @@ body {
 #mobileMenu .menu li:nth-child(4) a { transition-delay: 0.25s; }
 #mobileMenu .menu li:nth-child(5) a { transition-delay: 0.3s; }
 
+.nav-link-active {
+    background: linear-gradient(120deg, rgba(59, 130, 246, 0.16), rgba(236, 72, 153, 0.12));
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+    transform: translateY(-2px);
+    transition: transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out), background 0.25s ease;
+}
+
+.nav-link-active:not(.btn) {
+    border-radius: 9999px;
+    padding-inline: 0.65rem;
+}
+
 @font-face {
     font-family: 'LINESeedSansTH';
-    src: url('./fonts/LINESeedSansTH_W_Rg.woff2') format('woff2'),
-         url('./fonts/LINESeedSansTH_W_Rg.woff') format('woff'),
-         url('./fonts/LINESeedSansTH_W_Rg.ttf') format('truetype');
+    src: url('../fonts/LINESeedSansTH_W_Rg.woff2') format('woff2'),
+         url('../fonts/LINESeedSansTH_W_Rg.woff') format('woff'),
+         url('../fonts/LINESeedSansTH_W_Rg.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -131,9 +150,9 @@ body {
 /* You can add additional @font-face declarations for different weights */
 @font-face {
     font-family: 'LINESeedSansTH';
-    src: url('./fonts/LINESeedSansTH_W_Bd.woff2') format('woff2'),
-         url('./fonts/LINESeedSansTH_W_Bd.woff') format('woff'),
-         url('./fonts/LINESeedSansTH_W_Bd.ttf') format('truetype');
+    src: url('../fonts/LINESeedSansTH_W_Bd.woff2') format('woff2'),
+         url('../fonts/LINESeedSansTH_W_Bd.woff') format('woff'),
+         url('../fonts/LINESeedSansTH_W_Bd.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
 }

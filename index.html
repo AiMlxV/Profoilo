@@ -1,35 +1,21 @@
 <!DOCTYPE html>
 <html lang="th">
-<script>
-    (function () {
-        const prefersDark = window.matchMedia(
-            "(prefers-color-scheme: dark)"
-        ).matches;
-        const storedTheme = localStorage.getItem("theme");
-        const theme = storedTheme || (prefersDark ? "dark" : "light");
-        document.documentElement.classList.toggle("dark", theme === "dark");
-        document.documentElement.setAttribute("data-theme", theme);
-        document.documentElement.style.setProperty("transition", "none");
-        window.addEventListener("load", () => {
-            document.documentElement.style.removeProperty("transition");
-        });
-    })();
-</script>
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Hi~~👋 Welcome to E-Portfolio</title>
+    <title>Welcome to E-Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="public/img/favico.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@4.12.19/dist/full.min.css" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/styles.css" />
     <link rel="preload" href="fonts/LINESeedSansTH_W_Rg.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="fonts/LINESeedSansTH_W_Bd.woff2" as="font" type="font/woff2" crossorigin />
+    <script src="js/theme-init.js"></script>
+    <script src="js/config.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script defer data-domain="aimlxv.me" src="https://visitor.aimlxv.me/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"></script>
-    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+    <script async src="https://plausible.65737776.xyz/js/pa-OAajxJ6ofMBNp996BxmLF.js"></script>
 </head>
 
 <body class="font-custom min-h-screen">
@@ -39,7 +25,7 @@
             <progress id="loading-progress" class="progress progress-primary w-full" value="0" max="100"></progress>
         </div>
         <p id="loading-text" class="text-lg mb-2">Getting Ready...</p>
-        <p class="text-sm text-base-content/60">Now Loading... Please Wait. 🪄</p>
+        <p class="text-sm text-base-content/60">Now Loading... Please Wait. <i class="fas fa-wand-magic-sparkles"></i></p>
     </div>
 
     <nav class="navbar fixed bg-base-100/95 backdrop-blur-md shadow-xl border-b border-base-300 z-50">
@@ -49,14 +35,14 @@
             </div>
             <div class="hidden md:flex">
                 <ul class="menu menu-horizontal px-1 gap-1">
-                    <li><a href="#home" class="btn btn-ghost hover:btn-primary transition-all duration-300">🏠 หน้าแรก</a></li>
-                    <li><a href="#about" class="btn btn-ghost hover:btn-primary transition-all duration-300">📁 เกี่ยวกับ</a></li>
-                    <li><a href="#projects" class="btn btn-ghost hover:btn-primary transition-all duration-300">💼 ผลงาน</a></li>
+                    <li><a href="#home" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i class="fas fa-house"></i> หน้าแรก</a></li>
+                    <li><a href="#about" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i class="fas fa-folder-open"></i> เกี่ยวกับ</a></li>
+                    <li><a href="#projects" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i class="fas fa-briefcase"></i> ผลงาน</a></li>
                     <li>
-                        <a href="#certificates" class="btn btn-ghost hover:btn-primary transition-all duration-300">📜 เกียรติบัตร</a>
+                        <a href="#certificates" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i class="fas fa-scroll"></i> เกียรติบัตร</a>
                     </li>
                     <li>
-                        <a href="#contact" class="btn btn-ghost hover:btn-primary transition-all duration-300">ต้องการติดต่อ 🤔</a>
+                        <a href="#contact" class="btn btn-ghost hover:btn-primary transition-all duration-300">ต้องการติดต่อ <i class="fas fa-circle-question"></i></a>
                     </li>
                     <li>
                         <button class="theme-toggle btn btn-circle btn-ghost hover:btn-primary transition-all duration-300">
@@ -78,35 +64,35 @@
                 <li>
                     <a href="#home"
                         class="flex items-center gap-4 text-xl p-5 hover:bg-primary hover:text-primary-content rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl">
-                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl">🏠</span>
+                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i class="fas fa-house"></i></span>
                         <span class="font-semibold">หน้าแรก</span>
                     </a>
                 </li>
                 <li>
                     <a href="#about"
                         class="flex items-center gap-4 text-xl p-5 hover:bg-primary hover:text-primary-content rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl">
-                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl">📁</span>
+                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i class="fas fa-folder-open"></i></span>
                         <span class="font-semibold">เกี่ยวกับ</span>
                     </a>
                 </li>
                 <li>
                     <a href="#projects"
                         class="flex items-center gap-4 text-xl p-5 hover:bg-primary hover:text-primary-content rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl">
-                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl">💼</span>
+                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i class="fas fa-briefcase"></i></span>
                         <span class="font-semibold">ผลงาน</span>
                     </a>
                 </li>
                 <li>
                     <a href="#certificates"
                         class="flex items-center gap-4 text-xl p-5 hover:bg-primary hover:text-primary-content rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl">
-                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl">📜</span>
+                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i class="fas fa-scroll"></i></span>
                         <span class="font-semibold">เกียรติบัตร</span>
                     </a>
                 </li>
                 <li>
                     <a href="#contact"
                         class="flex items-center gap-4 text-xl p-5 hover:bg-primary hover:text-primary-content rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl">
-                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl">📞</span>
+                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i class="fas fa-phone"></i></span>
                         <span class="font-semibold">ติดต่อ</span>
                     </a>
                 </li>
@@ -132,8 +118,8 @@
                 </h1>
                 <p id="welcome-text" class="text-2xl mt-6 text-white/90 font-mono drop-shadow-lg" data-aos="fade-up" data-aos-delay="200"></p>
                 <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="300">
-                    <a href="#contact" class="btn btn-primary btn-lg shadow-2xl hover:scale-105 transition-transform">ต้องการติดต่อ 🤔</a>
-                    <a href="#projects" class="btn btn-glass btn-lg text-white hover:bg-white/20 shadow-2xl hover:scale-105 transition-transform">💼 ผลงาน</a>
+                    <a href="#contact" class="btn btn-primary btn-lg shadow-2xl hover:scale-105 transition-transform">ต้องการติดต่อ <i class="fas fa-circle-question"></i></a>
+                    <a href="#projects" class="btn btn-glass btn-lg hover:bg-white/20 shadow-2xl hover:scale-105 transition-transform"><i class="fas fa-briefcase"></i> ผลงาน</a>
                 </div>
             </div>
         </div>
@@ -141,7 +127,7 @@
 
     <section id="about" class="py-20 bg-base-100">
         <div class="container mx-auto px-4">
-            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up">😄 About Me</h2>
+            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up"><i class="fas fa-face-smile text-primary"></i> About Me</h2>
             <div class="divider max-w-xs mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
             <div class="card lg:card-side bg-base-200 shadow-2xl max-w-6xl mx-auto hover:shadow-primary/20 transition-all duration-300" data-aos="zoom-in" data-aos-delay="200">
                 <figure class="w-full md:w-1/2">
@@ -160,15 +146,15 @@
                         </p>
                     </div>
                     <div class="divider"></div>
-                    <h4 class="text-2xl font-bold flex items-center gap-2"><span>🎯</span> งานอดิเรก</h4>
+                    <h4 class="text-2xl font-bold flex items-center gap-2"><i class="fas fa-bullseye"></i> งานอดิเรก</h4>
                     <div class="flex flex-wrap gap-2 my-4">
-                        <div class="badge badge-lg badge-outline gap-2">😆 ดูหนังฟังเพลงเล่นเกมดูTV</div>
-                        <div class="badge badge-lg badge-outline gap-2">📰 ติดตามข่าวสารทางด้านเทคโนโลยี</div>
-                        <div class="badge badge-lg badge-outline gap-2">🤔 ออกแบบชิ้นงานและพิมพ์โมเดล 3 มิติ</div>
+                        <div class="badge badge-lg badge-outline gap-2"><i class="fas fa-face-laugh-beam"></i> ดูหนังฟังเพลงเล่นเกมดูTV</div>
+                        <div class="badge badge-lg badge-outline gap-2"><i class="fas fa-newspaper"></i> ติดตามข่าวสารทางด้านเทคโนโลยี</div>
+                        <div class="badge badge-lg badge-outline gap-2"><i class="fas fa-lightbulb"></i> ออกแบบชิ้นงานและพิมพ์โมเดล 3 มิติ</div>
                     </div>
                     <div class="divider"></div>
                     <div class="skills">
-                        <h3 class="text-2xl font-bold flex items-center gap-2 mb-6"><span>🍵</span> Working on it</h3>
+                        <h3 class="text-2xl font-bold flex items-center gap-2 mb-6">🍵 Working on it</h3>
                         <div class="flex flex-col gap-4">
                             <img src="https://skillicons.dev/icons?i=c,cpp,cs,py,go,js,ts,html,css,bootstrap,tailwind,react,angular,flutter,firebase,figma,ae,linux,windows,git,github,githubactions,vscode,pycharm,clion,rider,arduino,discord,instagram,linkedin&theme=dark"
                                 alt="My Skills" class="w-full max-w-3xl" loading="lazy" />
@@ -181,7 +167,7 @@
 
     <section id="projects" class="py-20 bg-base-200">
         <div class="container mx-auto px-4">
-            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up">💼 Projects & Works</h2>
+            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up"><i class="fas fa-briefcase text-primary"></i> Projects & Works</h2>
             <div class="divider max-w-xs mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
             <p class="text-center text-lg text-base-content/70 mb-12" data-aos="fade-up" data-aos-delay="200">ผลงานและโปรเจกต์ที่ผมได้ทำมา</p>
             <div class="projects-grid max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
@@ -190,7 +176,7 @@
 
     <section id="certificates" class="py-20 bg-base-100">
         <div class="container mx-auto px-4">
-            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up">📜 Certificates</h2>
+            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up"><i class="fas fa-scroll text-primary"></i> Certificates</h2>
             <div class="divider max-w-xs mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
             <p class="text-center text-lg text-base-content/70 mb-8" data-aos="fade-up" data-aos-delay="200">เกียรติบัตรและรางวัลที่ได้รับ</p>
 
@@ -260,7 +246,7 @@
             </div>
 
             <div class="flex justify-center mt-12" data-aos="fade-up">
-                <button id="loadMoreBtn" onclick="loadMoreCertificates()" class="btn btn-wide btn-primary btn-lg shadow-xl hover:scale-105 transition-transform">
+                <button id="loadMoreBtn" class="btn btn-wide btn-primary btn-lg shadow-xl hover:scale-105 transition-transform">
                     <i class="fas fa-arrow-down mr-2"></i>
                     Load More
                     <i class="fas fa-arrow-down ml-2"></i>
@@ -271,7 +257,7 @@
 
     <section id="contact" class="py-20 bg-base-200">
         <div class="container mx-auto px-4">
-            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up">📞 Contact Me</h2>
+            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up"><i class="fas fa-phone-volume text-primary"></i> Contact Me</h2>
             <div class="divider max-w-xs mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
             <p class="text-center text-lg text-base-content/70 mb-12" data-aos="fade-up" data-aos-delay="200">ติดต่อผมได้ที่ช่องทางเหล่านี้</p>
             <div class="flex flex-col md:flex-row justify-center gap-6 max-w-2xl mx-auto" data-aos="zoom-in" data-aos-delay="300">
@@ -303,24 +289,18 @@
 
     <footer class="footer footer-center p-10 bg-base-300 text-base-content">
         <div>
-            <div class="text-3xl mb-4">🌟</div>
+            <div class="text-3xl mb-4"><i class="fas fa-star"></i></div>
             <p class="font-bold text-lg">
                 AiMlxV's Portfolio
             </p> 
             <p class="text-base-content/70">&copy; <span id="currentYear"></span> AiMlxV. All rights reserved.</p>
-            <p class="text-sm text-base-content/50">Made with ❤️ using daisyUI & Tailwind CSS</p>
+            <p class="text-sm text-base-content/50">Made with <i class="fas fa-heart text-error"></i> using daisyUI & Tailwind CSS</p>
         </div>
     </footer>
-    <script>
-            (function() {
-                document.getElementById('currentYear').textContent = new Date().getFullYear();
-            })();
-    </script>
-
     <button id="scrollTop" class="btn btn-circle btn-primary shadow-2xl hover:scale-110 transition-transform"><i class="fas fa-arrow-up text-lg"></i></button>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script type="module" src="script.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 
 </html>
