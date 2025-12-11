@@ -1,7 +1,7 @@
 //aliviable tags: ["ai", "camp", "coding", "contest", "robotics", "stem"]
 export const certificates = [
     {
-        title: "Thailand Cyber Talent 2025",
+        title: "Thailand Cyber Top Talent 2025",
         date: "2025",
         image: "public/img/Cer/ctf2025.jpg",
         tags: ["coding", "contest"]

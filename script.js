@@ -6,8 +6,8 @@ const loadingConfig = {
     progressInterval: 30,
     loadingMessages: [
         "🖥️กำลังเปิดเครื่อง...",
-        "🛜เชื่อมต่ออินเตอร์เน็ต...",
-        "🍵ชงกาแฟ...",
+        "🛜เชื่อมต่อกับอินเตอร์เน็ต...",
+        "🍵เตรียมกาแฟ...",
         "😊เกือบจะเสร็จแล้ว...",
         "😄เสร็จแล้ว..."
     ],
@@ -269,12 +269,12 @@ function createThumbnail(originalUrl) {
         
         img.onerror = function() {
             console.warn('Image load failed:', originalUrl);
-            resolve('https://via.placeholder.com/400x300?text=Certificate+Image+Not+Available');
+            resolve('https://placehold.com/400x300?text=Certificate+Image+Not+Available');
         };
         
         //  timeout
         setTimeout(() => {
-            resolve('https://via.placeholder.com/400x300?text=Loading+Timeout');
+            resolve('https://placehold.com/400x300?text=Loading+Timeout');
         }, 5000);
 
         img.src = originalUrl;
@@ -413,7 +413,7 @@ window.openCertificateModal = function(imageUrl, title) {
         <dialog id="cert_modal" class="modal modal-bottom sm:modal-middle">
             <div class="modal-box bg-base-100 p-0 relative max-w-4xl shadow-2xl">
                 <div class="p-6 flex justify-between items-center border-b-2 border-base-300 bg-base-200">
-                    <h3 class="font-bold text-2xl text-primary">${title}</h3>
+                    <h3 class="font-bold text-2xl">${title}</h3>
                     <form method="dialog">
                         <button class="btn btn-circle btn-ghost btn-lg hover:btn-error transition-all">
                             <i class="fas fa-times text-xl"></i>
