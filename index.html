@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Welcome to E-Portfolio</title>
-    <link rel="icon" type="image/x-icon" href="public/img/favico.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" />
+    <link rel="icon" type="image/x-icon" href="public/img/favico.ico" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@4.12.19/dist/full.min.css" />
@@ -25,34 +27,53 @@
             <progress id="loading-progress" class="progress progress-primary w-full" value="0" max="100"></progress>
         </div>
         <p id="loading-text" class="text-lg mb-2">Getting Ready...</p>
-        <p class="text-sm text-base-content/60">Now Loading... Please Wait. <i class="fas fa-wand-magic-sparkles"></i></p>
+        <p class="text-sm text-base-content/60">
+            Now Loading... Please Wait. <i class="fas fa-wand-magic-sparkles"></i>
+        </p>
     </div>
 
     <nav class="navbar fixed bg-base-100/95 backdrop-blur-md shadow-xl border-b border-base-300 z-50">
         <div class="container mx-auto px-4">
             <div class="flex-1">
-                <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text">AiMlxV's Portfolio</h1>
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text">
+                    AiMlxV's Portfolio
+                </h1>
             </div>
             <div class="hidden md:flex">
                 <ul class="menu menu-horizontal px-1 gap-1">
-                    <li><a href="#home" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i class="fas fa-house"></i> หน้าแรก</a></li>
-                    <li><a href="#about" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i class="fas fa-folder-open"></i> เกี่ยวกับ</a></li>
-                    <li><a href="#projects" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i class="fas fa-briefcase"></i> ผลงาน</a></li>
                     <li>
-                        <a href="#certificates" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i class="fas fa-scroll"></i> เกียรติบัตร</a>
+                        <a href="#home" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i
+                                class="fas fa-house"></i> หน้าแรก</a>
                     </li>
                     <li>
-                        <a href="#contact" class="btn btn-ghost hover:btn-primary transition-all duration-300">ต้องการติดต่อ <i class="fas fa-circle-question"></i></a>
+                        <a href="#about" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i
+                                class="fas fa-folder-open"></i> เกี่ยวกับ</a>
                     </li>
                     <li>
-                        <button class="theme-toggle btn btn-circle btn-ghost hover:btn-primary transition-all duration-300">
+                        <a href="#projects" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i
+                                class="fas fa-briefcase"></i> ผลงาน</a>
+                    </li>
+                    <li>
+                        <a href="#certificates" class="btn btn-ghost hover:btn-primary transition-all duration-300"><i
+                                class="fas fa-scroll"></i> เกียรติบัตร</a>
+                    </li>
+                    <li>
+                        <a href="#contact"
+                            class="btn btn-ghost hover:btn-primary transition-all duration-300">ต้องการติดต่อ <i
+                                class="fas fa-circle-question"></i></a>
+                    </li>
+                    <li>
+                        <button
+                            class="theme-toggle btn btn-circle btn-ghost hover:btn-primary transition-all duration-300">
                             <i class="fas fa-moon text-lg"></i>
                         </button>
                     </li>
                 </ul>
             </div>
             <div class="md:hidden">
-                <button class="btn btn-ghost btn-square"><i class="fas fa-bars text-xl"></i></button>
+                <button class="btn btn-ghost btn-square">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
             </div>
         </div>
     </nav>
@@ -64,35 +85,40 @@
                 <li>
                     <a href="#home"
                         class="flex items-center gap-4 text-xl p-5 hover:bg-primary hover:text-primary-content rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl">
-                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i class="fas fa-house"></i></span>
+                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i
+                                class="fas fa-house"></i></span>
                         <span class="font-semibold">หน้าแรก</span>
                     </a>
                 </li>
                 <li>
                     <a href="#about"
                         class="flex items-center gap-4 text-xl p-5 hover:bg-primary hover:text-primary-content rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl">
-                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i class="fas fa-folder-open"></i></span>
+                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i
+                                class="fas fa-folder-open"></i></span>
                         <span class="font-semibold">เกี่ยวกับ</span>
                     </a>
                 </li>
                 <li>
                     <a href="#projects"
                         class="flex items-center gap-4 text-xl p-5 hover:bg-primary hover:text-primary-content rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl">
-                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i class="fas fa-briefcase"></i></span>
+                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i
+                                class="fas fa-briefcase"></i></span>
                         <span class="font-semibold">ผลงาน</span>
                     </a>
                 </li>
                 <li>
                     <a href="#certificates"
                         class="flex items-center gap-4 text-xl p-5 hover:bg-primary hover:text-primary-content rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl">
-                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i class="fas fa-scroll"></i></span>
+                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i
+                                class="fas fa-scroll"></i></span>
                         <span class="font-semibold">เกียรติบัตร</span>
                     </a>
                 </li>
                 <li>
                     <a href="#contact"
                         class="flex items-center gap-4 text-xl p-5 hover:bg-primary hover:text-primary-content rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl">
-                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i class="fas fa-phone"></i></span>
+                        <span class="w-12 h-12 flex items-center justify-center bg-primary/20 rounded-xl text-2xl"><i
+                                class="fas fa-phone"></i></span>
                         <span class="font-semibold">ติดต่อ</span>
                     </a>
                 </li>
@@ -101,7 +127,8 @@
                 <button class="theme-toggle btn btn-circle btn-lg shadow-xl hover:scale-110 transition-transform">
                     <i class="fas fa-moon text-xl"></i>
                 </button>
-                <button id="closeMobileMenu" class="btn btn-circle btn-lg btn-primary shadow-xl hover:scale-110 transition-transform">
+                <button id="closeMobileMenu"
+                    class="btn btn-circle btn-lg btn-primary shadow-xl hover:scale-110 transition-transform">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
@@ -112,14 +139,24 @@
         <div class="hero-overlay bg-black/60"></div>
         <div class="hero-content text-center text-neutral-content relative z-10" data-aos="fade-up">
             <div class="max-w-2xl">
-                <div class="badge badge-primary badge-lg mb-4" data-aos="fade-up" data-aos-delay="0">Version 1.19</div>
-                <h1 class="text-6xl md:text-7xl font-bold mb-6 text-white drop-shadow-2xl" data-aos="fade-up" data-aos-delay="100">
-                    ยินดีต้อนรับสู่ <br> พอร์ตโฟลิโอ online
+                <div class="badge badge-primary badge-lg mb-4" data-aos="fade-up" data-aos-delay="0">
+                    Version 1.19
+                </div>
+                <h1 class="text-6xl md:text-7xl font-bold mb-6 text-white drop-shadow-2xl" data-aos="fade-up"
+                    data-aos-delay="100">
+                    ยินดีต้อนรับสู่ <br />
+                    พอร์ตโฟลิโอ online
                 </h1>
-                <p id="welcome-text" class="text-2xl mt-6 text-white/90 font-mono drop-shadow-lg" data-aos="fade-up" data-aos-delay="200"></p>
-                <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="300">
-                    <a href="#contact" class="btn btn-primary btn-lg shadow-2xl hover:scale-105 transition-transform">ต้องการติดต่อ <i class="fas fa-circle-question"></i></a>
-                    <a href="#projects" class="btn btn-glass btn-lg hover:bg-white/20 shadow-2xl hover:scale-105 transition-transform"><i class="fas fa-briefcase"></i> ผลงาน</a>
+                <p id="welcome-text" class="text-2xl mt-6 text-white/90 font-mono drop-shadow-lg" data-aos="fade-up"
+                    data-aos-delay="200"></p>
+                <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up"
+                    data-aos-delay="300">
+                    <a href="#contact"
+                        class="btn btn-primary btn-lg shadow-2xl hover:scale-105 transition-transform">ต้องการติดต่อ <i
+                            class="fas fa-circle-question"></i></a>
+                    <a href="#projects"
+                        class="btn btn-glass btn-lg hover:bg-white/20 shadow-2xl hover:scale-105 transition-transform"><i
+                            class="fas fa-briefcase"></i> ผลงาน</a>
                 </div>
             </div>
         </div>
@@ -127,12 +164,15 @@
 
     <section id="about" class="py-20 bg-base-100">
         <div class="container mx-auto px-4">
-            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up"><i class="fas fa-face-smile text-primary"></i> About Me</h2>
+            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up">
+                <i class="fas fa-face-smile text-primary"></i> About Me
+            </h2>
             <div class="divider max-w-xs mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
-            <div class="card lg:card-side bg-base-200 shadow-2xl max-w-6xl mx-auto hover:shadow-primary/20 transition-all duration-300" data-aos="zoom-in" data-aos-delay="200">
+            <div class="card lg:card-side bg-base-200 shadow-2xl max-w-6xl mx-auto hover:shadow-primary/20 transition-all duration-300"
+                data-aos="zoom-in" data-aos-delay="200">
                 <figure class="w-full md:w-1/2">
-                    <img src="https://images.microcms-assets.io/assets/0fe4e011ef5d44708e3dea66d8893415/ee3c8dd138f449eca0573cd01fed98af/ewn.JPG?fit=crop&w=1024&h=1024" alt="Profile Photo"
-                        class="w-full h-full object-cover" />
+                    <img src="https://images.microcms-assets.io/assets/0fe4e011ef5d44708e3dea66d8893415/ee3c8dd138f449eca0573cd01fed98af/ewn.JPG?fit=crop&w=1024&h=1024"
+                        alt="Profile Photo" class="w-full h-full object-cover" />
                 </figure>
                 <div class="card-body p-8">
                     <div class="text-4xl mb-4">🙏</div>
@@ -141,20 +181,37 @@
                     </h3>
                     <div class="prose max-w-none">
                         <p class="text-lg leading-relaxed">
-                            ผมชื่อ<span class="font-bold">ธนวัฒน์ ศรีสุขพร้อม</span> หรือเรียกชื่อเล่น <span class="font-bold">"อาร์ต"</span> ครับ
-                            กำลังศึกษาอยู่ชั้นปีที่ 1 ในคณะวิศวกรรมศาสตร์ สาขาวิชาวิศวกรรมคอมพิวเตอร์และเทคโนโลยีดิจิทัล(CEDT) จุฬาลงกรณ์มหาวิทยาลัยครับ
+                            สวัสดีครับ ผมชื่อ
+                            <span class="font-bold">ธนวัฒน์ ศรีสุขพร้อม</span>
+                            หรือเรียกชื่อเล่นสั้นๆ ว่า
+                            <span class="font-bold">"อาร์ต"</span> ก็ได้ครับ
+                            <br />ปัจจุบันกำลังศึกษาอยู่ชั้นปีที่ 1
+                            สาขาวิชาวิศวกรรมคอมพิวเตอร์และเทคโนโลยีดิจิทัล (CEDT)
+                            คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย
                         </p>
                     </div>
                     <div class="divider"></div>
-                    <h4 class="text-2xl font-bold flex items-center gap-2"><i class="fas fa-bullseye"></i> งานอดิเรก</h4>
+                    <h4 class="text-2xl font-bold flex items-center gap-2">
+                        <i class="fas fa-bullseye"></i> งานอดิเรก
+                    </h4>
                     <div class="flex flex-wrap gap-2 my-4">
-                        <div class="badge badge-lg badge-outline gap-2"><i class="fas fa-face-laugh-beam"></i> ดูหนังฟังเพลงเล่นเกมดูTV</div>
-                        <div class="badge badge-lg badge-outline gap-2"><i class="fas fa-newspaper"></i> ติดตามข่าวสารทางด้านเทคโนโลยี</div>
-                        <div class="badge badge-lg badge-outline gap-2"><i class="fas fa-lightbulb"></i> ออกแบบชิ้นงานและพิมพ์โมเดล 3 มิติ</div>
+                        <div class="badge badge-lg badge-outline gap-2">
+                            <i class="fas fa-gamepad"></i> ดูหนัง ฟังเพลง เล่นเกม
+                        </div>
+
+                        <div class="badge badge-lg badge-outline gap-2">
+                            <i class="fas fa-newspaper"></i> ติดตามเทรนด์เทคโนโลยี
+                        </div>
+
+                        <div class="badge badge-lg badge-outline gap-2">
+                            <i class="fas fa-cube"></i> 3D Modeling & Printing
+                        </div>
                     </div>
                     <div class="divider"></div>
                     <div class="skills">
-                        <h3 class="text-2xl font-bold flex items-center gap-2 mb-6">🍵 Working on it</h3>
+                        <h3 class="text-2xl font-bold flex items-center gap-2 mb-6">
+                            🍵 Working on it
+                        </h3>
                         <div class="flex flex-col gap-4">
                             <img src="https://skillicons.dev/icons?i=c,cpp,cs,py,go,js,ts,html,css,bootstrap,tailwind,react,angular,flutter,firebase,figma,ae,linux,windows,git,github,githubactions,vscode,pycharm,clion,rider,arduino,discord,instagram,linkedin&theme=dark"
                                 alt="My Skills" class="w-full max-w-3xl" loading="lazy" />
@@ -167,18 +224,26 @@
 
     <section id="projects" class="py-20 bg-base-200">
         <div class="container mx-auto px-4">
-            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up"><i class="fas fa-briefcase text-primary"></i> Projects & Works</h2>
+            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up">
+                <i class="fas fa-briefcase text-primary"></i> Projects & Works
+            </h2>
             <div class="divider max-w-xs mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
-            <p class="text-center text-lg text-base-content/70 mb-12" data-aos="fade-up" data-aos-delay="200">ผลงานและโปรเจกต์ที่ผมได้ทำมา</p>
+            <p class="text-center text-lg text-base-content/70 mb-12" data-aos="fade-up" data-aos-delay="200">
+                ผลงานและโปรเจกต์ที่ผมได้ทำมา
+            </p>
             <div class="projects-grid max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </div>
     </section>
 
     <section id="certificates" class="py-20 bg-base-100">
         <div class="container mx-auto px-4">
-            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up"><i class="fas fa-scroll text-primary"></i> Certificates</h2>
+            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up">
+                <i class="fas fa-scroll text-primary"></i> Certificates
+            </h2>
             <div class="divider max-w-xs mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
-            <p class="text-center text-lg text-base-content/70 mb-8" data-aos="fade-up" data-aos-delay="200">เกียรติบัตรและรางวัลที่ได้รับ</p>
+            <p class="text-center text-lg text-base-content/70 mb-8" data-aos="fade-up" data-aos-delay="200">
+                เกียรติบัตรและรางวัลที่ได้รับ
+            </p>
 
             <div class="flex flex-col items-center mb-8" data-aos="fade-up" data-aos-delay="300">
                 <div class="mb-6 card bg-base-200 shadow-lg" id="activeTagDisplay">
@@ -200,7 +265,9 @@
 
                 <!-- Filter -->
                 <div class="flex flex-wrap justify-center gap-3 mb-4">
-                    <button class="btn btn-md tag-filter border-2 border-base-300 hover:bg-base-200 shadow-md hover:shadow-lg transition-all" data-tag="all">
+                    <button
+                        class="btn btn-md tag-filter border-2 border-base-300 hover:bg-base-200 shadow-md hover:shadow-lg transition-all"
+                        data-tag="all">
                         <i class="fas fa-th-large"></i> ทั้งหมด
                     </button>
                     <button
@@ -246,7 +313,8 @@
             </div>
 
             <div class="flex justify-center mt-12" data-aos="fade-up">
-                <button id="loadMoreBtn" class="btn btn-wide btn-primary btn-lg shadow-xl hover:scale-105 transition-transform">
+                <button id="loadMoreBtn"
+                    class="btn btn-wide btn-primary btn-lg shadow-xl hover:scale-105 transition-transform">
                     <i class="fas fa-arrow-down mr-2"></i>
                     Load More
                     <i class="fas fa-arrow-down ml-2"></i>
@@ -257,18 +325,25 @@
 
     <section id="contact" class="py-20 bg-base-200">
         <div class="container mx-auto px-4">
-            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up"><i class="fas fa-phone-volume text-primary"></i> Contact Me</h2>
+            <h2 class="text-5xl font-bold text-center mb-4" data-aos="fade-up">
+                <i class="fas fa-phone-volume text-primary"></i> Contact Me
+            </h2>
             <div class="divider max-w-xs mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
-            <p class="text-center text-lg text-base-content/70 mb-12" data-aos="fade-up" data-aos-delay="200">ติดต่อผมได้ที่ช่องทางเหล่านี้</p>
-            <div class="flex flex-col md:flex-row justify-center gap-6 max-w-2xl mx-auto" data-aos="zoom-in" data-aos-delay="300">
-                <a href="https://github.com/AiMlxV" target="_blank" class="btn btn-lg gap-3 flex-1 shadow-xl hover:scale-105 transition-transform hover:btn-neutral">
+            <p class="text-center text-lg text-base-content/70 mb-12" data-aos="fade-up" data-aos-delay="200">
+                ติดต่อผมได้ที่ช่องทางเหล่านี้
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-6 max-w-2xl mx-auto" data-aos="zoom-in"
+                data-aos-delay="300">
+                <a href="https://github.com/AiMlxV" target="_blank"
+                    class="btn btn-lg gap-3 flex-1 shadow-xl hover:scale-105 transition-transform hover:btn-neutral">
                     <i class="fab fa-github text-3xl"></i>
                     <div class="text-left">
                         <div class="text-xs opacity-70">View on</div>
                         <div class="font-bold">GitHub Profile</div>
                     </div>
                 </a>
-                <a href="https://www.linkedin.com/in/aimltanawat/" target="_blank" class="btn btn-lg gap-3 btn-primary flex-1 shadow-xl hover:scale-105 transition-transform">
+                <a href="https://www.linkedin.com/in/aimltanawat/" target="_blank"
+                    class="btn btn-lg gap-3 btn-primary flex-1 shadow-xl hover:scale-105 transition-transform">
                     <i class="fab fa-linkedin text-3xl"></i>
                     <div class="text-left">
                         <div class="text-xs opacity-70">Connect on</div>
@@ -280,24 +355,29 @@
     </section>
 
     <style>
-    .footer.footer-center > * {
-        display: inline-flex !important;
-        align-items: center !important;
-        gap: 0.2rem !important;
-    }
+        .footer.footer-center>* {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.2rem !important;
+        }
     </style>
 
     <footer class="footer footer-center p-10 bg-base-300 text-base-content">
         <div>
             <div class="text-3xl mb-4"><i class="fas fa-star"></i></div>
-            <p class="font-bold text-lg">
-                AiMlxV's Portfolio
-            </p> 
-            <p class="text-base-content/70">&copy; <span id="currentYear"></span> AiMlxV. All rights reserved.</p>
-            <p class="text-sm text-base-content/50">Made with <i class="fas fa-heart text-error"></i> using daisyUI & Tailwind CSS</p>
+            <p class="font-bold text-lg">AiMlxV's Portfolio</p>
+            <p class="text-base-content/70">
+                &copy; <span id="currentYear"></span> AiMlxV. All rights reserved.
+            </p>
+            <p class="text-sm text-base-content/50">
+                Made with <i class="fas fa-heart text-error"></i> using daisyUI &
+                Tailwind CSS
+            </p>
         </div>
     </footer>
-    <button id="scrollTop" class="btn btn-circle btn-primary shadow-2xl hover:scale-110 transition-transform"><i class="fas fa-arrow-up text-lg"></i></button>
+    <button id="scrollTop" class="btn btn-circle btn-primary shadow-2xl hover:scale-110 transition-transform">
+        <i class="fas fa-arrow-up text-lg"></i>
+    </button>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="module" src="js/main.js"></script>
