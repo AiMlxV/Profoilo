@@ -22,7 +22,7 @@ export const projects = [
         title: "AI Smart Water Allocation: ระบบจัดสรรน้ำเพื่อการเกษตร",
         description: "ระบบที่ใช้ AI เข้ามาช่วยวิเคราะห์และคาดการณ์ปริมาณน้ำล่วงหน้า เพื่อจัดสรรน้ำให้เพียงพอและทั่วถึงสำหรับทุกครัวเรือนในหมู่บ้านครับ",
         image: "public/img/Project/depa.jpg",
-        link: "https://cloud.aimlxv.me/s/depa"
+        link: "https://blk-cloud.65737776.xyz/s/TEReHDkuXJkDOYn"
     },
     {
         title: "Recipe Manager AI",
@@ -34,13 +34,13 @@ export const projects = [
         title: "AI Image Classification & Valuation Model",
         description: "โมเดล AI ที่มีความสามารถทั้งจำแนกประเภทของรูปภาพ (Classification) และช่วยประเมินราคารูปภาพได้อย่างแม่นยำครับ",
         image: "public/img/Project/NGI_13.png",
-        link: "https://cloud.aimlxv.me/s/NGI"
+        link: "https://blk-cloud.65737776.xyz/s/dGbJeNWqXgMcGeu"
     },
     {
         title: "Smart Home: ระบบป้องกันอัคคีภัย IoT",
         description: "ระบบ IoT ที่ช่วยเฝ้าระวังอัคคีภัยภายในบ้าน โดยจะตรวจจับและแจ้งเตือนทันทีหากมีแก๊สหุงต้มรั่วไหล ช่วยลดความเสี่ยงการเกิดอุบัติเหตุครับ",
         image: "public/img/Project/fire.png",
-        link: "https://cloud.aimlxv.me/s/Fire"
+        link: "https://blk-cloud.65737776.xyz/s/SxqrHdXhwgExsvQ"
     },
     {
         title: "CHS Centennial Run 100th Website",
@@ -52,12 +52,12 @@ export const projects = [
         title: "Finalist: การแข่งขันหุ่นยนต์ Robo Soccer",
         description: "ได้เข้าร่วมแข่งขันหุ่นยนต์รายการ ส.ส.ท.-สพฐ. ประเภท Robo Soccer และผ่านเข้าสู่รอบชิงชนะเลิศต่อเนื่อง 2 ปีครับ (2566-2567)",
         image: "public/img/Project/TPA.jpg",
-        link: "https://cloud.aimlxv.me/s/TPARobot"
+        link: "https://blk-cloud.65737776.xyz/s/JMERsEgsGCHwMYt"
     },
     {
         title: "Silver Medal: การแข่งขันหุ่นยนต์ระดับสูง",
         description: "ผลงานการแข่งขันหุ่นยนต์ระดับสูง งานศิลปหัตถกรรมนักเรียน ได้รับรางวัลเหรียญเงินระดับเขตพื้นที่ฯ ต่อเนื่อง 2 ปีครับ (2565-2566)",
         image: "public/img/Project/high.jpg",
-        link: "https://cloud.aimlxv.me/s/art"
+        link: "https://blk-cloud.65737776.xyz/s/coYcmnVlQCfYKlf"
     }
 ];
