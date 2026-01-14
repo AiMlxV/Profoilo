@@ -3,61 +3,61 @@ export const projects = [
     {
         title: "Internship Project: ระบบ Automation และหุ่นยนต์ Cobot",
         description: "ผมได้รับโจทย์จากทางบริษัทในโครงการ Talent RAC ให้ร่วมพัฒนาโปรเจกต์ระบบอัตโนมัติ โดยใช้หุ่นยนต์ Cobot ทำงานร่วมกับคน และช่วยออกแบบระบบสายพานลำเลียงสินค้าครับ",
-        image: "public/img/Project/rac.jpg",
+        image: "public/img/Project/rac.webp",
         link: "https://rac.thairobotics.org/2023/10/27/conveyor-system/"
     },
     {
         title: "School Admission System (DevOps Role)",
         description: "โปรเจกต์นี้ผมรับหน้าที่เป็น DevOps ดูแลระบบหลังบ้านและ Infrastructure ของเว็บรับสมัครนักเรียนโรงเรียนเฉลิมขวัญสตรี ให้รองรับการใช้งานจริงช่วงที่มีคนเข้าใช้งานเยอะๆ ได้ครับ",
-        image: "public/img/Project/chs.jpg",
+        image: "public/img/Project/chs.webp",
         link: "https://register.chs.ac.th/"
     },
     {
         title: "TA & System Admin: ค่ายสอวน. คอมพิวเตอร์",
         description: "ได้รับโอกาสเป็นพี่เลี้ยงวิชาการ (TA) ค่าย สอวน. คอมฯ ค่าย 1 ศูนย์โรงเรียนเฉลิมขวัญสตรีครับ หน้าที่หลักคือดูแลระบบ Grader บน Server และคอยให้คำปรึกษาน้องๆ เรื่องการเขียนโปรแกรม",
-        image: "public/img/Project/posnta.jpg",
+        image: "public/img/Project/posnta.webp",
         link: "https://www.facebook.com/profile.php?id=100086664457918"
     },
     {
         title: "AI Smart Water Allocation: ระบบจัดสรรน้ำเพื่อการเกษตร",
         description: "ระบบที่ใช้ AI เข้ามาช่วยวิเคราะห์และคาดการณ์ปริมาณน้ำล่วงหน้า เพื่อจัดสรรน้ำให้เพียงพอและทั่วถึงสำหรับทุกครัวเรือนในหมู่บ้านครับ",
-        image: "public/img/Project/depa.jpg",
+        image: "public/img/Project/depa.webp",
         link: "https://blk-cloud.65737776.xyz/s/TEReHDkuXJkDOYn"
     },
     {
         title: "Recipe Manager AI",
         description: "เว็บแอปที่ใช้ Generative AI มาช่วยคิดเมนูอาหารใหม่ๆ จากวัตถุดิบที่เรามีเหลืออยู่ในตู้เย็นครับ ช่วยแก้ปัญหาเวลาไม่รู้จะกินอะไรดี",
-        image: "public/img/Project/ai_recipe.png",
+        image: "public/img/Project/ai_recipe.webp",
         link: "https://github.com/Croissant-no-Yuusha/20-Croissant-no-Maou"
     },
     {
         title: "AI Image Classification & Valuation Model",
         description: "โมเดล AI ที่มีความสามารถทั้งจำแนกประเภทของรูปภาพ (Classification) และช่วยประเมินราคารูปภาพได้อย่างแม่นยำครับ",
-        image: "public/img/Project/NGI_13.png",
+        image: "public/img/Project/NGI_13.webp",
         link: "https://blk-cloud.65737776.xyz/s/dGbJeNWqXgMcGeu"
     },
     {
         title: "Smart Home: ระบบป้องกันอัคคีภัย IoT",
         description: "ระบบ IoT ที่ช่วยเฝ้าระวังอัคคีภัยภายในบ้าน โดยจะตรวจจับและแจ้งเตือนทันทีหากมีแก๊สหุงต้มรั่วไหล ช่วยลดความเสี่ยงการเกิดอุบัติเหตุครับ",
-        image: "public/img/Project/fire.png",
+        image: "public/img/Project/fire.webp",
         link: "https://blk-cloud.65737776.xyz/s/SxqrHdXhwgExsvQ"
     },
     {
         title: "CHS Centennial Run 100th Website",
         description: "ผมรับหน้าที่เป็น Front-End Developer พัฒนาหน้าเว็บไซต์สำหรับรับสมัครงานวิ่งมินิมาราธอน ฉลองครบ 100 ปี โรงเรียนเฉลิมขวัญสตรีครับ",
-        image: "public/img/Project/run.png",
+        image: "public/img/Project/run.webp",
         link: "https://www.facebook.com/p/CHS-Centennial-RUN-100th-100094773282617/"
     },
     {
         title: "Finalist: การแข่งขันหุ่นยนต์ Robo Soccer",
         description: "ได้เข้าร่วมแข่งขันหุ่นยนต์รายการ ส.ส.ท.-สพฐ. ประเภท Robo Soccer และผ่านเข้าสู่รอบชิงชนะเลิศต่อเนื่อง 2 ปีครับ (2566-2567)",
-        image: "public/img/Project/TPA.jpg",
+        image: "public/img/Project/TPA.webp",
         link: "https://blk-cloud.65737776.xyz/s/JMERsEgsGCHwMYt"
     },
     {
         title: "Silver Medal: การแข่งขันหุ่นยนต์ระดับสูง",
         description: "ผลงานการแข่งขันหุ่นยนต์ระดับสูง งานศิลปหัตถกรรมนักเรียน ได้รับรางวัลเหรียญเงินระดับเขตพื้นที่ฯ ต่อเนื่อง 2 ปีครับ (2565-2566)",
-        image: "public/img/Project/high.jpg",
+        image: "public/img/Project/high.webp",
         link: "https://blk-cloud.65737776.xyz/s/coYcmnVlQCfYKlf"
     }
 ];
